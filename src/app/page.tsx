@@ -74,15 +74,17 @@ export default function ModernBrutalistPortfolio() {
 
   const projectCategories = [
     "All",
-    "Web Development",
-    "Mobile Application",
-    "E-Commerce",
-    "Enterprise Solution",
+    "Live Demos",
+    "Management Systems",
+    "Web Applications",
+    "Education",
   ];
 
   const filteredProjects =
     activeProjectCategory === "All"
       ? PROJECTS
+      : activeProjectCategory === "Live Demos"
+      ? PROJECTS.filter((p) => p.isLiveDemo)
       : PROJECTS.filter((p) => p.category === activeProjectCategory);
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -523,7 +525,7 @@ export default function ModernBrutalistPortfolio() {
       </section>
 
       {/* =========================================================================
-          SECTION 4: PROJECTS (SELECTED WORK & ASYMMETRIC GRID)
+          SECTION 4: PROJECTS (PREMIUM LIVE DEMOS & ASYMMETRIC GRID)
          ========================================================================= */}
       <section
         id="projects"
@@ -534,9 +536,9 @@ export default function ModernBrutalistPortfolio() {
           <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 pb-4 mb-8 sm:mb-12 border-b border-[#E5E5E5] text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest text-[#666666]">
             <div className="flex items-center gap-2">
               <span className="text-[#FF6B35] font-bold">[04]</span>
-              <span className="text-[#111111] font-bold">SELECTED PORTFOLIO SHOWCASE</span>
+              <span className="text-[#111111] font-bold">PORTFOLIO &amp; LIVE DEMO SYSTEMS</span>
             </div>
-            <span>12 DELIVERED PROJECTS &bull; ASYMMETRIC GRID</span>
+            <span>INTERACTIVE DEMOS &bull; VERIFIED SOFTWARE</span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-12">
@@ -545,7 +547,7 @@ export default function ModernBrutalistPortfolio() {
                 {COMPANY_DETAILS.projectsHeadline}
               </h2>
               <p className="text-sm xs:text-base text-[#555555] leading-relaxed font-sans">
-                Explore real client deliveries and specialized technical systems developed by Black Grapes Softech. We clearly distinguish live enterprise client engagements from demonstration prototypes.
+                {COMPANY_DETAILS.projectsSubheadline}
               </p>
             </div>
 
@@ -567,19 +569,23 @@ export default function ModernBrutalistPortfolio() {
             </div>
           </div>
 
-          {/* Asymmetric Projects Grid */}
+          {/* Asymmetric Projects Showcase Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project) => {
+              const isLiveDemo = project.isLiveDemo || project.status === "LIVE DEMO";
               const isClientProject = project.status === "CLIENT PROJECT";
+              const demoTargetUrl = project.demoUrl || project.liveUrl;
 
               return (
                 <div
                   key={project.id}
-                  className="rounded-none bg-[#F1F0EC] border-2 border-[#111111] overflow-hidden flex flex-col justify-between group hover:border-[#FF6B35] transition-all duration-300 shadow-[4px_4px_0px_#111111] sm:shadow-[5px_5px_0px_#111111] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+                  className={`rounded-none bg-[#F1F0EC] border-2 ${
+                    isLiveDemo ? "border-[#111111] shadow-[5px_5px_0px_#FF6B35]" : "border-[#111111] shadow-[4px_4px_0px_#111111]"
+                  } overflow-hidden flex flex-col justify-between group hover:border-[#FF6B35] transition-all duration-300 hover:translate-x-[-2px] hover:translate-y-[-2px]`}
                 >
                   <div>
-                    {/* Project Screenshot Container */}
-                    <div className="relative h-52 sm:h-60 w-full bg-[#E5E5E5] overflow-hidden border-b-2 border-[#111111]">
+                    {/* Project Cover Container */}
+                    <div className="relative h-56 sm:h-64 w-full bg-[#1A1A1A] overflow-hidden border-b-2 border-[#111111]">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -589,24 +595,33 @@ export default function ModernBrutalistPortfolio() {
                       />
 
                       {/* Top Badges */}
-                      <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-3 sm:left-3 sm:right-3 flex items-center justify-between">
+                      <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-3 sm:left-3 sm:right-3 flex items-center justify-between z-10">
                         <span
-                          className={`text-[10px] font-mono uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-none font-bold ${
-                            isClientProject
-                              ? "bg-[#111111] text-white shadow-sm flex items-center gap-1.5 border border-[#111111]"
-                              : "bg-white text-[#777777] border border-[#111111]"
+                          className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-none font-extrabold flex items-center gap-1.5 border ${
+                            isLiveDemo
+                              ? "bg-[#FF6B35] text-white border-[#FF6B35] shadow-[2px_2px_0px_#111111]"
+                              : isClientProject
+                              ? "bg-[#111111] text-white border-[#111111]"
+                              : "bg-white text-[#777777] border-[#111111]"
                           }`}
                         >
-                          {isClientProject && (
-                            <span className="w-1.5 h-1.5 bg-[#FF6B35]" />
-                          )}
+                          <span className={`w-1.5 h-1.5 ${isLiveDemo ? "bg-white animate-ping" : "bg-[#FF6B35]"}`} />
                           {project.status}
                         </span>
 
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border border-[#111111] font-bold">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border-2 border-[#111111] font-bold shadow-[1px_1px_0px_#111111]">
                           {project.num}
                         </span>
                       </div>
+
+                      {/* Illustrative Artwork Transparency Tag */}
+                      {project.isAiArtwork && (
+                        <div className="absolute bottom-2 left-2.5 z-10">
+                          <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-none bg-[#111111]/85 backdrop-blur-sm text-[#CCCCCC] border border-[#2A2A2A]">
+                            ILLUSTRATIVE COVER ARTWORK
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Content */}
@@ -619,11 +634,11 @@ export default function ModernBrutalistPortfolio() {
                         {project.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-4 line-clamp-2 font-sans">
+                      <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-4 line-clamp-3 font-sans">
                         {project.summary}
                       </p>
 
-                      {/* Tags */}
+                      {/* Tech Pills */}
                       <div className="flex flex-wrap gap-1.5 mb-2">
                         {project.tags.map((tag, i) => (
                           <span
@@ -638,25 +653,49 @@ export default function ModernBrutalistPortfolio() {
                   </div>
 
                   {/* Bottom Action Strip */}
-                  <div className="p-5 sm:p-6 pt-0 flex items-center justify-between gap-2.5">
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="w-full min-h-[44px] py-2.5 px-4 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-between"
-                    >
-                      <span>VIEW CASE STUDY</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
+                  <div className="p-5 sm:p-6 pt-0">
+                    {isLiveDemo && demoTargetUrl ? (
+                      <div className="flex items-center gap-2">
+                        <a
+                          href={demoTargetUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 min-h-[44px] py-2.5 px-4 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-extrabold transition-all flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
+                        >
+                          <span>VIEW LIVE DEMO</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
 
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-none border border-[#111111] bg-white text-[#111111] hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] transition-all"
-                        title="Open Live Website"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
+                        <button
+                          onClick={() => setSelectedProject(project)}
+                          className="min-h-[44px] py-2.5 px-3.5 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border-2 border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-center shadow-[2px_2px_0px_#111111]"
+                          title="View Project Specifications"
+                        >
+                          <span>DETAILS</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between gap-2.5">
+                        <button
+                          onClick={() => setSelectedProject(project)}
+                          className="w-full min-h-[44px] py-2.5 px-4 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border-2 border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-between shadow-[2px_2px_0px_#111111]"
+                        >
+                          <span>VIEW CASE STUDY</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </button>
+
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-none border-2 border-[#111111] bg-white text-[#111111] hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] transition-all shadow-[2px_2px_0px_#111111]"
+                            title="Open Live Website"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -1009,7 +1048,7 @@ export default function ModernBrutalistPortfolio() {
             </div>
 
             {/* Project Image Preview */}
-            <div className="relative h-48 sm:h-80 w-full rounded-none overflow-hidden border-2 border-[#111111] mb-5 sm:mb-6 bg-[#E5E5E5]">
+            <div className="relative h-48 sm:h-80 w-full rounded-none overflow-hidden border-2 border-[#111111] mb-4 sm:mb-5 bg-[#1A1A1A]">
               <Image
                 src={selectedProject.image}
                 alt={selectedProject.title}
@@ -1018,6 +1057,14 @@ export default function ModernBrutalistPortfolio() {
                 className="object-cover object-top"
               />
             </div>
+
+            {/* Illustrative Artwork Notice if applicable */}
+            {selectedProject.isAiArtwork && (
+              <div className="mb-5 p-2.5 sm:p-3 rounded-none bg-[#F1F0EC] border border-[#111111] text-[10px] sm:text-[11px] font-mono text-[#555555]">
+                <span className="font-bold text-[#111111]">[CONCEPTUAL ARTWORK NOTICE]</span>{" "}
+                {selectedProject.artworkNotice || "Illustrative conceptual cover artwork representing application features, not an authentic application screenshot."}
+              </div>
+            )}
 
             {/* Summary */}
             <div className="mb-5 sm:mb-6">
@@ -1068,7 +1115,7 @@ export default function ModernBrutalistPortfolio() {
               </ul>
             </div>
 
-            {/* Tech Tags */}
+            {/* Tech Tags & Live Link */}
             <div className="pt-4 sm:pt-6 border-t border-[#E5E5E5] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
               <div className="flex flex-wrap gap-1.5">
                 {selectedProject.tags.map((tag, i) => (
@@ -1081,14 +1128,14 @@ export default function ModernBrutalistPortfolio() {
                 ))}
               </div>
 
-              {selectedProject.liveUrl && (
+              {(selectedProject.demoUrl || selectedProject.liveUrl) && (
                 <a
-                  href={selectedProject.liveUrl}
+                  href={selectedProject.demoUrl || selectedProject.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 min-h-[44px] rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-bold inline-flex items-center justify-center gap-2 transition-all shadow-[2px_2px_0px_#111111]"
+                  className="px-5 py-2.5 min-h-[44px] rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-extrabold inline-flex items-center justify-center gap-2 transition-all shadow-[2px_2px_0px_#111111]"
                 >
-                  <span>Visit Live Site</span>
+                  <span>{selectedProject.isLiveDemo ? "Open Live Application Demo" : "Visit Live Site"}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}

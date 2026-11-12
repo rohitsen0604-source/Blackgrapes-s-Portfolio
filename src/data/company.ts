@@ -15,14 +15,18 @@ export interface ProjectItem {
   num: string;
   title: string;
   client: string;
-  category: "Web Development" | "Mobile Application" | "E-Commerce" | "Enterprise Solution";
-  status: "CLIENT PROJECT" | "DEMO PROJECT";
+  category: "Web Applications" | "Management Systems" | "Education" | "Enterprise Solution" | "E-Commerce" | "Mobile Application";
+  status: "LIVE DEMO" | "CLIENT PROJECT" | "DEMO PROJECT";
+  isLiveDemo?: boolean;
+  demoUrl?: string;
+  liveUrl?: string;
   summary: string;
   challenge: string;
   solution: string;
   results: string[];
   image: string;
-  liveUrl?: string;
+  isAiArtwork?: boolean;
+  artworkNotice?: string;
   tags: string[];
   platform: "Web" | "iOS" | "Android" | "Cross-Platform";
   featured?: boolean;
@@ -35,7 +39,9 @@ export const COMPANY_DETAILS = {
     "Black Grapes Softech combines technology, creativity and engineering to build meaningful digital experiences and business solutions.",
   location: "INDORE, INDIA",
   aboutHeadline: "WE BELIEVE GREAT TECHNOLOGY SHOULD MAKE A REAL DIFFERENCE.",
-  projectsHeadline: "SELECTED WORK. REAL-WORLD IMPACT.",
+  projectsHeadline: "BUILT TO SOLVE. DESIGNED TO PERFORM.",
+  projectsSubheadline:
+    "Explore selected digital products and software solutions developed to address real business requirements.",
   contactHeadline: "LET'S BUILD SOMETHING THAT MATTERS.",
   aboutText:
     "Black Grapes Softech is a modern software engineering studio headquartered in Vijaynagar, Indore. Since our inception, we have helped enterprises, startups, and public institutions transform complex operational challenges into elegant, high-performing digital platforms.",
@@ -282,14 +288,126 @@ export const SERVICES: ServiceItem[] = [
   },
 ];
 
-// Verified 12 Projects with Distinction
+// Premier Live Demo Systems & Verified Client Deliveries
 export const PROJECTS: ProjectItem[] = [
   {
-    id: "borit",
+    id: "time-management-system",
     num: "01",
+    title: "Time Management System",
+    client: "Enterprise Operational Utility",
+    category: "Management Systems",
+    status: "LIVE DEMO",
+    isLiveDemo: true,
+    demoUrl: "https://timemangementsystem.onrender.com",
+    liveUrl: "https://timemangementsystem.onrender.com",
+    summary:
+      "A web-based project time management solution designed to organize project activities, monitor progress, manage time allocation and support reporting.",
+    challenge:
+      "Managing distributed project deliverables, tracking hours across new, in-progress, and closed tasks, and calculating accurate time allocation reports.",
+    solution:
+      "Architected a responsive PHP & MySQL tracking engine with date-range filters, project status counters, and automated duration report generation.",
+    results: [
+      "Structured time-tracking across active, in-progress and closed projects",
+      "Unified date-range reporting and total time allocation metrics",
+      "Instant responsive dashboard with zero bloat",
+    ],
+    image: "/images/projects/time-management-cover.png",
+    isAiArtwork: true,
+    artworkNotice: "Illustrative conceptual cover artwork representing application features",
+    tags: ["PHP", "MySQL", "Time Tracking", "Project Management", "Bootstrap"],
+    platform: "Web",
+    featured: true,
+  },
+  {
+    id: "veterinary-appointment-system",
+    num: "02",
+    title: "Online Veterinary Appointment System",
+    client: "Pet Care & Veterinary Clinic",
+    category: "Management Systems",
+    status: "LIVE DEMO",
+    isLiveDemo: true,
+    demoUrl: "https://multi-vendor-grocery-management-system.onrender.com",
+    liveUrl: "https://multi-vendor-grocery-management-system.onrender.com",
+    summary:
+      "A multi-role veterinary clinic management platform designed to organize pet appointments, client records, vendor supplies, and central administration.",
+    challenge:
+      "Coordinating multi-tier role access between pet clients, veterinary service vendors, and clinic administrators with appointment slot reservation.",
+    solution:
+      "Built a modular PHP portal featuring dedicated Client, Vendor, and Admin login portals, appointment booking workflows, and pet care product catalogs.",
+    results: [
+      "Multi-role authentication for clients, vendors, and clinic administrators",
+      "Automated appointment booking and schedule conflict prevention",
+      "Integrated veterinary healthcare and supplies catalog",
+    ],
+    image: "/images/projects/veterinary-appointment-cover.png",
+    isAiArtwork: true,
+    artworkNotice: "Illustrative conceptual cover artwork representing application features",
+    tags: ["PHP", "MySQL", "Clinic Management", "Multi-Role Portal", "Web App"],
+    platform: "Web",
+    featured: true,
+  },
+  {
+    id: "survey-management-system",
+    num: "03",
+    title: "Survey Management System",
+    client: "Feedback & Research Platform",
+    category: "Web Applications",
+    status: "LIVE DEMO",
+    isLiveDemo: true,
+    demoUrl: "https://surveymangementsystem.onrender.com",
+    liveUrl: "https://surveymangementsystem.onrender.com",
+    summary:
+      "A centralized survey management platform designed to organize surveys, collect participant responses, and support structured feedback analysis.",
+    challenge:
+      "Capturing structured audience feedback with flexible form schemas, secure response collection, and administrator data export.",
+    solution:
+      "Engineered an online survey engine featuring dynamic questionnaire configuration, respondent data capture, and administrative analytical summaries.",
+    results: [
+      "Dynamic survey creation and question configuration",
+      "Centralized response collection database with export capability",
+      "Clean authentication flow for survey administrators",
+    ],
+    image: "/images/projects/survey-management-cover.png",
+    isAiArtwork: true,
+    artworkNotice: "Illustrative conceptual cover artwork representing application features",
+    tags: ["PHP", "MySQL", "Survey Engine", "Form Builder", "Web App"],
+    platform: "Web",
+    featured: true,
+  },
+  {
+    id: "college-website",
+    num: "04",
+    title: "College Institutional Website",
+    client: "Higher Education Portal",
+    category: "Education",
+    status: "LIVE DEMO",
+    isLiveDemo: true,
+    demoUrl: "https://collage-website-hyu2.onrender.com",
+    liveUrl: "https://collage-website-hyu2.onrender.com",
+    summary:
+      "A modern educational website experience designed to present institutional information, academic offerings, campus updates and essential student resources.",
+    challenge:
+      "Presenting academic programs, department news, faculty information, and prospective student admissions in an accessible, fast-loading portal.",
+    solution:
+      "Developed a clean educational web portal featuring structured academic program directories, campus updates, and direct admissions contact channels.",
+    results: [
+      "Accessible presentation of academic offerings and campus information",
+      "Responsive layout tailored for prospective students on mobile & desktop",
+      "Direct admissions contact and communication inquiries",
+    ],
+    image: "/images/projects/college-website-cover.png",
+    isAiArtwork: true,
+    artworkNotice: "Illustrative conceptual cover artwork representing application features",
+    tags: ["Education", "PHP", "Responsive Web", "Campus Portal"],
+    platform: "Web",
+    featured: true,
+  },
+  {
+    id: "borit",
+    num: "05",
     title: "BORIT Industrial Engineering",
     client: "BORIT International",
-    category: "Web Development",
+    category: "Web Applications",
     status: "CLIENT PROJECT",
     summary:
       "Global corporate web platform and engineering showcase for an international manufacturing precision technology leader.",
@@ -309,7 +427,7 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "blush-and-bloom",
-    num: "02",
+    num: "06",
     title: "Blush & Bloom Luxury Beauty",
     client: "Blush & Bloom Co.",
     category: "E-Commerce",
@@ -332,10 +450,10 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "aton-fitness",
-    num: "03",
+    num: "07",
     title: "Aton Fitness Performance Club",
     client: "Aton Fitness",
-    category: "Web Development",
+    category: "Web Applications",
     status: "CLIENT PROJECT",
     summary:
       "High-energy athletic gym web portal featuring member onboarding, interactive class timetables, and trainer portfolios.",
@@ -354,7 +472,7 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "readmore",
-    num: "04",
+    num: "08",
     title: "ReadMore E-Reader & Audio Books",
     client: "ReadMore Media",
     category: "Mobile Application",
@@ -375,7 +493,7 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "dbt-24-7",
-    num: "05",
+    num: "09",
     title: "DBT 24/7 Digital Banking & Transfers",
     client: "DBT Financial Services",
     category: "Mobile Application",
@@ -397,7 +515,7 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "beauty-counter",
-    num: "06",
+    num: "10",
     title: "Beauty Counter On-Demand Salon App",
     client: "Beauty Counter Services",
     category: "Mobile Application",
@@ -418,10 +536,10 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "eduvacancy",
-    num: "07",
+    num: "11",
     title: "Eduvacancy - Educator Recruitment",
     client: "Eduvacancy Network",
-    category: "Mobile Application",
+    category: "Education",
     status: "CLIENT PROJECT",
     summary:
       "Pan-India educator job marketplace and recruitment app connecting schools and colleges with verified teachers.",
@@ -439,10 +557,10 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "honeylia-emart",
-    num: "08",
+    num: "12",
     title: "HoneyliaEmart Hyperlocal Grocery",
     client: "Honeylia Retail",
-    category: "Mobile Application",
+    category: "E-Commerce",
     status: "CLIENT PROJECT",
     summary:
       "High-speed hyperlocal grocery and household goods delivery application with real-time delivery rider tracking.",
@@ -460,10 +578,10 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "jobberman",
-    num: "09",
+    num: "13",
     title: "Jobberman Career & Talent Hub",
     client: "Jobberman Group",
-    category: "Web Development",
+    category: "Web Applications",
     status: "CLIENT PROJECT",
     summary:
       "High-scale recruitment, career development, and candidate assessment digital platform serving enterprise employers.",
@@ -483,7 +601,7 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "stavanger-parkering",
-    num: "10",
+    num: "14",
     title: "Stavanger Parkering Smart Mobility",
     client: "Stavanger Municipality Mobility",
     category: "Enterprise Solution",
@@ -504,7 +622,7 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "dc-shoes",
-    num: "11",
+    num: "15",
     title: "DC Shoes Global Digital Catalog",
     client: "DC Shoes Distribution",
     category: "E-Commerce",
@@ -525,10 +643,10 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "pikto",
-    num: "12",
+    num: "16",
     title: "Pikto Visual Design & Media Platform",
     client: "Pikto Inc.",
-    category: "Web Development",
+    category: "Web Applications",
     status: "CLIENT PROJECT",
     summary:
       "Modern graphic asset marketplace and visual media showcase for designers, agencies, and content creators.",
