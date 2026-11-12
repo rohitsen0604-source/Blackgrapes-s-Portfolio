@@ -93,26 +93,23 @@ export default function ModernBrutalistPortfolio() {
 
   const demoCategories = [
     "All Demos",
-    "Payment Systems",
-    "Real Estate",
-    "Business Management",
+    "Operations & Utilities",
     "Education Systems",
+    "Payment & Real Estate",
+    "Community & Media",
     "Healthcare Systems",
   ];
 
   const filteredDemos =
     activeDemoCategory === "All Demos"
       ? LIVE_DEMOS
-      : activeDemoCategory === "Payment Systems"
-      ? LIVE_DEMOS.filter((d) => d.category.includes("Payment"))
-      : activeDemoCategory === "Real Estate"
-      ? LIVE_DEMOS.filter((d) => d.category.includes("Real Estate"))
-      : activeDemoCategory === "Business Management"
+      : activeDemoCategory === "Operations & Utilities"
       ? LIVE_DEMOS.filter(
           (d) =>
             d.category.includes("Business") ||
             d.category.includes("Productivity") ||
-            d.category.includes("Analytics")
+            d.category.includes("Driving") ||
+            d.category.includes("Operations")
         )
       : activeDemoCategory === "Education Systems"
       ? LIVE_DEMOS.filter(
@@ -120,7 +117,20 @@ export default function ModernBrutalistPortfolio() {
             d.category.includes("Education") ||
             d.category.includes("Academic") ||
             d.category.includes("Campus") ||
-            d.category.includes("Student")
+            d.category.includes("Student") ||
+            d.category.includes("Grading")
+        )
+      : activeDemoCategory === "Payment & Real Estate"
+      ? LIVE_DEMOS.filter(
+          (d) =>
+            d.category.includes("Payment") || d.category.includes("Real Estate")
+        )
+      : activeDemoCategory === "Community & Media"
+      ? LIVE_DEMOS.filter(
+          (d) =>
+            d.category.includes("Music") ||
+            d.category.includes("Community") ||
+            d.category.includes("Analytics")
         )
       : activeDemoCategory === "Healthcare Systems"
       ? LIVE_DEMOS.filter(
@@ -715,7 +725,7 @@ export default function ModernBrutalistPortfolio() {
             </div>
             <div className="flex items-center gap-2">
               <span className="inline-block w-2 h-2 rounded-full bg-[#FF6B35] animate-ping" />
-              <span className="text-white font-bold">9 LIVE DEMONSTRATION SYSTEMS</span>
+              <span className="text-white font-bold">11 LIVE DEMONSTRATION SYSTEMS</span>
             </div>
           </div>
 
@@ -736,7 +746,7 @@ export default function ModernBrutalistPortfolio() {
             {/* Live Indicator Pill */}
             <div className="hidden lg:flex items-center gap-3 px-4 py-2.5 bg-[#1C1C1C] border border-[#2E2E2E] text-xs font-mono shrink-0">
               <span className="w-2.5 h-2.5 bg-[#22C55E] rounded-full animate-pulse" />
-              <span className="text-[#CCCCCC] uppercase tracking-wider">9 Public Demos Operational</span>
+              <span className="text-[#CCCCCC] uppercase tracking-wider">11 Public Demos Operational</span>
             </div>
           </div>
 
@@ -757,7 +767,7 @@ export default function ModernBrutalistPortfolio() {
             ))}
           </div>
 
-          {/* 9 Live Demo Cards Responsive Grid (3 Cols Desktop, 2 Cols Tablet, 1 Col Mobile) */}
+          {/* 11 Live Demo Cards Responsive Grid (3 Cols Desktop, 2 Cols Tablet, 1 Col Mobile) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredDemos.map((demo) => (
               <div
@@ -793,7 +803,7 @@ export default function ModernBrutalistPortfolio() {
                       </span>
                       <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 bg-black/80 text-[#22C55E] font-bold border border-[#22C55E]/40 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
-                        {demo.status}
+                        {demo.status === "ACTIVE" ? "LIVE DEMO AVAILABLE" : demo.status}
                       </span>
                     </div>
                   </div>
@@ -847,7 +857,7 @@ export default function ModernBrutalistPortfolio() {
                     rel="noopener noreferrer"
                     className="w-full min-h-[48px] py-3 px-5 bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs sm:text-sm uppercase tracking-wider font-extrabold transition-all flex items-center justify-center gap-2 shadow-[3px_3px_0px_#FFFFFF] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
                   >
-                    <span>VIEW LIVE DEMO</span>
+                    <span>VIEW LIVE DEMO ↗</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
