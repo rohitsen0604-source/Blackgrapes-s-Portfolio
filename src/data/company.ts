@@ -1,20 +1,22 @@
 export interface ServiceItem {
   id: string;
+  num: string;
   title: string;
   shortDesc: string;
-  category: "Engineering" | "Design" | "Growth" | "Consulting";
   icon: string;
   image: string;
   features: string[];
   technologies: string[];
+  theme: "white" | "beige" | "charcoal";
 }
 
 export interface ProjectItem {
   id: string;
+  num: string;
   title: string;
   client: string;
   category: "Web Development" | "Mobile Application" | "E-Commerce" | "Enterprise Solution";
-  type: "Completed Client Project" | "Concept Demonstration";
+  status: "CLIENT PROJECT" | "DEMO PROJECT";
   summary: string;
   challenge: string;
   solution: string;
@@ -23,20 +25,22 @@ export interface ProjectItem {
   liveUrl?: string;
   tags: string[];
   platform: "Web" | "iOS" | "Android" | "Cross-Platform";
+  featured?: boolean;
 }
 
 export const COMPANY_DETAILS = {
-  name: "Black Grapes Softech",
-  tagline: "Innovate. Integrate. Elevate.",
-  subTagline: "Transforming Ideas Into Powerful Digital Experiences.",
-  description:
-    "From custom software and digital platforms to intelligent applications, Black Grapes Softech helps businesses transform ideas into scalable digital solutions.",
+  name: "BLACK GRAPES SOFTECH",
+  tagline: "BUILDING DIGITAL EXPERIENCES THAT MOVE BUSINESS FORWARD.",
+  supportingCopy:
+    "Technology, creativity and engineering come together to turn ambitious ideas into meaningful digital solutions.",
+  location: "INDORE, INDIA",
+  contactHeadline: "LET'S CREATE SOMETHING MEANINGFUL.",
   aboutText:
-    "Black Grapes Softech is an enterprise software development company based in Indore, India. With over 12 years of software engineering leadership, we design, develop, and deploy bespoke applications for startups, growing enterprises, and public-sector initiatives worldwide.",
-  mission:
-    "To provide exceptional software development services tailored to our clients' unique needs. We are dedicated to delivering cutting-edge, reliable digital solutions while fostering a culture of collaboration, growth, and continuous innovation.",
+    "Black Grapes Softech is a modern software engineering studio headquartered in Vijaynagar, Indore. Since our inception, we have helped enterprises, startups, and public institutions transform complex operational challenges into elegant, high-performing digital platforms.",
   vision:
-    "To lead the way in software development, using innovation and creativity to shape the future of technology. We envision a world where every software solution we create empowers individuals, businesses, and communities to thrive.",
+    "To lead the future of software development through human-centered design, architectural precision, and enduring digital craft.",
+  mission:
+    "To build purposeful, scalable digital products that empower our clients to achieve measurable competitive advantage and operational efficiency.",
   address: {
     line1: "252-F/H Scheme No 54",
     area: "Vijaynagar",
@@ -101,194 +105,206 @@ export const COMPANY_DETAILS = {
   ],
 };
 
-// 11 Actual Services Required by the Master Specification
+// 11 Actual Services with Alternating Editorial Themes
 export const SERVICES: ServiceItem[] = [
   {
     id: "software-development",
+    num: "01",
     title: "Software Development",
     shortDesc:
-      "Custom enterprise software, real estate management ERPs, restaurant operating systems, and automated workflow engines tailored to your business rules.",
-    category: "Engineering",
+      "Custom enterprise software, real estate management ERPs, restaurant operating systems, and automated business engines built for scale.",
     icon: "Code2",
     image: "/assets/Software.jpg",
     features: [
-      "Custom Enterprise Software Architectures",
-      "Real Estate & Brokerage Management ERP",
-      "College & University Campus Management",
-      "Role-Based Access Control & Secure DB",
+      "Custom Enterprise Architectures",
+      "Real Estate & Brokerage ERP Systems",
+      "Campus & University Management",
+      "Role-Based Access & Data Security",
     ],
     technologies: ["Node.js", "Python / Django", "TypeScript", "PostgreSQL", "Docker", "AWS"],
+    theme: "charcoal", // Featured dark card
   },
   {
     id: "website-design-development",
+    num: "02",
     title: "Website Design & Development",
     shortDesc:
-      "Modern, ultra-fast, and SEO-optimized corporate web applications built with Next.js, React, and high-performance frontend frameworks.",
-    category: "Engineering",
+      "Modern, ultra-fast corporate web applications crafted with Next.js, React, and Swiss-inspired editorial typography.",
     icon: "Globe",
     image: "/assets/Website-Designing.jpg",
     features: [
-      "Next.js & React Component Architectures",
-      "Pixel-Perfect Mobile-First Responsive UI",
-      "Technical SEO & Core Web Vitals Optimization",
-      "Editorial Micro-Animations with Framer Motion",
+      "Next.js App Router & SSR Primitives",
+      "Fluid Responsive Typography & Layouts",
+      "Core Web Vitals & Technical SEO",
+      "Framer Motion Micro-Interactions",
     ],
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP"],
+    theme: "white",
   },
   {
     id: "mobile-app-development",
-    title: "Mobile App Development",
+    num: "03",
+    title: "Mobile Application Development",
     shortDesc:
-      "Native iOS, Android, and cross-platform Flutter/React Native mobile applications with smooth gesture controls and real-time synchronization.",
-    category: "Engineering",
+      "Native iOS (Swift), Android (Kotlin), and cross-platform Flutter/React Native mobile applications with smooth touch ergonomics.",
     icon: "Smartphone",
     image: "/assets/app.jpg",
     features: [
-      "Native iOS (Swift & SwiftUI) Applications",
-      "Native Android (Kotlin & Jetpack) Development",
-      "Cross-Platform Apps with Flutter & React Native",
-      "Push Notifications & In-App Payment Gateways",
+      "Native iOS (Swift & SwiftUI) Engineering",
+      "Native Android (Kotlin & Jetpack)",
+      "Cross-Platform Flutter & React Native",
+      "Real-Time Sync & In-App Purchases",
     ],
     technologies: ["Flutter", "React Native", "Swift", "Kotlin", "Firebase"],
+    theme: "beige",
   },
   {
     id: "crm-software-development",
+    num: "04",
     title: "CRM Software Development",
     shortDesc:
-      "Tailored Customer Relationship Management software that automates lead routing, client communication pipelines, and sales conversion analytics.",
-    category: "Engineering",
+      "Bespoke Customer Relationship Management platforms designed to automate sales pipelines, lead routing, and customer communications.",
     icon: "Users2",
     image: "/assets/crm-1.png",
     features: [
-      "Lead Capture & Automated Scoring Funnels",
-      "Multi-Channel Email & Telephony Integration",
-      "Real-Time Sales Performance Dashboards",
-      "Automated Quotation & Invoicing Workflows",
+      "Lead Capture & Qualification Funnels",
+      "Multi-Channel Telephony & Email Sync",
+      "Real-Time Executive Dashboards",
+      "Automated Contract & Invoice Generation",
     ],
     technologies: ["React", "Node.js", "PostgreSQL", "Redis", "SendGrid"],
+    theme: "white",
   },
   {
     id: "mlm-software-development",
+    num: "05",
     title: "MLM Software Development",
     shortDesc:
-      "Battle-tested Multi-Level Marketing software featuring automated commission engines, real-time genealogic trees, member e-wallets, and E-Pins.",
-    category: "Engineering",
+      "Battle-tested Multi-Level Marketing software featuring automated commission engines, interactive genealogic trees, and secure member e-wallets.",
     icon: "Network",
     image: "/assets/mlm-software.png",
     features: [
-      "Binary, Matrix, Unilevel & Generation Compensation",
-      "Interactive Real-Time Genealogic Visual Tree",
-      "E-Wallet System & Automated Payout Calculations",
-      "E-Pin Generation & Member Pin Transfer Portals",
+      "Binary, Matrix, Unilevel & Hybrid Plans",
+      "Real-Time Dynamic Genealogic Visual Tree",
+      "Automated Payouts & Commission Engine",
+      "E-Pin Generation & Transfer Security",
     ],
     technologies: ["PHP / Laravel", "Node.js", "MySQL", "Redis Queue"],
+    theme: "charcoal", // Featured dark card
   },
   {
     id: "game-development",
+    num: "06",
     title: "Game Development",
     shortDesc:
-      "Immersive 2D and 3D interactive mobile and web games with fluid physics mechanics, particle animations, and multiplayer networking.",
-    category: "Engineering",
+      "Engaging 2D and 3D interactive mobile and web games with fluid physics mechanics, particle animations, and multiplayer networking.",
     icon: "Gamepad2",
     image: "/assets/Game-Development.jpg",
     features: [
-      "2D & 3D Interactive Game Architecture",
-      "Cross-Platform Mobile & WebGL Deployment",
+      "2D & 3D Interactive Game Engineering",
+      "Cross-Platform Mobile & WebGL Games",
       "Multiplayer Networking & Real-Time Sync",
-      "In-App Purchases & Rewarded Monetization",
+      "In-App Purchases & Rewarded Ads",
     ],
     technologies: ["Unity", "Unreal Engine", "C#", "WebGL", "Blender"],
+    theme: "white",
   },
   {
     id: "graphic-designing",
+    num: "07",
     title: "Graphic Designing",
     shortDesc:
-      "Corporate brand identity, vector logos, marketing collateral, pitch decks, and Figma UI/UX component design systems.",
-    category: "Design",
+      "Corporate visual identity, typography systems, vector logos, marketing collateral, pitch decks, and Figma UI component libraries.",
     icon: "Palette",
     image: "/assets/Graphic-Design-Black-Grapes-Softech.jpg",
     features: [
-      "Complete Brand Identity Guidelines & Logos",
-      "Figma UI/UX Prototypes & Wireframes",
-      "Marketing Collateral & Presentation Decks",
-      "Product Packaging & Vector Illustrations",
+      "Complete Brand Identity Guidelines",
+      "Figma UI/UX Component Design Systems",
+      "Marketing Collateral & Pitch Decks",
+      "Product Packaging & Vector Assets",
     ],
     technologies: ["Figma", "Adobe Illustrator", "Photoshop", "InDesign"],
+    theme: "beige",
   },
   {
     id: "digital-marketing",
+    num: "08",
     title: "Digital Marketing",
     shortDesc:
-      "Data-driven search engine optimization (SEO), Google Ads, meta performance marketing, and conversion rate optimization campaigns.",
-    category: "Growth",
+      "Data-driven technical SEO, Google Search & Display campaigns, meta performance marketing, and conversion rate optimization.",
     icon: "TrendingUp",
     image: "/assets/digital-marketing.jpg",
     features: [
       "Technical On-Page & Off-Page SEO",
       "Google Ads (Search & Performance Max)",
-      "Social Media Marketing & Content Strategy",
-      "Conversion Rate Optimization (CRO)",
+      "Social Media Growth Strategy",
+      "Funnel Conversion Rate Optimization (CRO)",
     ],
     technologies: ["Google Analytics 4", "Search Console", "Meta Ads", "SEMrush"],
+    theme: "white",
   },
   {
     id: "ecommerce-solutions",
+    num: "09",
     title: "E-Commerce Solutions",
     shortDesc:
       "High-converting single-store and multi-vendor online marketplaces with seamless payment gateways, automated inventory, and fast checkout.",
-    category: "Engineering",
     icon: "ShoppingBag",
     image: "/assets/your-businesses.jpeg",
     features: [
       "Custom Headless E-Commerce Storefronts",
       "Multi-Vendor Marketplace Infrastructure",
-      "Multiple Payment Gateways (Stripe, Razorpay, COD)",
-      "Automated Shipping Logistics & Order Tracking",
+      "Integrated Payment Gateways (Razorpay, Stripe)",
+      "Automated Shipping Logistics & Tracking",
     ],
     technologies: ["Next.js", "Shopify Storefront", "Node.js", "Razorpay"],
+    theme: "beige",
   },
   {
     id: "it-staffing",
+    num: "10",
     title: "IT Staffing Solutions",
     shortDesc:
-      "Talent augmentation and dedicated software developers to scale your engineering team quickly without recruitment overhead.",
-    category: "Consulting",
+      "Talent augmentation and dedicated software engineers to scale your development teams quickly with 48-hour onboarding.",
     icon: "UserCheck",
     image: "/assets/about-3.png",
     features: [
-      "Dedicated Full-Time Developers (Next.js, Node, Flutter)",
-      "Team Augmentation with 48-Hour Onboarding",
-      "Direct Slack/Teams Integration & Daily Standups",
-      "Flexible Monthly Scale-Up or Scale-Down",
+      "Dedicated Engineers (Next.js, Node, Flutter)",
+      "48-Hour Talent Onboarding Process",
+      "Direct Slack / Teams Integration & Standups",
+      "Elastic Scale Without Recruitment Overhead",
     ],
     technologies: ["React", "Node.js", "Flutter", "QA Automation", "DevOps"],
+    theme: "white",
   },
   {
     id: "tender-services",
+    num: "11",
     title: "Government & Private Tender Services",
     shortDesc:
-      "Comprehensive tender identification, technical proposal drafting, documentation compliance, and bid management for public and commercial bids.",
-    category: "Consulting",
+      "End-to-end tender discovery, technical proposal drafting, documentation compliance, and bid management on public and corporate portals.",
     icon: "FileText",
     image: "/assets/Security-1.jpg",
     features: [
       "Tender Identification on GeM & CPP Portals",
-      "Technical Proposal & BOQ Documentation",
+      "Technical Proposal & BOQ Drafting",
       "Eligibility & EMD Compliance Verification",
-      "Private Commercial RFP/RFQ Bidding Advisory",
+      "Corporate RFP / RFQ Negotiation Advisory",
     ],
     technologies: ["GeM Portal", "CPP Portal", "RFP Analysis", "Compliance"],
+    theme: "charcoal", // Featured dark card
   },
 ];
 
-// Verified Actual Projects from Official Reference
+// Verified 12 Projects with Distinction
 export const PROJECTS: ProjectItem[] = [
   {
     id: "borit",
+    num: "01",
     title: "BORIT Industrial Engineering",
     client: "BORIT International",
     category: "Web Development",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Global corporate web platform and engineering showcase for an international manufacturing precision technology leader.",
     challenge:
@@ -303,13 +319,15 @@ export const PROJECTS: ProjectItem[] = [
     liveUrl: "https://www.borit.com",
     tags: ["Enterprise Web", "Industrial", "Responsive UI", "Next.js"],
     platform: "Web",
+    featured: true,
   },
   {
     id: "blush-and-bloom",
+    num: "02",
     title: "Blush & Bloom Luxury Beauty",
     client: "Blush & Bloom Co.",
     category: "E-Commerce",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Luxury organic cosmetics and skincare e-commerce storefront with streamlined mobile checkout and rich product storytelling.",
     challenge:
@@ -324,17 +342,19 @@ export const PROJECTS: ProjectItem[] = [
     liveUrl: "https://blushandbloom.co.in",
     tags: ["E-Commerce", "Luxury Beauty", "Razorpay", "Mobile-First"],
     platform: "Web",
+    featured: true,
   },
   {
     id: "aton-fitness",
+    num: "03",
     title: "Aton Fitness Performance Club",
     client: "Aton Fitness",
     category: "Web Development",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "High-energy athletic gym web portal featuring member onboarding, interactive class timetables, and trainer portfolios.",
     challenge:
-      "Designing a dark-themed visual interface embodying athletic energy that converted online visitors into gym trial bookings.",
+      "Designing a visual interface embodying athletic energy that converted online visitors into gym trial bookings.",
     solution:
       "Engineered an impactful web portal with schedule filters, direct trainer booking, and instant WhatsApp membership inquiries.",
     results: [
@@ -348,10 +368,11 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "readmore",
+    num: "04",
     title: "ReadMore E-Reader & Audio Books",
     client: "ReadMore Media",
     category: "Mobile Application",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Native iOS reading and audiobook listening application with personalized typography, dark mode, and offline synchronization.",
     challenge:
@@ -368,10 +389,11 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "dbt-24-7",
+    num: "05",
     title: "DBT 24/7 Digital Banking & Transfers",
     client: "DBT Financial Services",
     category: "Mobile Application",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Secure iOS mobile banking and direct-benefit transaction management application with biometric authentication.",
     challenge:
@@ -385,13 +407,15 @@ export const PROJECTS: ProjectItem[] = [
     image: "/assets/DBT247.png",
     tags: ["Fintech", "iOS", "Biometrics", "High Security"],
     platform: "iOS",
+    featured: true,
   },
   {
     id: "beauty-counter",
+    num: "06",
     title: "Beauty Counter On-Demand Salon App",
     client: "Beauty Counter Services",
     category: "Mobile Application",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "On-demand personal grooming and salon booking app connecting verified stylists with clients in real-time.",
     challenge:
@@ -408,10 +432,11 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "eduvacancy",
+    num: "07",
     title: "Eduvacancy - Educator Recruitment",
     client: "Eduvacancy Network",
     category: "Mobile Application",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Pan-India educator job marketplace and recruitment app connecting schools and colleges with verified teachers.",
     challenge:
@@ -428,10 +453,11 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "honeylia-emart",
+    num: "08",
     title: "HoneyliaEmart Hyperlocal Grocery",
     client: "Honeylia Retail",
     category: "Mobile Application",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "High-speed hyperlocal grocery and household goods delivery application with real-time delivery rider tracking.",
     challenge:
@@ -448,10 +474,11 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "jobberman",
+    num: "09",
     title: "Jobberman Career & Talent Hub",
     client: "Jobberman Group",
     category: "Web Development",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "High-scale recruitment, career development, and candidate assessment digital platform serving enterprise employers.",
     challenge:
@@ -466,13 +493,15 @@ export const PROJECTS: ProjectItem[] = [
     liveUrl: "https://www.jobberman.com",
     tags: ["Enterprise Web", "Recruitment", "High Scale", "Job Board"],
     platform: "Web",
+    featured: true,
   },
   {
     id: "stavanger-parkering",
+    num: "10",
     title: "Stavanger Parkering Smart Mobility",
     client: "Stavanger Municipality Mobility",
     category: "Enterprise Solution",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Municipal smart parking management system providing real-time sensor occupancy updates, digital permits, and ticket validation.",
     challenge:
@@ -489,19 +518,20 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "dc-shoes",
+    num: "11",
     title: "DC Shoes Global Digital Catalog",
     client: "DC Shoes Distribution",
     category: "E-Commerce",
-    type: "Completed Client Project",
+    status: "DEMO PROJECT",
     summary:
       "High-impact digital footwear showcase and brand storytelling experience celebrating action sports culture.",
     challenge:
-      "Designing a brand-aligned, high-energy product catalog reflecting skateboarding heritage while preserving fast load times.",
+      "Designing a brand-aligned, high-energy product catalog reflecting action sports culture while preserving fast load times.",
     solution:
       "Engineered an interactive product catalog with high-fidelity asset rendering, interactive 360 spin views, and localized retailer directory lookups.",
     results: [
       "Product showcase dwell time increased by 65%",
-      "Store locator interactions surged by 80%",
+      "Interactive 3D model render pipeline",
     ],
     image: "/assets/DC-Shoes.png",
     tags: ["Footwear", "Brand Catalog", "High-Impact UI", "Interactive"],
@@ -509,10 +539,11 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: "pikto",
+    num: "12",
     title: "Pikto Visual Design & Media Platform",
     client: "Pikto Inc.",
     category: "Web Development",
-    type: "Completed Client Project",
+    status: "CLIENT PROJECT",
     summary:
       "Modern graphic asset marketplace and visual media showcase for designers, agencies, and content creators.",
     challenge:

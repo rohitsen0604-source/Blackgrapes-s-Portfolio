@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
-  Sparkles,
+  ArrowUpRight,
   ShieldCheck,
   CheckCircle2,
   Phone,
@@ -15,14 +14,13 @@ import {
   ExternalLink,
   Target,
   Zap,
-  Quote,
   X,
   Send,
+  ChevronRight,
+  Award,
   Layers,
-  Cpu,
-  Globe,
-  Smartphone,
-  ChevronDown,
+  Sparkles,
+  Code2,
 } from "lucide-react";
 import {
   COMPANY_DETAILS,
@@ -33,13 +31,35 @@ import {
 } from "@/data/company";
 import { DynamicIcon } from "@/components/ui/DynamicIcon";
 
-export default function SinglePagePortfolio() {
+export default function ModernEditorialPortfolio() {
   // Projects filtering state
   const [activeProjectCategory, setActiveProjectCategory] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   // Services modal state
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+
+  // Keyboard accessibility and body scroll lock for modals
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+        setSelectedService(null);
+      }
+    };
+
+    if (selectedProject || selectedService) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject, selectedService]);
 
   // Contact Form state
   const [formData, setFormData] = useState({
@@ -71,7 +91,7 @@ export default function SinglePagePortfolio() {
     setFormStatus("submitting");
     setTimeout(() => {
       setFormStatus("success");
-    }, 800);
+    }, 700);
   };
 
   const getFormWhatsAppLink = () => {
@@ -81,382 +101,399 @@ export default function SinglePagePortfolio() {
     return `https://wa.me/${COMPANY_DETAILS.contact.whatsappNumber}?text=${text}`;
   };
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offsetTop = el.offsetTop - 75;
+      window.scrollTo({
+        top: offsetTop > 0 ? offsetTop : 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="relative overflow-hidden bg-obsidian text-soft-white">
+    <div className="relative overflow-hidden bg-[#F7F5F0] text-[#14243A]">
       {/* =========================================================================
-          SECTION 1: HOME (HERO)
+          SECTION 1: HOME (EDITORIAL HERO)
          ========================================================================= */}
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden"
+        className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
       >
-        {/* Ambient Glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-purple-rich/20 rounded-full blur-[160px] pointer-events-none" />
-        <div className="absolute top-1/3 left-10 w-[300px] h-[300px] bg-grape/40 rounded-full blur-[130px] pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-purple-electric/15 rounded-full blur-[150px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center">
+          {/* Top Metadata Stamp */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-8 mb-8 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#F07860] animate-pulse"></span>
+              <span>[01 // OVERVIEW]</span>
+              <span>&bull;</span>
+              <span className="text-[#14243A] font-semibold">{COMPANY_DETAILS.name}</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <span>EST. 2014</span>
+              <span>&bull;</span>
+              <span>{COMPANY_DETAILS.location}</span>
+            </div>
+          </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          {/* Top Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-purple-electric/30 mb-8 shadow-xl"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-electric opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-electric"></span>
-            </span>
-            <span className="text-xs sm:text-sm font-semibold tracking-wide text-soft-white">
-              Enterprise Software &amp; Digital Platforms
-            </span>
-            <span className="text-xs bg-purple-rich/50 text-purple-electric px-2.5 py-0.5 rounded-full font-medium hidden sm:inline">
-              Indore &bull; Global Delivery
-            </span>
-          </motion.div>
+          {/* Main Hero Asymmetric Composition */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-end">
+            {/* Large Editorial Headline */}
+            <div className="lg:col-span-8">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.4rem] font-heading font-extrabold tracking-[-0.035em] leading-[1.0] text-[#14243A]">
+                BUILDING DIGITAL EXPERIENCES THAT{" "}
+                <span className="font-serif italic text-[#F07860] font-normal tracking-normal">
+                  MOVE BUSINESS FORWARD.
+                </span>
+              </h1>
+            </div>
 
-          {/* Master Tagline Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-soft-white mb-6"
-          >
-            Innovate. <span className="text-gradient">Integrate.</span> Elevate.
-          </motion.h1>
+            {/* Supporting Copy & Action Column */}
+            <div className="lg:col-span-4 flex flex-col justify-end space-y-6">
+              <p className="text-base sm:text-lg text-[#777D87] leading-relaxed font-sans">
+                {COMPANY_DETAILS.supportingCopy}
+              </p>
 
-          {/* Supporting Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-xl sm:text-2xl md:text-3xl font-medium text-purple-accent/90 max-w-4xl mx-auto mb-6"
-          >
-            {COMPANY_DETAILS.subTagline}
-          </motion.h2>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => scrollToSection("projects")}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_4px_16px_rgba(240,120,96,0.32)] hover:translate-y-[-1px]"
+                >
+                  <span>EXPLORE OUR WORK</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
 
-          {/* Short Introduction */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-sm sm:text-base md:text-lg text-muted-grey max-w-3xl mx-auto leading-relaxed mb-10"
-          >
-            {COMPANY_DETAILS.description}
-          </motion.p>
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-[#14243A] hover:text-white text-[#14243A] border border-[#E2DED7] hover:border-[#14243A] font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_2px_8px_rgba(20,36,58,0.03)]"
+                >
+                  <span>LET&apos;S TALK</span>
+                </button>
+              </div>
+            </div>
+          </div>
 
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-          >
-            <a
-              href="#contact"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold text-soft-white bg-gradient-to-r from-purple-rich via-purple-electric to-purple-rich bg-[length:200%_auto] hover:bg-right transition-all duration-500 shadow-xl shadow-purple-900/50 hover:shadow-purple-electric/40 hover:scale-105 active:scale-95 flex items-center justify-center gap-3"
-            >
-              <span>Get In Touch</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
-
-            <a
-              href="#services"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-semibold text-soft-white glass-panel border border-purple-electric/30 hover:border-purple-electric hover:bg-grape/40 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <span>Explore Services</span>
-            </a>
-
-            <a
-              href="#projects"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-medium text-purple-accent glass-panel border border-purple-electric/20 hover:border-purple-electric hover:bg-grape/30 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <span>View Client Projects</span>
-            </a>
-          </motion.div>
-
-          {/* Stats Cluster */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto"
-          >
+          {/* Editorial Metric Strip */}
+          <div className="mt-16 pt-8 border-t border-[#E2DED7] grid grid-cols-2 md:grid-cols-4 gap-6">
             {COMPANY_DETAILS.stats.map((stat, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-2xl glass-panel border border-purple-electric/20 hover:border-purple-electric/40 transition-all duration-300 text-left"
-              >
-                <div className="text-2xl sm:text-4xl font-extrabold text-soft-white">
+              <div key={idx} className="space-y-1">
+                <div className="text-3xl sm:text-4xl font-heading font-bold text-[#14243A] tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm text-muted-grey mt-1 font-medium">
+                <div className="text-xs font-mono uppercase tracking-wider text-[#777D87]">
                   {stat.label}
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
+        </div>
+
+        {/* Enterprise Client Ticker Strip */}
+        <div className="max-w-7xl mx-auto w-full pt-10 mt-8 border-t border-[#E2DED7]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#777D87]">
+              TRUSTED BY INNOVATIVE ENTERPRISES &bull; 35+ VERIFIED PARTNERS
+            </span>
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#F07860] font-semibold">
+              PROVEN TECHNICAL DELIVERY
+            </span>
+          </div>
+
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-[#14243A]">
+            {COMPANY_DETAILS.verifiedClients.slice(0, 14).map((client, i) => (
+              <span key={i} className="inline-flex items-center gap-2 py-1">
+                <span className="text-[#F07860]">&bull;</span>
+                <span className="font-medium hover:text-[#F07860] transition-colors">
+                  {client}
+                </span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 2: ABOUT
+          SECTION 2: ABOUT US & FOUNDERS
          ========================================================================= */}
-      <section id="about" className="py-24 relative overflow-hidden bg-obsidian-200/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section
+        id="about"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+      >
+        <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-purple-rich/20 text-purple-electric border border-purple-electric/30 mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              Company Overview &amp; Leadership
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+            <div className="flex items-center gap-2">
+              <span className="text-[#F07860] font-bold">[02]</span>
+              <span>WHO WE ARE &bull; COMPANY OVERVIEW</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-soft-white tracking-tight">
-              About <span className="text-gradient">Black Grapes Softech</span>
-            </h2>
-            <p className="text-muted-grey text-base sm:text-lg mt-4 leading-relaxed">
-              {COMPANY_DETAILS.aboutText}
-            </p>
+            <span>ESTABLISHED IN INDORE, INDIA</span>
           </div>
 
-          {/* Vision & Mission Split Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+            <div className="lg:col-span-5">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#14243A] leading-tight">
+                ARCHITECTURAL RIGOR. CRAFTED FOR SUSTAINED BUSINESS SCALE.
+              </h2>
+            </div>
+            <div className="lg:col-span-7 space-y-6 text-[#777D87] text-base sm:text-lg leading-relaxed font-sans">
+              <p>
+                {COMPANY_DETAILS.aboutText}
+              </p>
+              <p>
+                We do not build generic templates. Every line of code, database schema, and interface interaction is tailored specifically for your operational ecosystem. From mission-critical ERP platforms and automated multi-tier marketing engines to slick mobile apps, we bridge bold ideas with dependable software architecture.
+              </p>
+            </div>
+          </div>
+
+          {/* Vision & Mission Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-            <div className="p-8 sm:p-10 rounded-3xl glass-panel border border-purple-electric/25 bg-gradient-to-br from-grape/30 to-obsidian-200">
-              <div className="w-12 h-12 rounded-2xl bg-grape flex items-center justify-center text-purple-electric mb-6 border border-purple-electric/40">
-                <Target className="w-6 h-6" />
+            {/* Vision */}
+            <div className="p-8 sm:p-10 rounded-2xl bg-white border border-[#E2DED7] shadow-sm relative overflow-hidden group hover:border-[#F07860] transition-all">
+              <div className="flex items-center justify-between mb-6">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#F07860] font-semibold">
+                  [DIRECTION &bull; 01]
+                </span>
+                <Target className="w-5 h-5 text-[#F07860]" />
               </div>
-              <h3 className="text-2xl font-bold text-soft-white mb-3">Our Vision</h3>
-              <p className="text-sm sm:text-base text-muted-grey leading-relaxed">
+              <h3 className="text-2xl font-heading font-bold text-[#14243A] mb-3">
+                Our Vision
+              </h3>
+              <p className="text-[#777D87] leading-relaxed text-sm sm:text-base font-sans">
                 {COMPANY_DETAILS.vision}
               </p>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-3xl glass-panel border border-purple-electric/25 bg-gradient-to-br from-grape/30 to-obsidian-200">
-              <div className="w-12 h-12 rounded-2xl bg-grape flex items-center justify-center text-purple-electric mb-6 border border-purple-electric/40">
-                <Zap className="w-6 h-6" />
+            {/* Mission */}
+            <div className="p-8 sm:p-10 rounded-2xl bg-[#14243A] text-[#F7F5F0] border border-[#1F3552] shadow-sm relative overflow-hidden group hover:border-[#F07860] transition-all">
+              <div className="flex items-center justify-between mb-6">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#F07860] font-semibold">
+                  [PURPOSE &bull; 02]
+                </span>
+                <Zap className="w-5 h-5 text-[#F07860]" />
               </div>
-              <h3 className="text-2xl font-bold text-soft-white mb-3">Our Mission</h3>
-              <p className="text-sm sm:text-base text-muted-grey leading-relaxed">
+              <h3 className="text-2xl font-heading font-bold text-white mb-3">
+                Our Mission
+              </h3>
+              <p className="text-[#E8E5DF]/80 leading-relaxed text-sm sm:text-base font-sans">
                 {COMPANY_DETAILS.mission}
               </p>
             </div>
           </div>
 
-          {/* Founders Spotlight (Arpit Jain & Deepika Jain) */}
-          <div className="p-8 sm:p-12 rounded-3xl glass-panel border border-purple-electric/30 shadow-2xl mb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Authentic Photo */}
-              <div className="lg:col-span-5 relative">
-                <div className="relative h-[380px] sm:h-[440px] w-full rounded-2xl overflow-hidden border border-purple-electric/40 shadow-xl">
-                  <Image
-                    src="/assets/the-founders.jpeg"
-                    alt="Mr. Arpit Jain and Mrs. Deepika Jain - Founders of Black Grapes Softech"
-                    fill
-                    className="object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <span className="text-[11px] font-bold text-purple-electric uppercase tracking-wider block mb-1">
-                      Founding Leadership
-                    </span>
-                    <h4 className="text-lg font-bold text-soft-white">
-                      Mr. Arpit Jain &amp; Mrs. Deepika Jain
-                    </h4>
-                    <span className="text-xs text-muted-grey">
-                      Black Grapes Softech, Indore
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Founder Details */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-purple-electric font-bold">
-                  <Quote className="w-4 h-4" />
-                  Executive Leadership
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-soft-white">
-                  Meet the Founders
-                </h3>
-                <p className="text-sm sm:text-base text-muted-grey leading-relaxed italic">
-                  &ldquo;Behind Black Grapes Softech stand two visionary leaders with an unquenchable passion for innovation. Meet our founder, Arpit Jain, the driving force behind our software development journey. With a wealth of experience and a knack for staying ahead of the curve, he has pioneered cutting-edge solutions that have redefined the industry. Deepika Jain doesn&apos;t just see challenges; she envisions opportunities. Her boundless creativity has shaped our company&apos;s culture of relentless innovation.&rdquo;
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-obsidian-100 border border-purple-electric/20">
-                    <h5 className="font-bold text-soft-white text-base">Mr. Arpit Jain</h5>
-                    <div className="text-xs text-purple-electric font-semibold">Founder &amp; Technical Director</div>
-                    <p className="text-xs text-muted-grey mt-2 leading-relaxed">
-                      Leads software architecture, technical governance, and high-performance engineering standards.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-obsidian-100 border border-purple-electric/20">
-                    <h5 className="font-bold text-soft-white text-base">Mrs. Deepika Jain</h5>
-                    <div className="text-xs text-purple-electric font-semibold">Co-Founder &amp; Creative Director</div>
-                    <p className="text-xs text-muted-grey mt-2 leading-relaxed">
-                      Shapes product design vision, client relationships, and organizational development.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Client Trust Strip */}
-          <div className="text-center">
-            <span className="text-xs uppercase tracking-wider text-muted-light font-semibold block mb-4">
-              Trusted by 35+ Enterprise Partners Worldwide
-            </span>
-            <div className="flex flex-wrap justify-center gap-2.5 max-w-4xl mx-auto">
-              {COMPANY_DETAILS.verifiedClients.slice(0, 14).map((client, idx) => (
-                <span
-                  key={idx}
-                  className="px-3.5 py-1.5 rounded-xl glass-panel text-xs font-semibold text-muted-light border border-purple-electric/15"
-                >
-                  {client}
+          {/* Authentic Founders Showcase */}
+          <div className="border-t border-[#E2DED7] pt-16">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-widest text-[#F07860] block mb-2">
+                  [EXECUTIVE LEADERSHIP]
                 </span>
-              ))}
+                <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#14243A]">
+                  Meet The Founders
+                </h3>
+              </div>
+              <p className="text-xs font-mono uppercase tracking-wider text-[#777D87] max-w-md">
+                Hands-on leadership directly involved in technical architecture and design reviews.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              {/* Official Photo of Founders */}
+              <div className="lg:col-span-5 relative min-h-[380px] rounded-2xl overflow-hidden border border-[#E2DED7] bg-[#E8E5DF] group">
+                <Image
+                  src="/assets/the-founders.jpeg"
+                  alt="Mr. Arpit Jain and Mrs. Deepika Jain - Founders of Black Grapes Softech"
+                  fill
+                  className="object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#14243A]/90 via-[#14243A]/20 to-transparent flex flex-col justify-end p-6">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold">
+                    BLACK GRAPES SOFTECH DIRECTORS
+                  </span>
+                  <h4 className="text-lg font-heading font-bold text-white">
+                    Mr. Arpit Jain &amp; Mrs. Deepika Jain
+                  </h4>
+                  <p className="text-xs text-[#F7F5F0]/80 font-mono mt-0.5">
+                    Indore Headquarters, Madhya Pradesh
+                  </p>
+                </div>
+              </div>
+
+              {/* Founder Bios */}
+              <div className="lg:col-span-7 flex flex-col justify-between gap-6">
+                {COMPANY_DETAILS.founders.map((founder, idx) => (
+                  <div
+                    key={idx}
+                    className="p-8 rounded-2xl bg-white border border-[#E2DED7] shadow-sm flex flex-col justify-between hover:border-[#F07860] transition-all"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-xl font-heading font-bold text-[#14243A]">
+                          {founder.name}
+                        </h4>
+                        <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F7F5F0] text-[#14243A] border border-[#E2DED7]">
+                          DIRECTOR
+                        </span>
+                      </div>
+                      <div className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-4">
+                        {founder.role}
+                      </div>
+                      <p className="text-sm text-[#777D87] leading-relaxed font-sans">
+                        {founder.bio}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-[#E2DED7] flex items-center justify-between text-xs font-mono text-[#777D87]">
+                      <span>VERIFIED CORPORATE DIRECTOR</span>
+                      <ShieldCheck className="w-4 h-4 text-[#F07860]" />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 3: SERVICES
+          SECTION 3: SERVICES (11 CLEAN EDITORIAL CARDS)
          ========================================================================= */}
-      <section id="services" className="py-24 relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-purple-rich/10 rounded-full blur-[180px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-purple-rich/20 text-purple-electric border border-purple-electric/30 mb-4">
-              <Layers className="w-3.5 h-3.5" />
-              Verified Enterprise Services
+      <section
+        id="services"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+            <div className="flex items-center gap-2">
+              <span className="text-[#F07860] font-bold">[03]</span>
+              <span>COMPANY SERVICES &amp; TECHNICAL CAPABILITIES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-soft-white tracking-tight">
-              Our Core <span className="text-gradient">Services Portfolio</span>
+            <span>11 CORE OFFERINGS</span>
+          </div>
+
+          <div className="max-w-3xl mb-14">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#14243A] leading-tight mb-4">
+              COMPREHENSIVE DIGITAL &amp; SOFTWARE CRAFT.
             </h2>
-            <p className="text-muted-grey text-base sm:text-lg mt-4 leading-relaxed">
-              Preserving Black Grapes Softech&apos;s genuine service catalog with modern architecture, secure frameworks, and scalable cloud deployment.
+            <p className="text-base sm:text-lg text-[#777D87] leading-relaxed font-sans">
+              Every business challenge requires a distinct architectural approach. Explore our complete spectrum of engineering, design, and staffing capabilities.
             </p>
           </div>
 
-          {/* 11 Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {SERVICES.map((service, idx) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="group rounded-3xl glass-panel border border-purple-electric/20 hover:border-purple-electric/50 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-purple-950/70 hover:-translate-y-1"
-              >
-                <div>
-                  {/* Visual Header Image */}
-                  <div className="relative h-48 w-full overflow-hidden bg-obsidian-200">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/40 to-transparent" />
-                    
-                    {/* Category */}
-                    <span className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-obsidian-950/80 text-purple-electric border border-purple-electric/30 backdrop-blur-md">
-                      {service.category}
-                    </span>
+          {/* 11 Editorial Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SERVICES.map((service, index) => {
+              // Alternating white and off-white cards with fine borders
+              const isEven = index % 2 === 0;
 
-                    {/* Icon */}
-                    <div className="absolute bottom-4 left-4 w-11 h-11 rounded-xl bg-purple-rich/80 backdrop-blur-md border border-purple-electric/40 flex items-center justify-center text-soft-white shadow-lg">
-                      <DynamicIcon name={service.icon} className="w-5 h-5 text-soft-white" />
+              return (
+                <div
+                  key={service.id}
+                  className={`rounded-2xl p-7 flex flex-col justify-between border border-[#E2DED7] transition-all duration-300 relative group ${
+                    isEven ? "bg-white" : "bg-[#F7F5F0]"
+                  } hover:translate-y-[-4px] hover:border-[#F07860] hover:shadow-[0_14px_34px_rgba(20,36,58,0.06)]`}
+                >
+                  <div>
+                    {/* Card Top Numeral & Icon */}
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="font-mono text-sm font-bold text-[#F07860]">
+                        {service.num}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-white border border-[#E2DED7] flex items-center justify-center text-[#F07860] shadow-sm">
+                        <DynamicIcon name={service.icon} className="w-5 h-5" />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Body Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-soft-white group-hover:text-purple-electric transition-colors">
+                    {/* Title */}
+                    <h3 className="text-xl font-heading font-bold text-[#14243A] mb-3">
                       {service.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted-grey mt-2.5 leading-relaxed">
+
+                    {/* Short Description */}
+                    <p className="text-sm text-[#777D87] leading-relaxed mb-6 font-sans">
                       {service.shortDesc}
                     </p>
 
-                    {/* Feature Bullets */}
-                    <div className="mt-4 pt-4 border-t border-purple-900/30 space-y-2">
-                      {service.features.slice(0, 3).map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-center gap-2 text-xs text-muted-light">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-purple-electric shrink-0" />
-                          <span className="line-clamp-1">{feat}</span>
-                        </div>
+                    {/* Features List */}
+                    <ul className="space-y-2 mb-6">
+                      {service.features.map((feat, i) => (
+                        <li
+                          key={i}
+                          className="text-xs text-[#14243A] flex items-start gap-2 font-sans"
+                        >
+                          <ChevronRight className="w-3.5 h-3.5 text-[#F07860] shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
+                  </div>
 
-                    {/* Tech Pills */}
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {service.technologies.slice(0, 4).map((tech, tIdx) => (
+                  {/* Card Bottom: Tech Pills & Trigger */}
+                  <div className="pt-4 border-t border-[#E2DED7]">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {service.technologies.slice(0, 3).map((tech, i) => (
                         <span
-                          key={tIdx}
-                          className="text-[10px] px-2 py-0.5 rounded-md bg-grape/60 text-muted-light border border-purple-electric/20"
+                          key={i}
+                          className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#E8E5DF]/60 text-[#14243A] border border-[#E2DED7]"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
+
+                    <button
+                      onClick={() => setSelectedService(service)}
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#F7F5F0] hover:bg-[#14243A] hover:text-white text-[#14243A] border border-[#E2DED7] text-xs font-mono uppercase tracking-wider font-semibold transition-all flex items-center justify-between"
+                    >
+                      <span>SPECIFICATIONS</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
-
-                {/* Card Action: Interactive Details Modal */}
-                <div className="p-6 pt-0">
-                  <button
-                    onClick={() => setSelectedService(service)}
-                    className="w-full py-2.5 rounded-xl glass-panel border border-purple-electric/25 group-hover:border-purple-electric group-hover:bg-purple-rich/20 text-xs font-semibold text-soft-white flex items-center justify-center gap-2 transition-all"
-                  >
-                    <span>View Specifications</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-purple-electric group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 4: PROJECTS
+          SECTION 4: PROJECTS (12 VERIFIED PROJECTS)
          ========================================================================= */}
-      <section id="projects" className="py-24 relative overflow-hidden bg-obsidian-200/40">
-        {/* Ambient glow */}
-        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-purple-rich/10 rounded-full blur-[180px] pointer-events-none" />
+      <section
+        id="projects"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+            <div className="flex items-center gap-2">
+              <span className="text-[#F07860] font-bold">[04]</span>
+              <span>VERIFIED PORTFOLIO SHOWCASE</span>
+            </div>
+            <span>12 DELIVERED PROJECTS &bull; ASYMMETRIC GRID</span>
+          </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-purple-rich/20 text-purple-electric border border-purple-electric/30 mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                Verified Client Showcase
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-soft-white tracking-tight">
-                Featured Client <span className="text-gradient">Projects</span>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#14243A] leading-tight mb-4">
+                PROVEN DELIVERIES. MEASURABLE IMPACT.
               </h2>
-              <p className="text-muted-grey text-base mt-2 max-w-xl">
-                Authentic projects identified from the company reference, clearly distinguished with completed client badges and verified technology stacks.
+              <p className="text-base text-[#777D87] leading-relaxed font-sans">
+                Explore real client deliveries and specialized technical systems developed by Black Grapes Softech. We clearly distinguish live enterprise client engagements from demonstration prototypes.
               </p>
             </div>
 
             {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
+            <div className="flex flex-wrap gap-2">
               {projectCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveProjectCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all ${
                     activeProjectCategory === cat
-                      ? "bg-purple-electric text-obsidian shadow-lg shadow-purple-electric/30 font-bold"
-                      : "glass-panel text-muted-light hover:text-soft-white hover:border-purple-electric/40"
+                      ? "bg-[#14243A] text-white font-semibold shadow-sm"
+                      : "bg-white text-[#777D87] hover:text-[#14243A] border border-[#E2DED7]"
                   }`}
                 >
                   {cat}
@@ -465,242 +502,261 @@ export default function SinglePagePortfolio() {
             </div>
           </div>
 
-          {/* Projects Cards Grid */}
+          {/* Asymmetric Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="group rounded-3xl glass-panel border border-purple-electric/20 hover:border-purple-electric/50 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-purple-950/70 hover:-translate-y-1"
-              >
-                <div>
-                  {/* Thumbnail Image */}
-                  <div className="relative h-56 w-full overflow-hidden bg-obsidian-200">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/40 to-transparent" />
+            {filteredProjects.map((project) => {
+              const isClientProject = project.status === "CLIENT PROJECT";
 
-                    {/* Platform Tag */}
-                    <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-obsidian-950/85 backdrop-blur-md text-soft-white border border-purple-electric/30">
-                      {project.platform === "Web" ? (
-                        <Globe className="w-3.5 h-3.5 text-purple-electric" />
-                      ) : (
-                        <Smartphone className="w-3.5 h-3.5 text-purple-electric" />
-                      )}
-                      <span>{project.platform}</span>
-                    </div>
+              return (
+                <div
+                  key={project.id}
+                  className="rounded-2xl bg-white border border-[#E2DED7] overflow-hidden flex flex-col justify-between group hover:border-[#F07860] transition-all duration-300 shadow-sm hover:translate-y-[-4px]"
+                >
+                  <div>
+                    {/* Project Screenshot Container */}
+                    <div className="relative h-56 w-full bg-[#E8E5DF] overflow-hidden border-b border-[#E2DED7]">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-500"
+                      />
 
-                    {/* Prominent Verification Badge */}
-                    <div className="absolute top-4 right-4 flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-green-950/80 text-green-300 border border-green-500/40 backdrop-blur-md">
-                      <ShieldCheck className="w-3 h-3 text-green-400" />
-                      <span>{project.type}</span>
-                    </div>
-                  </div>
-
-                  {/* Details */}
-                  <div className="p-6">
-                    <div className="text-xs font-semibold text-purple-electric uppercase tracking-wider mb-1">
-                      {project.category}
-                    </div>
-                    <h3 className="text-xl font-bold text-soft-white group-hover:text-purple-electric transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-grey mt-2 line-clamp-2 leading-relaxed">
-                      {project.summary}
-                    </p>
-
-                    {/* Technology Tags */}
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                      {project.tags.map((tag, tIdx) => (
+                      {/* Top Badges */}
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                         <span
-                          key={tIdx}
-                          className="text-[11px] px-2.5 py-0.5 rounded-md bg-grape/60 text-muted-light border border-purple-electric/20 font-medium"
+                          className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-md font-semibold ${
+                            isClientProject
+                              ? "bg-[#14243A] text-white shadow-sm flex items-center gap-1.5"
+                              : "bg-white/95 text-[#777D87] border border-[#E2DED7]"
+                          }`}
                         >
-                          {tag}
+                          {isClientProject && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#F07860]" />
+                          )}
+                          {project.status}
                         </span>
-                      ))}
+
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/95 text-[#14243A] border border-[#E2DED7] font-semibold">
+                          {project.num}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-medium mb-1.5">
+                        {project.category} &bull; {project.client}
+                      </div>
+
+                      <h3 className="text-xl font-heading font-bold text-[#14243A] mb-2.5 group-hover:text-[#F07860] transition-colors">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-sm text-[#777D87] leading-relaxed mb-4 line-clamp-2 font-sans">
+                        {project.summary}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        {project.tags.map((tag, i) => (
+                          <span
+                            key={i}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F7F5F0] text-[#14243A] border border-[#E2DED7]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Bottom Actions */}
-                <div className="p-6 pt-0 flex items-center gap-2">
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="flex-1 py-2.5 rounded-xl glass-panel border border-purple-electric/25 group-hover:border-purple-electric group-hover:bg-purple-rich/20 text-xs font-semibold text-soft-white flex items-center justify-center gap-1.5 transition-colors"
-                  >
-                    <span>View Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-purple-electric" />
-                  </button>
-
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl glass-panel border border-purple-electric/25 hover:border-purple-electric hover:bg-grape/50 text-muted-light hover:text-soft-white transition-colors"
-                      title={`Visit ${project.title}`}
+                  {/* Bottom Action Strip */}
+                  <div className="p-6 pt-0 flex items-center justify-between gap-3">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#F7F5F0] hover:bg-[#14243A] hover:text-white text-[#14243A] border border-[#E2DED7] text-xs font-mono uppercase tracking-wider font-semibold transition-all flex items-center justify-between"
                     >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
+                      <span>VIEW CASE STUDY</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 rounded-xl border border-[#E2DED7] bg-white text-[#777D87] hover:text-[#F07860] hover:border-[#F07860] transition-all"
+                        title="Open Live Website"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 5: CONTACT
+          SECTION 5: CONTACT & WORKING INQUIRY FORM (NAVY BACKGROUND)
          ========================================================================= */}
-      <section id="contact" className="py-24 relative overflow-hidden">
-        {/* Glow */}
-        <div className="absolute bottom-0 left-1/3 w-[600px] h-[600px] bg-purple-rich/10 rounded-full blur-[180px] pointer-events-none" />
+      <section
+        id="contact"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 bg-[#14243A] text-white"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#2A4468] text-xs font-mono uppercase tracking-widest text-[#E8E5DF]/70">
+            <div className="flex items-center gap-2">
+              <span className="text-[#F07860] font-bold">[05]</span>
+              <span>COMMENCE A PROJECT INQUIRY</span>
+            </div>
+            <span>INDORE HEADQUARTERS &bull; DIRECT CONTACT</span>
+          </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left Column: Official Contact Channels */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Left Column: Official Contact Dossier */}
             <div className="lg:col-span-5 space-y-8">
               <div>
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-purple-rich/20 text-purple-electric border border-purple-electric/30 mb-4">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Get In Touch
-                </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-soft-white tracking-tight leading-tight">
-                  Start Your <span className="text-gradient">Next Project</span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white leading-tight mb-4">
+                  LET&apos;S CREATE SOMETHING MEANINGFUL.
                 </h2>
-                <p className="text-muted-grey text-base mt-4 leading-relaxed">
-                  Connect directly with our software directors in Indore. We analyze your requirements and provide an architectural roadmap, cost projection, and timeline.
+                <p className="text-base text-[#E8E5DF]/80 leading-relaxed font-sans">
+                  Whether you are architecting a custom software ecosystem, revamping an enterprise web application, or building an MLM/CRM algorithm, connect with our Indore directors directly.
                 </p>
               </div>
 
-              {/* Verified Contact Details Cards */}
+              {/* Contact Information Cards */}
               <div className="space-y-4">
-                {/* WhatsApp Quick Discussion */}
-                <a
-                  href={COMPANY_DETAILS.contact.whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-5 rounded-2xl glass-panel border border-green-500/30 hover:border-green-500/60 bg-green-950/20 flex items-center gap-4 transition-all duration-300 group hover:-translate-y-0.5"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-green-900/50 flex items-center justify-center text-green-400 group-hover:scale-105 transition-transform">
-                    <MessageSquare className="w-6 h-6" />
+                {/* Physical Location */}
+                <div className="p-6 rounded-2xl bg-[#1C304B] border border-[#2A4468] shadow-sm flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-[#F07860]">
+                    <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-soft-white group-hover:text-green-300 transition-colors">
-                      Chat Directly on WhatsApp
-                    </div>
-                    <div className="text-xs text-green-400/80 mt-0.5">
-                      +91 7470997884 &bull; Instant Response
-                    </div>
-                  </div>
-                </a>
-
-                {/* Direct Phone Numbers */}
-                <div className="p-5 rounded-2xl glass-panel border border-purple-electric/20 space-y-2">
-                  <div className="flex items-center gap-3 text-soft-white text-sm font-bold">
-                    <Phone className="w-4 h-4 text-purple-electric" />
-                    <span>Official Call Lines</span>
-                  </div>
-                  <div className="pl-7 flex flex-wrap gap-4 text-xs font-medium">
-                    <a
-                      href={`tel:${COMPANY_DETAILS.contact.phone1}`}
-                      className="text-muted-light hover:text-purple-electric transition-colors"
-                    >
-                      {COMPANY_DETAILS.contact.phone1}
-                    </a>
-                    <span className="text-muted-dark">|</span>
-                    <a
-                      href={`tel:${COMPANY_DETAILS.contact.phone2}`}
-                      className="text-muted-light hover:text-purple-electric transition-colors"
-                    >
-                      {COMPANY_DETAILS.contact.phone2}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Official Emails */}
-                <div className="p-5 rounded-2xl glass-panel border border-purple-electric/20 space-y-2">
-                  <div className="flex items-center gap-3 text-soft-white text-sm font-bold">
-                    <Mail className="w-4 h-4 text-purple-electric" />
-                    <span>Official Email Addresses</span>
-                  </div>
-                  <div className="pl-7 flex flex-col gap-1.5 text-xs">
-                    <a
-                      href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`}
-                      className="text-muted-light hover:text-purple-electric transition-colors font-medium"
-                    >
-                      {COMPANY_DETAILS.contact.primaryEmail}
-                    </a>
-                    <a
-                      href={`mailto:${COMPANY_DETAILS.contact.directorEmail}`}
-                      className="text-muted-grey hover:text-purple-electric transition-colors"
-                    >
-                      {COMPANY_DETAILS.contact.directorEmail} (Director)
-                    </a>
-                    <a
-                      href={`mailto:${COMPANY_DETAILS.contact.managementEmail}`}
-                      className="text-muted-grey hover:text-purple-electric transition-colors"
-                    >
-                      {COMPANY_DETAILS.contact.managementEmail} (Management)
-                    </a>
-                  </div>
-                </div>
-
-                {/* Indore Physical Location */}
-                <div className="p-5 rounded-2xl glass-panel border border-purple-electric/20 flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-purple-electric shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-sm font-bold text-soft-white">
-                      Corporate Headquarters
-                    </div>
-                    <p className="text-xs text-muted-grey mt-1 leading-relaxed">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8E5DF]/70 block mb-1">
+                      HEADQUARTERS
+                    </span>
+                    <p className="text-sm font-medium text-white leading-relaxed font-sans">
                       {COMPANY_DETAILS.address.full}
                     </p>
                   </div>
                 </div>
+
+                {/* Direct Phone Lines */}
+                <div className="p-6 rounded-2xl bg-[#1C304B] border border-[#2A4468] shadow-sm flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-[#F07860]">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8E5DF]/70 block mb-1">
+                      DIRECT CALL LINES
+                    </span>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-mono font-medium text-white">
+                      <a
+                        href={`tel:${COMPANY_DETAILS.contact.phone1}`}
+                        className="hover:text-[#F07860] transition-colors"
+                      >
+                        {COMPANY_DETAILS.contact.phone1}
+                      </a>
+                      <span className="text-[#2A4468]">|</span>
+                      <a
+                        href={`tel:${COMPANY_DETAILS.contact.phone2}`}
+                        className="hover:text-[#F07860] transition-colors"
+                      >
+                        {COMPANY_DETAILS.contact.phone2}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Official Emails */}
+                <div className="p-6 rounded-2xl bg-[#1C304B] border border-[#2A4468] shadow-sm flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-[#F07860]">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8E5DF]/70 block mb-1">
+                      OFFICIAL COMMUNICATIONS
+                    </span>
+                    <div className="flex flex-col gap-1 text-sm font-mono text-white">
+                      <a
+                        href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`}
+                        className="hover:text-[#F07860] transition-colors font-medium"
+                      >
+                        {COMPANY_DETAILS.contact.primaryEmail}
+                      </a>
+                      <a
+                        href={`mailto:${COMPANY_DETAILS.contact.directorEmail}`}
+                        className="hover:text-[#F07860] transition-colors text-xs text-[#E8E5DF]/70"
+                      >
+                        {COMPANY_DETAILS.contact.directorEmail}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Direct WhatsApp Callout */}
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#F07860] block mb-1">
+                    INSTANT CHAT
+                  </span>
+                  <div className="text-sm font-bold font-heading text-white">
+                    Need immediate technical advisory?
+                  </div>
+                </div>
+                <a
+                  href={COMPANY_DETAILS.contact.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shrink-0 flex items-center gap-2"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
 
             {/* Right Column: Working Inquiry Form */}
             <div className="lg:col-span-7">
-              <div className="p-8 sm:p-10 rounded-3xl glass-panel border border-purple-electric/30 shadow-2xl relative">
-                <h3 className="text-2xl font-bold text-soft-white mb-2">
-                  Send Us an Inquiry
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-grey mb-8">
-                  Fill in your details below and our team will get in touch with you within 24 hours.
-                </p>
+              <div className="p-8 sm:p-10 rounded-3xl bg-[#1C304B] border border-[#2A4468] shadow-xl">
+                <div className="flex items-center justify-between pb-6 mb-8 border-b border-[#2A4468]">
+                  <div>
+                    <h3 className="text-2xl font-heading font-bold text-white">
+                      Project Inquiry Form
+                    </h3>
+                    <p className="text-xs text-[#E8E5DF]/70 font-mono mt-1">
+                      EXPECT RESPONSE WITHIN 4 BUSINESS HOURS
+                    </p>
+                  </div>
+                  <span className="w-3 h-3 rounded-full bg-[#F07860]"></span>
+                </div>
 
                 {formStatus === "success" ? (
-                  <div className="p-8 rounded-2xl bg-grape/40 border border-purple-electric/50 text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto border border-green-500/40">
+                  <div className="py-12 text-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-[#F07860]/20 text-[#F07860] mx-auto flex items-center justify-center">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h4 className="text-xl font-bold text-soft-white">
-                      Inquiry Received!
+                    <h4 className="text-2xl font-heading font-bold text-white">
+                      Inquiry Received Successfully!
                     </h4>
-                    <p className="text-sm text-muted-light max-w-md mx-auto leading-relaxed">
-                      Thank you, {formData.name}. Our directors at Black Grapes Softech will review your inquiry for <strong>{formData.service}</strong> and respond shortly.
+                    <p className="text-sm text-[#E8E5DF]/80 max-w-md mx-auto font-sans">
+                      Thank you for contacting Black Grapes Softech. Our engineering directors will review your scope and respond promptly.
                     </p>
-
-                    <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <div className="pt-4 flex flex-wrap justify-center gap-3">
                       <a
                         href={getFormWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 rounded-xl bg-green-600 text-white font-semibold text-xs flex items-center gap-2 hover:bg-green-500 transition-colors shadow-lg"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F07860] text-white font-mono text-xs uppercase tracking-wider"
                       >
-                        <MessageSquare className="w-4 h-4" />
-                        <span>Continue via WhatsApp</span>
+                        <MessageSquare className="w-3.5 h-3.5" />
+                        <span>Send via WhatsApp also</span>
                       </a>
                       <button
                         onClick={() => {
@@ -713,114 +769,130 @@ export default function SinglePagePortfolio() {
                             message: "",
                           });
                         }}
-                        className="px-5 py-3 rounded-xl glass-panel text-xs text-soft-white hover:bg-grape/60 transition-colors"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white font-mono text-xs uppercase tracking-wider border border-white/20"
                       >
-                        Submit Another
+                        <span>Send Another Message</span>
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-xs font-semibold text-muted-light uppercase tracking-wider mb-2">
-                          Your Name *
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Name */}
+                      <div className="space-y-2">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                          Your Full Name *
                         </label>
                         <input
                           type="text"
                           required
                           value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="e.g. Rohit Sharma"
-                          className="w-full px-4 py-3 rounded-xl bg-obsidian-100 border border-purple-electric/25 focus:border-purple-electric focus:ring-1 focus:ring-purple-electric text-sm text-soft-white placeholder-muted-dark outline-none transition-all"
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
+                          placeholder="e.g. Rahul Sharma"
+                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans"
                         />
                       </div>
 
-                      <div>
-                        <label className="block text-xs font-semibold text-muted-light uppercase tracking-wider mb-2">
-                          Email Address *
+                      {/* Email */}
+                      <div className="space-y-2">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                          Work Email *
                         </label>
                         <input
                           type="email"
                           required
                           value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="e.g. rohit@company.com"
-                          className="w-full px-4 py-3 rounded-xl bg-obsidian-100 border border-purple-electric/25 focus:border-purple-electric focus:ring-1 focus:ring-purple-electric text-sm text-soft-white placeholder-muted-dark outline-none transition-all"
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
+                          placeholder="name@company.com"
+                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans"
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-xs font-semibold text-muted-light uppercase tracking-wider mb-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Phone */}
+                      <div className="space-y-2">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
                           Phone / WhatsApp Number
                         </label>
                         <input
                           type="tel"
                           value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="e.g. +91 98765 43210"
-                          className="w-full px-4 py-3 rounded-xl bg-obsidian-100 border border-purple-electric/25 focus:border-purple-electric focus:ring-1 focus:ring-purple-electric text-sm text-soft-white placeholder-muted-dark outline-none transition-all"
+                          onChange={(e) =>
+                            setFormData({ ...formData, phone: e.target.value })
+                          }
+                          placeholder="+91 98765 43210"
+                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans"
                         />
                       </div>
 
-                      <div>
-                        <label className="block text-xs font-semibold text-muted-light uppercase tracking-wider mb-2">
-                          Service Required
+                      {/* Service */}
+                      <div className="space-y-2">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                          Service Required *
                         </label>
                         <select
                           value={formData.service}
-                          onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl bg-obsidian-100 border border-purple-electric/25 focus:border-purple-electric focus:ring-1 focus:ring-purple-electric text-sm text-soft-white outline-none transition-all"
+                          onChange={(e) =>
+                            setFormData({ ...formData, service: e.target.value })
+                          }
+                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white focus:outline-none focus:border-[#F07860] transition-all font-sans"
                         >
                           {SERVICES.map((s) => (
-                            <option key={s.id} value={s.title} className="bg-obsidian-950 text-soft-white">
-                              {s.title}
+                            <option key={s.id} value={s.title}>
+                              {s.num}. {s.title}
                             </option>
                           ))}
                         </select>
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-muted-light uppercase tracking-wider mb-2">
-                        Project Description *
+                    {/* Requirement Message */}
+                    <div className="space-y-2">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                        Project Scope &amp; Deliverables *
                       </label>
                       <textarea
-                        rows={4}
                         required
+                        rows={4}
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Tell us about your project requirements, expected timeline, and goals..."
-                        className="w-full px-4 py-3 rounded-xl bg-obsidian-100 border border-purple-electric/25 focus:border-purple-electric focus:ring-1 focus:ring-purple-electric text-sm text-soft-white placeholder-muted-dark outline-none transition-all resize-none"
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
+                        placeholder="Please describe your project objectives, timeline, existing tech stack, and expected deliverables..."
+                        className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans resize-none"
                       />
                     </div>
 
-                    <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+                    {/* Actions */}
+                    <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                       <button
                         type="submit"
                         disabled={formStatus === "submitting"}
-                        className="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-soft-white bg-gradient-to-r from-purple-rich to-purple-electric hover:from-purple-electric hover:to-purple-rich transition-all duration-300 shadow-xl shadow-purple-900/40 flex items-center justify-center gap-2 disabled:opacity-50"
+                        className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_4px_16px_rgba(240,120,96,0.35)] flex items-center justify-center gap-2 hover:translate-y-[-1px] disabled:opacity-50"
                       >
                         {formStatus === "submitting" ? (
-                          <span>Sending Inquiry...</span>
+                          <span>TRANSMITTING...</span>
                         ) : (
                           <>
-                            <span>Send Message</span>
-                            <Send className="w-4 h-4" />
+                            <span>SEND INQUIRY</span>
+                            <Send className="w-3.5 h-3.5" />
                           </>
                         )}
                       </button>
 
                       <a
-                        href={COMPANY_DETAILS.contact.whatsappLink}
+                        href={getFormWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full sm:w-auto px-6 py-4 rounded-xl glass-panel border border-green-500/30 text-green-400 hover:bg-green-950/40 text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                        className="w-full sm:w-auto px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-mono text-xs uppercase tracking-wider font-medium transition-all flex items-center justify-center gap-2"
                       >
-                        <MessageSquare className="w-4 h-4" />
-                        <span>Or WhatsApp Directly</span>
+                        <MessageSquare className="w-3.5 h-3.5 text-[#F07860]" />
+                        <span>Chat via WhatsApp</span>
                       </a>
                     </div>
                   </form>
@@ -832,204 +904,222 @@ export default function SinglePagePortfolio() {
       </section>
 
       {/* =========================================================================
-          INTERACTIVE PROJECT CASE STUDY MODAL (QUICK-VIEW)
+          INTERACTIVE MODAL: PROJECT CASE STUDY
          ========================================================================= */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl glass-panel border border-purple-electric/40 bg-obsidian-950 p-6 sm:p-8 shadow-2xl"
+      {selectedProject && (
+        <div
+          onClick={() => setSelectedProject(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#14243A]/75 backdrop-blur-sm animate-in fade-in duration-200"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white border border-[#E2DED7] p-6 sm:p-8 shadow-2xl"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-[#F7F5F0] text-[#14243A] hover:bg-[#14243A] hover:text-white transition-colors"
+              aria-label="Close Case Study"
             >
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 p-2 rounded-xl bg-grape/60 text-muted-light hover:text-soft-white hover:bg-purple-rich transition-colors"
-                aria-label="Close Case Study"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <X className="w-5 h-5" />
+            </button>
 
-              <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden mb-6 border border-purple-electric/25">
-                <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-green-950/80 text-green-300 border border-green-500/40 backdrop-blur-md flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
-                  <span>{selectedProject.type}</span>
-                </div>
+            {/* Modal Header */}
+            <div className="mb-6 pr-12">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#14243A] text-white">
+                  {selectedProject.status}
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold">
+                  {selectedProject.category}
+                </span>
               </div>
-
-              <div className="text-xs uppercase tracking-wider text-purple-electric font-bold mb-1">
-                {selectedProject.category} &bull; Client: {selectedProject.client}
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-soft-white mb-3">
+              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#14243A]">
                 {selectedProject.title}
               </h3>
-              <p className="text-sm text-muted-grey mb-6 leading-relaxed">
+              <p className="text-xs font-mono uppercase tracking-wider text-[#777D87] mt-1">
+                Client: {selectedProject.client} &bull; Platform: {selectedProject.platform}
+              </p>
+            </div>
+
+            {/* Project Image Preview */}
+            <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-[#E2DED7] mb-6 bg-[#E8E5DF]">
+              <Image
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+
+            {/* Summary */}
+            <div className="mb-6">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-2">
+                PROJECT OVERVIEW
+              </h4>
+              <p className="text-sm text-[#777D87] leading-relaxed font-sans">
                 {selectedProject.summary}
               </p>
+            </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div className="p-4 rounded-xl bg-obsidian-100 border border-purple-electric/20 space-y-2">
-                  <div className="text-xs font-bold uppercase tracking-wider text-purple-electric">
-                    The Challenge
-                  </div>
-                  <p className="text-xs text-muted-grey leading-relaxed">
-                    {selectedProject.challenge}
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-obsidian-100 border border-purple-electric/20 space-y-2">
-                  <div className="text-xs font-bold uppercase tracking-wider text-purple-electric">
-                    The Solution
-                  </div>
-                  <p className="text-xs text-muted-grey leading-relaxed">
-                    {selectedProject.solution}
-                  </p>
-                </div>
+            {/* Challenge & Solution */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#E2DED7]">
+                <h5 className="text-xs font-mono uppercase tracking-wider text-[#14243A] font-bold mb-2">
+                  THE CHALLENGE
+                </h5>
+                <p className="text-xs text-[#777D87] leading-relaxed font-sans">
+                  {selectedProject.challenge}
+                </p>
               </div>
 
-              <div className="mb-6">
-                <div className="text-xs font-bold uppercase tracking-wider text-purple-electric mb-2">
-                  Key Results &amp; Impact
-                </div>
-                <div className="space-y-1.5">
-                  {selectedProject.results.map((r, rIdx) => (
-                    <div key={rIdx} className="flex items-center gap-2 text-xs text-muted-light">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-electric shrink-0" />
-                      <span>{r}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="p-5 rounded-2xl bg-[#E8E5DF]/50 border border-[#E2DED7]">
+                <h5 className="text-xs font-mono uppercase tracking-wider text-[#14243A] font-bold mb-2">
+                  OUR SOLUTION
+                </h5>
+                <p className="text-xs text-[#777D87] leading-relaxed font-sans">
+                  {selectedProject.solution}
+                </p>
               </div>
+            </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-purple-900/40">
-                <div className="flex flex-wrap gap-1.5">
-                  {selectedProject.tags.map((t, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-2.5 py-1 rounded-lg bg-grape/80 text-xs text-purple-accent border border-purple-electric/20"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {selectedProject.liveUrl && (
-                  <a
-                    href={selectedProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-rich to-purple-electric text-soft-white text-xs font-semibold flex items-center gap-2"
+            {/* Measurable Results */}
+            <div className="mb-6">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-2.5">
+                MEASURABLE OUTCOMES
+              </h4>
+              <ul className="space-y-2">
+                {selectedProject.results.map((res, i) => (
+                  <li
+                    key={i}
+                    className="text-xs text-[#14243A] flex items-center gap-2 font-medium font-sans"
                   >
-                    <span>Visit Live Site</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
+                    <CheckCircle2 className="w-4 h-4 text-[#F07860] shrink-0" />
+                    <span>{res}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Tech Tags */}
+            <div className="pt-6 border-t border-[#E2DED7] flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-wrap gap-1.5">
+                {selectedProject.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F7F5F0] text-[#14243A] border border-[#E2DED7]"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </motion.div>
+
+              {selectedProject.liveUrl && (
+                <a
+                  href={selectedProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold inline-flex items-center gap-2 transition-all shadow-sm"
+                >
+                  <span>Visit Live Site</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
 
       {/* =========================================================================
-          INTERACTIVE SERVICE DETAILS MODAL
+          INTERACTIVE MODAL: SERVICE SPECIFICATIONS
          ========================================================================= */}
-      <AnimatePresence>
-        {selectedService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl glass-panel border border-purple-electric/40 bg-obsidian-950 p-6 sm:p-8 shadow-2xl"
+      {selectedService && (
+        <div
+          onClick={() => setSelectedService(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#14243A]/75 backdrop-blur-sm animate-in fade-in duration-200"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-2xl rounded-3xl bg-white border border-[#E2DED7] p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedService(null)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-[#F7F5F0] text-[#14243A] hover:bg-[#14243A] hover:text-white transition-colors"
+              aria-label="Close Specifications"
             >
-              <button
-                onClick={() => setSelectedService(null)}
-                className="absolute top-5 right-5 p-2 rounded-xl bg-grape/60 text-muted-light hover:text-soft-white hover:bg-purple-rich transition-colors"
-                aria-label="Close Service Modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <X className="w-5 h-5" />
+            </button>
 
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-grape flex items-center justify-center text-purple-electric border border-purple-electric/40">
-                  <DynamicIcon name={selectedService.icon} className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-xs uppercase tracking-wider text-purple-electric font-bold">
-                    {selectedService.category} Division
+            <div className="mb-6 pr-12">
+              <div className="flex items-center gap-2 mb-2 font-mono text-xs text-[#F07860] font-bold">
+                <span>{selectedService.num}</span>
+                <span>&bull;</span>
+                <span>ENGINEERING CAPABILITY</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#14243A]">
+                {selectedService.title}
+              </h3>
+            </div>
+
+            <p className="text-sm text-[#777D87] leading-relaxed mb-6 font-sans">
+              {selectedService.shortDesc}
+            </p>
+
+            {/* Core Features */}
+            <div className="mb-6">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-3">
+                ARCHITECTURAL CAPABILITIES
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {selectedService.features.map((feat, i) => (
+                  <div
+                    key={i}
+                    className="p-3.5 rounded-xl bg-[#F7F5F0] border border-[#E2DED7] text-xs text-[#14243A] flex items-start gap-2 font-sans"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-[#F07860] shrink-0 mt-0.5" />
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Technologies */}
+            <div className="mb-8">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-2.5">
+                RECOMMENDED TECH STACK
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {selectedService.technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="text-xs font-mono px-3 py-1 rounded-md bg-[#14243A] text-white"
+                  >
+                    {tech}
                   </span>
-                  <h3 className="text-2xl font-bold text-soft-white">
-                    {selectedService.title}
-                  </h3>
-                </div>
+                ))}
               </div>
+            </div>
 
-              <p className="text-sm text-muted-grey leading-relaxed mb-6">
-                {selectedService.shortDesc}
-              </p>
-
-              <div className="space-y-3 mb-6">
-                <div className="text-xs font-bold uppercase tracking-wider text-purple-electric">
-                  Core Architectural Capabilities
-                </div>
-                <div className="space-y-2">
-                  {selectedService.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-muted-light">
-                      <CheckCircle2 className="w-4 h-4 text-purple-electric shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </div>
-                  ))}
-                </div>
+            {/* Direct Service CTA */}
+            <div className="pt-6 border-t border-[#E2DED7] flex flex-wrap items-center justify-between gap-4">
+              <div className="text-xs font-mono text-[#777D87]">
+                Direct advisory available with Mr. Arpit Jain
               </div>
-
-              <div className="mb-6">
-                <div className="text-xs font-bold uppercase tracking-wider text-purple-electric mb-2">
-                  Technology Stack
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {selectedService.technologies.map((tech, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-3 py-1 rounded-lg bg-grape text-xs font-semibold text-soft-white border border-purple-electric/30"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-purple-900/40 flex items-center justify-between">
-                <a
-                  href="#contact"
-                  onClick={() => {
-                    setSelectedService(null);
-                    setFormData({ ...formData, service: selectedService.title });
-                  }}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-rich to-purple-electric text-soft-white text-xs font-semibold flex items-center gap-2"
-                >
-                  <span>Inquire for {selectedService.title}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-                <button
-                  onClick={() => setSelectedService(null)}
-                  className="text-xs text-muted-grey hover:text-soft-white"
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
+              <button
+                onClick={() => {
+                  setSelectedService(null);
+                  setFormData((prev) => ({ ...prev, service: selectedService.title }));
+                  scrollToSection("contact");
+                }}
+                className="px-6 py-3 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_4px_14px_rgba(240,120,96,0.35)]"
+              >
+                Request Quotation &rarr;
+              </button>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 }
