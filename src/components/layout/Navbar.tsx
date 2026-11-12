@@ -11,19 +11,19 @@ export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { label: "Home", href: "#home", num: "01" },
-    { label: "About", href: "#about", num: "02" },
-    { label: "Services", href: "#services", num: "03" },
-    { label: "Projects", href: "#projects", num: "04" },
-    { label: "Contact", href: "#contact", num: "05" },
+    { label: "HOME", href: "#home", num: "01" },
+    { label: "ABOUT", href: "#about", num: "02" },
+    { label: "SERVICES", href: "#services", num: "03" },
+    { label: "PROJECTS", href: "#projects", num: "04" },
+    { label: "CONTACT", href: "#contact", num: "05" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
 
       const sections = ["home", "about", "services", "projects", "contact"];
-      const scrollPosition = window.scrollY + 220;
+      const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -63,32 +63,33 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#F7F5F0]/95 backdrop-blur-md border-b border-[#E2DED7] py-3.5 shadow-[0_2px_12px_rgba(20,36,58,0.04)]"
+          ? "bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E5E5E5] py-3 shadow-[0_4px_16px_rgba(17,17,17,0.04)]"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Official Logo */}
+          {/* Original Official Logo with Enhanced Crisp Sizing */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
             className="flex items-center gap-3 group focus:outline-none"
             aria-label="Black Grapes Softech Home"
           >
-            <div className="relative h-10 w-44 sm:h-11 sm:w-52 transition-transform duration-200 group-hover:scale-[1.02]">
+            <div className="relative h-10 w-44 sm:h-11 sm:w-56 transition-transform duration-200 group-hover:scale-[1.01]">
               <Image
                 src="/assets/bgst-logo.png"
                 alt="Black Grapes Softech"
                 fill
-                className="object-contain"
+                sizes="(max-width: 640px) 176px, 224px"
+                className="object-contain object-left"
                 priority
               />
             </div>
           </a>
 
-          {/* Desktop Modern Editorial Navigation: 5 Sections Only */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 bg-[#FFFFFF] px-3.5 py-1.5 rounded-full border border-[#E2DED7] shadow-[0_2px_8px_rgba(20,36,58,0.03)]">
+          {/* Desktop Navigation: 5 Sections with Bold Readability */}
+          <nav className="hidden md:flex items-center space-x-1 bg-[#FFFFFF] px-3 py-1.5 rounded-none border border-[#E5E5E5] shadow-[2px_2px_0px_#111111]">
             {navItems.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -98,41 +99,44 @@ export const Navbar: React.FC = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`px-3.5 py-1.5 text-xs uppercase tracking-wider font-mono transition-all duration-200 rounded-full flex items-center gap-1.5 ${
+                  className={`px-3.5 py-1.5 text-xs uppercase tracking-wider font-mono font-bold transition-all duration-200 flex items-center gap-1.5 relative group ${
                     isActive
-                      ? "bg-[#14243A] text-white font-medium shadow-sm"
-                      : "text-[#777D87] hover:text-[#14243A] hover:bg-[#F7F5F0]"
+                      ? "bg-[#111111] text-white"
+                      : "text-[#555555] hover:text-[#111111] hover:bg-[#F1F0EC]"
                   }`}
                 >
                   <span
                     className={`text-[10px] ${
-                      isActive ? "text-[#F07860]" : "text-[#777D87]"
+                      isActive ? "text-[#FF6B35]" : "text-[#777777]"
                     }`}
                   >
                     {item.num}
                   </span>
-                  <span className="font-sans font-medium">{item.label}</span>
+                  <span>{item.label}</span>
+                  {!isActive && (
+                    <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#FF6B35] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200" />
+                  )}
                 </a>
               );
             })}
           </nav>
 
-          {/* Desktop Right CTA: Coral Button */}
-          <div className="hidden md:flex items-center gap-2.5">
+          {/* Desktop Right CTA: High-Contrast Tangerine Button */}
+          <div className="hidden md:flex items-center gap-3">
             <a
               href={COMPANY_DETAILS.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full border border-[#E2DED7] bg-white text-[#14243A] hover:bg-[#14243A] hover:text-white hover:border-[#14243A] transition-all duration-200"
+              className="p-2.5 rounded-none border border-[#E5E5E5] bg-white text-[#111111] hover:bg-[#111111] hover:text-white hover:border-[#111111] transition-all duration-200 shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px]"
               title="Chat on WhatsApp"
             >
-              <MessageSquare className="w-4 h-4 text-[#F07860]" />
+              <MessageSquare className="w-4 h-4 text-[#FF6B35]" />
             </a>
 
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs uppercase font-mono tracking-wider font-semibold text-white rounded-full bg-[#F07860] hover:bg-[#E0634A] transition-all duration-200 shadow-[0_4px_14px_rgba(240,120,96,0.3)] hover:translate-y-[-1px] active:translate-y-[0px]"
+              className="inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase font-mono tracking-wider font-bold text-white rounded-none bg-[#FF6B35] hover:bg-[#E55A27] transition-all duration-200 shadow-[3px_3px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
             >
               <span>LET&apos;S TALK</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -144,13 +148,13 @@ export const Navbar: React.FC = () => {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="text-xs uppercase font-mono tracking-wider font-semibold px-3 py-1.5 rounded-full bg-[#F07860] text-white"
+              className="text-xs uppercase font-mono tracking-wider font-bold px-3 py-1.5 rounded-none bg-[#FF6B35] text-white shadow-[2px_2px_0px_#111111]"
             >
               LET&apos;S TALK
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-white border border-[#E2DED7] text-[#14243A] focus:outline-none"
+              className="p-2 rounded-none bg-white border border-[#E5E5E5] text-[#111111] focus:outline-none shadow-[2px_2px_0px_#111111]"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -161,35 +165,35 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[#E2DED7] bg-[#F7F5F0] px-6 py-6 transition-all duration-200 shadow-lg">
+        <div className="md:hidden border-b-2 border-[#111111] bg-[#FFFFFF] px-6 py-6 transition-all duration-200 shadow-2xl">
           <div className="space-y-2">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="flex items-center justify-between px-4 py-3 text-sm font-sans font-medium uppercase tracking-wider rounded-lg text-[#14243A] hover:bg-white border border-transparent hover:border-[#E2DED7] transition-colors"
+                className="flex items-center justify-between px-4 py-3 text-sm font-heading font-extrabold uppercase tracking-wider text-[#111111] hover:bg-[#F1F0EC] border border-transparent hover:border-[#111111] transition-colors"
               >
                 <span>{item.label}</span>
-                <span className="text-xs text-[#F07860] font-mono">{item.num}</span>
+                <span className="text-xs text-[#FF6B35] font-mono font-bold">{item.num}</span>
               </a>
             ))}
           </div>
 
-          <div className="mt-6 pt-5 border-t border-[#E2DED7] space-y-2.5">
+          <div className="mt-6 pt-5 border-t border-[#E5E5E5] space-y-2.5">
             <a
               href={COMPANY_DETAILS.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-white border border-[#E2DED7] text-[#14243A] font-mono text-xs uppercase tracking-wider font-semibold"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-none bg-[#F1F0EC] border border-[#111111] text-[#111111] font-mono text-xs uppercase tracking-wider font-bold shadow-[2px_2px_0px_#111111]"
             >
-              <MessageSquare className="w-4 h-4 text-[#F07860]" />
+              <MessageSquare className="w-4 h-4 text-[#FF6B35]" />
               <span>WhatsApp Direct</span>
             </a>
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-[#F07860] text-white font-mono text-xs uppercase tracking-wider font-semibold shadow-md"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-none bg-[#FF6B35] text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[3px_3px_0px_#111111]"
             >
               <span>LET&apos;S TALK</span>
               <ArrowRight className="w-4 h-4" />

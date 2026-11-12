@@ -16,7 +16,7 @@ export const FloatingContact: React.FC = () => {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="w-10 h-10 rounded-full bg-white border border-[#E2DED7] text-[#14243A] flex items-center justify-center hover:bg-[#14243A] hover:text-white hover:border-[#14243A] transition-all duration-200 shadow-md"
+        className="w-10 h-10 rounded-none bg-white border border-[#E5E5E5] text-[#111111] flex items-center justify-center hover:bg-[#111111] hover:text-white hover:border-[#111111] transition-all duration-200 shadow-[2px_2px_0px_#111111]"
         aria-label="Scroll to top"
       >
         <ArrowUp className="w-4 h-4" />
@@ -29,17 +29,17 @@ export const FloatingContact: React.FC = () => {
             href={COMPANY_DETAILS.contact.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#14243A] text-white border border-[#E2DED7] font-mono text-xs uppercase tracking-wider shadow-lg hover:bg-[#F07860] hover:border-[#F07860] transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-none bg-[#111111] text-white border border-[#2A2A2A] font-mono text-xs uppercase tracking-wider shadow-[3px_3px_0px_#FF6B35] hover:bg-[#FF6B35] hover:border-[#FF6B35] transition-all"
           >
-            <MessageSquare className="w-3.5 h-3.5 text-[#F07860] group-hover:text-white" />
+            <MessageSquare className="w-3.5 h-3.5 text-[#FF6B35] group-hover:text-white" />
             <span>WhatsApp Direct</span>
           </a>
 
           <a
             href={`tel:${COMPANY_DETAILS.contact.phone1}`}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-[#14243A] border border-[#E2DED7] font-mono text-xs uppercase tracking-wider shadow-lg hover:bg-[#14243A] hover:text-white transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-none bg-white text-[#111111] border border-[#E5E5E5] font-mono text-xs uppercase tracking-wider shadow-[3px_3px_0px_#111111] hover:bg-[#111111] hover:text-white transition-all"
           >
-            <Phone className="w-3.5 h-3.5 text-[#F07860]" />
+            <Phone className="w-3.5 h-3.5 text-[#FF6B35]" />
             <span>Call +91 7470997884</span>
           </a>
         </div>
@@ -48,7 +48,7 @@ export const FloatingContact: React.FC = () => {
       {/* Main Trigger Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-12 h-12 rounded-full bg-[#F07860] text-white shadow-[0_4px_16px_rgba(240,120,96,0.4)] hover:bg-[#E0634A] hover:scale-105 active:scale-95 transition-all flex items-center justify-center border-2 border-white"
+        className="w-12 h-12 rounded-none bg-[#FF6B35] text-white shadow-[3px_3px_0px_#111111] hover:bg-[#E55A27] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px] transition-all flex items-center justify-center border border-[#111111]"
         aria-label="Quick Connect Options"
       >
         {open ? (
@@ -56,7 +56,7 @@ export const FloatingContact: React.FC = () => {
         ) : (
           <div className="relative">
             <MessageSquare className="w-5 h-5" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-white" />
           </div>
         )}
       </button>

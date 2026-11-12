@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -31,7 +32,7 @@ import {
 } from "@/data/company";
 import { DynamicIcon } from "@/components/ui/DynamicIcon";
 
-export default function ModernEditorialPortfolio() {
+export default function ModernBrutalistPortfolio() {
   // Projects filtering state
   const [activeProjectCategory, setActiveProjectCategory] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -91,7 +92,7 @@ export default function ModernEditorialPortfolio() {
     setFormStatus("submitting");
     setTimeout(() => {
       setFormStatus("success");
-    }, 700);
+    }, 600);
   };
 
   const getFormWhatsAppLink = () => {
@@ -113,52 +114,62 @@ export default function ModernEditorialPortfolio() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#F7F5F0] text-[#14243A]">
+    <div className="relative overflow-hidden bg-[#F1F0EC] text-[#111111]">
       {/* =========================================================================
-          SECTION 1: HOME (EDITORIAL HERO)
+          SECTION 1: HOME (REFINED MODERN BRUTALIST HERO)
          ========================================================================= */}
       <section
         id="home"
-        className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+        className="relative min-h-[94vh] flex flex-col justify-between pt-32 pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#E5E5E5] bg-[#F1F0EC]"
       >
         <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center">
-          {/* Top Metadata Stamp */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-8 mb-8 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#F07860] animate-pulse"></span>
-              <span>[01 // OVERVIEW]</span>
+          {/* Top Metadata Stamp with Verified Practice Info */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-6 mb-10 border-b border-[#E5E5E5] text-xs font-mono uppercase tracking-widest text-[#666666]">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 bg-[#FF6B35] animate-pulse"></span>
+              <span className="font-bold text-[#111111]">[01 // IDENTITY]</span>
               <span>&bull;</span>
-              <span className="text-[#14243A] font-semibold">{COMPANY_DETAILS.name}</span>
+              <span className="font-bold text-[#111111]">{COMPANY_DETAILS.name}</span>
             </div>
-            <div className="flex items-center gap-4">
-              <span>EST. 2014</span>
+            <div className="flex items-center gap-3">
+              <span className="text-[#FF6B35] font-bold">ESTABLISHED PRACTICE</span>
               <span>&bull;</span>
-              <span>{COMPANY_DETAILS.location}</span>
+              <span className="font-bold text-[#111111]">{COMPANY_DETAILS.location}</span>
             </div>
           </div>
 
           {/* Main Hero Asymmetric Composition */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-end">
-            {/* Large Editorial Headline */}
-            <div className="lg:col-span-8">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.4rem] font-heading font-extrabold tracking-[-0.035em] leading-[1.0] text-[#14243A]">
-                BUILDING DIGITAL EXPERIENCES THAT{" "}
-                <span className="font-serif italic text-[#F07860] font-normal tracking-normal">
-                  MOVE BUSINESS FORWARD.
+            {/* Oversized Brutalist Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-8"
+            >
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[5.5rem] font-heading font-extrabold tracking-[-0.03em] leading-[0.98] text-[#111111] uppercase">
+                WE TURN AMBITIOUS IDEAS INTO{" "}
+                <span className="text-[#FF6B35] underline decoration-[#111111] decoration-4 underline-offset-8">
+                  DIGITAL REALITY.
                 </span>
               </h1>
-            </div>
+            </motion.div>
 
             {/* Supporting Copy & Action Column */}
-            <div className="lg:col-span-4 flex flex-col justify-end space-y-6">
-              <p className="text-base sm:text-lg text-[#777D87] leading-relaxed font-sans">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-4 flex flex-col justify-end space-y-7"
+            >
+              <p className="text-base sm:text-lg lg:text-xl text-[#444444] leading-relaxed font-sans max-w-xl">
                 {COMPANY_DETAILS.supportingCopy}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <button
                   onClick={() => scrollToSection("projects")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_4px_16px_rgba(240,120,96,0.32)] hover:translate-y-[-1px]"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-extrabold transition-all shadow-[4px_4px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[2px] active:translate-y-[2px]"
                 >
                   <span>EXPLORE OUR WORK</span>
                   <ArrowRight className="w-4 h-4" />
@@ -166,22 +177,22 @@ export default function ModernEditorialPortfolio() {
 
                 <button
                   onClick={() => scrollToSection("contact")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-[#14243A] hover:text-white text-[#14243A] border border-[#E2DED7] hover:border-[#14243A] font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_2px_8px_rgba(20,36,58,0.03)]"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border-2 border-[#111111] font-mono text-xs uppercase tracking-wider font-extrabold transition-all shadow-[4px_4px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[2px] active:translate-y-[2px]"
                 >
                   <span>LET&apos;S TALK</span>
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Editorial Metric Strip */}
-          <div className="mt-16 pt-8 border-t border-[#E2DED7] grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* Audited Engineering Pillars (Authentic, Non-Numeric Milestones) */}
+          <div className="mt-16 pt-8 border-t border-[#E5E5E5] grid grid-cols-2 md:grid-cols-4 gap-6">
             {COMPANY_DETAILS.stats.map((stat, idx) => (
-              <div key={idx} className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-heading font-bold text-[#14243A] tracking-tight">
+              <div key={idx} className="p-5 bg-white border-2 border-[#111111] shadow-[3px_3px_0px_#111111]">
+                <div className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight uppercase">
                   {stat.value}
                 </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-[#777D87]">
+                <div className="text-xs font-mono uppercase tracking-wider text-[#666666] mt-1.5 font-bold">
                   {stat.label}
                 </div>
               </div>
@@ -189,23 +200,23 @@ export default function ModernEditorialPortfolio() {
           </div>
         </div>
 
-        {/* Enterprise Client Ticker Strip */}
-        <div className="max-w-7xl mx-auto w-full pt-10 mt-8 border-t border-[#E2DED7]">
+        {/* Verified Delivered Architectural Domains (Replacing unverified brand ticker) */}
+        <div className="max-w-7xl mx-auto w-full pt-10 mt-8 border-t border-[#E5E5E5]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#777D87]">
-              TRUSTED BY INNOVATIVE ENTERPRISES &bull; 35+ VERIFIED PARTNERS
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#666666] font-bold">
+              DELIVERED ARCHITECTURAL DOMAINS &bull; CENTRAL INDIAN ENGINEERING HUB
             </span>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#F07860] font-semibold">
-              PROVEN TECHNICAL DELIVERY
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF6B35] font-extrabold">
+              FULL-CYCLE EXPERTISE
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-[#14243A]">
-            {COMPANY_DETAILS.verifiedClients.slice(0, 14).map((client, i) => (
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-[#111111]">
+            {COMPANY_DETAILS.verifiedDomains.map((domain, i) => (
               <span key={i} className="inline-flex items-center gap-2 py-1">
-                <span className="text-[#F07860]">&bull;</span>
-                <span className="font-medium hover:text-[#F07860] transition-colors">
-                  {client}
+                <span className="text-[#FF6B35] font-extrabold">&bull;</span>
+                <span className="font-bold hover:text-[#FF6B35] transition-colors">
+                  {domain}
                 </span>
               </span>
             ))}
@@ -214,138 +225,162 @@ export default function ModernEditorialPortfolio() {
       </section>
 
       {/* =========================================================================
-          SECTION 2: ABOUT US & FOUNDERS
+          HERO-TO-ABOUT EDITORIAL BRIDGE (FEATURED PREVIEW)
+         ========================================================================= */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-b-2 border-[#111111] bg-[#111111] text-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-5 space-y-2">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#FF6B35] font-bold block">
+                [STRATEGIC POSITIONING]
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-heading font-extrabold uppercase">
+                Purpose-Built Engineering For Scale.
+              </h3>
+            </div>
+            <div className="lg:col-span-7">
+              <p className="text-sm sm:text-base text-[#CCCCCC] leading-relaxed font-sans">
+                Headquartered in Vijaynagar, Indore, Black Grapes Softech delivers resilient custom software, high-performance web applications, native &amp; cross-platform mobile products, and specialized business automation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 2: ABOUT US (WHITE EDITORIAL SURFACE)
          ========================================================================= */}
       <section
         id="about"
-        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E5E5E5] bg-[#FFFFFF]"
       >
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E5E5E5] text-xs font-mono uppercase tracking-widest text-[#666666]">
             <div className="flex items-center gap-2">
-              <span className="text-[#F07860] font-bold">[02]</span>
-              <span>WHO WE ARE &bull; COMPANY OVERVIEW</span>
+              <span className="text-[#FF6B35] font-bold">[02]</span>
+              <span className="text-[#111111] font-bold">WHO WE ARE &bull; COMPANY OVERVIEW</span>
             </div>
-            <span>ESTABLISHED IN INDORE, INDIA</span>
+            <span>INDORE, MADHYA PRADESH</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
             <div className="lg:col-span-5">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#14243A] leading-tight">
-                ARCHITECTURAL RIGOR. CRAFTED FOR SUSTAINED BUSINESS SCALE.
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#111111] leading-tight uppercase">
+                {COMPANY_DETAILS.aboutHeadline}
               </h2>
             </div>
-            <div className="lg:col-span-7 space-y-6 text-[#777D87] text-base sm:text-lg leading-relaxed font-sans">
+            <div className="lg:col-span-7 space-y-6 text-[#555555] text-base sm:text-lg leading-relaxed font-sans">
               <p>
                 {COMPANY_DETAILS.aboutText}
               </p>
               <p>
-                We do not build generic templates. Every line of code, database schema, and interface interaction is tailored specifically for your operational ecosystem. From mission-critical ERP platforms and automated multi-tier marketing engines to slick mobile apps, we bridge bold ideas with dependable software architecture.
+                We build without unnecessary bloat. Every line of code, database schema, and interface interaction is tailored specifically for your operational ecosystem. From mission-critical ERP platforms and automated multi-tier marketing engines to slick mobile apps, we bridge bold ideas with dependable software architecture.
               </p>
             </div>
           </div>
 
-          {/* Vision & Mission Cards */}
+          {/* Vision & Mission Cards: Brutalist Contrast */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-            {/* Vision */}
-            <div className="p-8 sm:p-10 rounded-2xl bg-white border border-[#E2DED7] shadow-sm relative overflow-hidden group hover:border-[#F07860] transition-all">
+            {/* Vision (Warm Grey Card with Dark Stroke) */}
+            <div className="p-8 sm:p-10 rounded-none bg-[#F1F0EC] border-2 border-[#111111] shadow-[6px_6px_0px_#111111] relative overflow-hidden group hover:border-[#FF6B35] transition-all">
               <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs uppercase tracking-widest text-[#F07860] font-semibold">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#FF6B35] font-bold">
                   [DIRECTION &bull; 01]
                 </span>
-                <Target className="w-5 h-5 text-[#F07860]" />
+                <Target className="w-5 h-5 text-[#FF6B35]" />
               </div>
-              <h3 className="text-2xl font-heading font-bold text-[#14243A] mb-3">
+              <h3 className="text-2xl font-heading font-extrabold text-[#111111] mb-3 uppercase">
                 Our Vision
               </h3>
-              <p className="text-[#777D87] leading-relaxed text-sm sm:text-base font-sans">
+              <p className="text-[#555555] leading-relaxed text-sm sm:text-base font-sans">
                 {COMPANY_DETAILS.vision}
               </p>
             </div>
 
-            {/* Mission */}
-            <div className="p-8 sm:p-10 rounded-2xl bg-[#14243A] text-[#F7F5F0] border border-[#1F3552] shadow-sm relative overflow-hidden group hover:border-[#F07860] transition-all">
+            {/* Mission (Jet Black Card) */}
+            <div className="p-8 sm:p-10 rounded-none bg-[#111111] text-white border-2 border-[#111111] shadow-[6px_6px_0px_#FF6B35] relative overflow-hidden group transition-all">
               <div className="flex items-center justify-between mb-6">
-                <span className="font-mono text-xs uppercase tracking-widest text-[#F07860] font-semibold">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#FF6B35] font-bold">
                   [PURPOSE &bull; 02]
                 </span>
-                <Zap className="w-5 h-5 text-[#F07860]" />
+                <Zap className="w-5 h-5 text-[#FF6B35]" />
               </div>
-              <h3 className="text-2xl font-heading font-bold text-white mb-3">
+              <h3 className="text-2xl font-heading font-extrabold text-white mb-3 uppercase">
                 Our Mission
               </h3>
-              <p className="text-[#E8E5DF]/80 leading-relaxed text-sm sm:text-base font-sans">
+              <p className="text-[#CCCCCC] leading-relaxed text-sm sm:text-base font-sans">
                 {COMPANY_DETAILS.mission}
               </p>
             </div>
           </div>
 
           {/* Authentic Founders Showcase */}
-          <div className="border-t border-[#E2DED7] pt-16">
+          <div className="border-t border-[#E5E5E5] pt-16">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
               <div>
-                <span className="font-mono text-xs uppercase tracking-widest text-[#F07860] block mb-2">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#FF6B35] block mb-2 font-bold">
                   [EXECUTIVE LEADERSHIP]
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#14243A]">
+                <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] uppercase">
                   Meet The Founders
                 </h3>
               </div>
-              <p className="text-xs font-mono uppercase tracking-wider text-[#777D87] max-w-md">
-                Hands-on leadership directly involved in technical architecture and design reviews.
+              <p className="text-xs font-mono uppercase tracking-wider text-[#666666] max-w-md font-bold">
+                Director-led technical execution and creative digital direction.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-              {/* Official Photo of Founders */}
-              <div className="lg:col-span-5 relative min-h-[380px] rounded-2xl overflow-hidden border border-[#E2DED7] bg-[#E8E5DF] group">
+              {/* Official Photo of Founders with Aligned Full-Height */}
+              <div className="lg:col-span-5 relative min-h-[420px] lg:min-h-full h-full rounded-none overflow-hidden border-2 border-[#111111] bg-[#111111] shadow-[6px_6px_0px_#111111] group">
                 <Image
                   src="/assets/the-founders.jpeg"
                   alt="Mr. Arpit Jain and Mrs. Deepika Jain - Founders of Black Grapes Softech"
                   fill
-                  className="object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-cover object-top filter contrast-110 group-hover:contrast-125 transition-all duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14243A]/90 via-[#14243A]/20 to-transparent flex flex-col justify-end p-6">
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/95 via-[#111111]/25 to-transparent flex flex-col justify-end p-6">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-extrabold">
                     BLACK GRAPES SOFTECH DIRECTORS
                   </span>
-                  <h4 className="text-lg font-heading font-bold text-white">
+                  <h4 className="text-lg font-heading font-extrabold text-white uppercase">
                     Mr. Arpit Jain &amp; Mrs. Deepika Jain
                   </h4>
-                  <p className="text-xs text-[#F7F5F0]/80 font-mono mt-0.5">
+                  <p className="text-xs text-[#E5E5E5] font-mono mt-0.5">
                     Indore Headquarters, Madhya Pradesh
                   </p>
                 </div>
               </div>
 
-              {/* Founder Bios */}
+              {/* Founder Bios with Verified Credentials Only */}
               <div className="lg:col-span-7 flex flex-col justify-between gap-6">
                 {COMPANY_DETAILS.founders.map((founder, idx) => (
                   <div
                     key={idx}
-                    className="p-8 rounded-2xl bg-white border border-[#E2DED7] shadow-sm flex flex-col justify-between hover:border-[#F07860] transition-all"
+                    className="p-8 rounded-none bg-[#F1F0EC] border-2 border-[#111111] shadow-[4px_4px_0px_#111111] flex flex-col justify-between hover:border-[#FF6B35] transition-all"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="text-xl font-heading font-bold text-[#14243A]">
+                        <h4 className="text-xl font-heading font-extrabold text-[#111111] uppercase">
                           {founder.name}
                         </h4>
-                        <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F7F5F0] text-[#14243A] border border-[#E2DED7]">
+                        <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-none bg-[#111111] text-white font-extrabold">
                           DIRECTOR
                         </span>
                       </div>
-                      <div className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-4">
+                      <div className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-4">
                         {founder.role}
                       </div>
-                      <p className="text-sm text-[#777D87] leading-relaxed font-sans">
+                      <p className="text-sm text-[#444444] leading-relaxed font-sans">
                         {founder.bio}
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-[#E2DED7] flex items-center justify-between text-xs font-mono text-[#777D87]">
+                    <div className="mt-6 pt-4 border-t border-[#E5E5E5] flex items-center justify-between text-xs font-mono text-[#666666] font-bold">
                       <span>VERIFIED CORPORATE DIRECTOR</span>
-                      <ShieldCheck className="w-4 h-4 text-[#F07860]" />
+                      <ShieldCheck className="w-4 h-4 text-[#FF6B35]" />
                     </div>
                   </div>
                 ))}
@@ -356,62 +391,78 @@ export default function ModernEditorialPortfolio() {
       </section>
 
       {/* =========================================================================
-          SECTION 3: SERVICES (11 CLEAN EDITORIAL CARDS)
+          SECTION 3: SERVICES (11 MODERN BRUTALIST SURFACES)
          ========================================================================= */}
       <section
         id="services"
-        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E5E5E5] bg-[#F1F0EC]"
       >
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E5E5E5] text-xs font-mono uppercase tracking-widest text-[#666666]">
             <div className="flex items-center gap-2">
-              <span className="text-[#F07860] font-bold">[03]</span>
-              <span>COMPANY SERVICES &amp; TECHNICAL CAPABILITIES</span>
+              <span className="text-[#FF6B35] font-bold">[03]</span>
+              <span className="text-[#111111] font-bold">OUR SERVICES &amp; TECHNICAL CAPABILITIES</span>
             </div>
-            <span>11 CORE OFFERINGS</span>
+            <span>11 CORE DELIVERABLES</span>
           </div>
 
           <div className="max-w-3xl mb-14">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#14243A] leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#111111] leading-tight uppercase mb-4">
               COMPREHENSIVE DIGITAL &amp; SOFTWARE CRAFT.
             </h2>
-            <p className="text-base sm:text-lg text-[#777D87] leading-relaxed font-sans">
+            <p className="text-base sm:text-lg text-[#555555] leading-relaxed font-sans">
               Every business challenge requires a distinct architectural approach. Explore our complete spectrum of engineering, design, and staffing capabilities.
             </p>
           </div>
 
-          {/* 11 Editorial Cards Grid */}
+          {/* 11 Brutalist Cards Grid: Alternating Black & White Surfaces */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES.map((service, index) => {
-              // Alternating white and off-white cards with fine borders
-              const isEven = index % 2 === 0;
+              // Alternating rhythm: card 1, 5, 11 are Jet Black statement blocks
+              const isDark = service.theme === "charcoal" || index === 0 || index === 4 || index === 10;
 
               return (
                 <div
                   key={service.id}
-                  className={`rounded-2xl p-7 flex flex-col justify-between border border-[#E2DED7] transition-all duration-300 relative group ${
-                    isEven ? "bg-white" : "bg-[#F7F5F0]"
-                  } hover:translate-y-[-4px] hover:border-[#F07860] hover:shadow-[0_14px_34px_rgba(20,36,58,0.06)]`}
+                  className={`rounded-none p-7 flex flex-col justify-between border-2 transition-all duration-300 relative group ${
+                    isDark
+                      ? "bg-[#111111] text-white border-[#111111] hover:border-[#FF6B35] shadow-[5px_5px_0px_#FF6B35]"
+                      : "bg-[#FFFFFF] text-[#111111] border-[#111111] hover:border-[#FF6B35] shadow-[5px_5px_0px_#111111]"
+                  } hover:translate-x-[-2px] hover:translate-y-[-2px]`}
                 >
                   <div>
                     {/* Card Top Numeral & Icon */}
                     <div className="flex items-center justify-between mb-6">
-                      <span className="font-mono text-sm font-bold text-[#F07860]">
+                      <span className="font-mono text-sm font-bold text-[#FF6B35]">
                         {service.num}
                       </span>
-                      <div className="w-10 h-10 rounded-xl bg-white border border-[#E2DED7] flex items-center justify-center text-[#F07860] shadow-sm">
+                      <div
+                        className={`w-10 h-10 rounded-none flex items-center justify-center border ${
+                          isDark
+                            ? "bg-[#1A1A1A] text-[#FF6B35] border-[#2A2A2A]"
+                            : "bg-[#F1F0EC] text-[#FF6B35] border-[#E5E5E5]"
+                        }`}
+                      >
                         <DynamicIcon name={service.icon} className="w-5 h-5" />
                       </div>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-heading font-bold text-[#14243A] mb-3">
+                    <h3
+                      className={`text-xl font-heading font-extrabold mb-3 uppercase tracking-tight ${
+                        isDark ? "text-white" : "text-[#111111]"
+                      }`}
+                    >
                       {service.title}
                     </h3>
 
                     {/* Short Description */}
-                    <p className="text-sm text-[#777D87] leading-relaxed mb-6 font-sans">
+                    <p
+                      className={`text-sm leading-relaxed mb-6 font-sans ${
+                        isDark ? "text-[#CCCCCC]" : "text-[#555555]"
+                      }`}
+                    >
                       {service.shortDesc}
                     </p>
 
@@ -420,9 +471,11 @@ export default function ModernEditorialPortfolio() {
                       {service.features.map((feat, i) => (
                         <li
                           key={i}
-                          className="text-xs text-[#14243A] flex items-start gap-2 font-sans"
+                          className={`text-xs flex items-start gap-2 font-sans ${
+                            isDark ? "text-[#E5E5E5]" : "text-[#111111]"
+                          }`}
                         >
-                          <ChevronRight className="w-3.5 h-3.5 text-[#F07860] shrink-0 mt-0.5" />
+                          <ChevronRight className="w-3.5 h-3.5 text-[#FF6B35] shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -430,12 +483,20 @@ export default function ModernEditorialPortfolio() {
                   </div>
 
                   {/* Card Bottom: Tech Pills & Trigger */}
-                  <div className="pt-4 border-t border-[#E2DED7]">
+                  <div
+                    className={`pt-4 border-t ${
+                      isDark ? "border-[#2A2A2A]" : "border-[#E5E5E5]"
+                    }`}
+                  >
                     <div className="flex flex-wrap gap-1.5 mb-4">
                       {service.technologies.slice(0, 3).map((tech, i) => (
                         <span
                           key={i}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#E8E5DF]/60 text-[#14243A] border border-[#E2DED7]"
+                          className={`text-[10px] font-mono px-2 py-0.5 rounded-none ${
+                            isDark
+                              ? "bg-[#1A1A1A] text-white border border-[#333333]"
+                              : "bg-[#F1F0EC] text-[#111111] border border-[#E5E5E5]"
+                          }`}
                         >
                           {tech}
                         </span>
@@ -444,7 +505,11 @@ export default function ModernEditorialPortfolio() {
 
                     <button
                       onClick={() => setSelectedService(service)}
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#F7F5F0] hover:bg-[#14243A] hover:text-white text-[#14243A] border border-[#E2DED7] text-xs font-mono uppercase tracking-wider font-semibold transition-all flex items-center justify-between"
+                      className={`w-full py-2.5 px-4 rounded-none text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-between border ${
+                        isDark
+                          ? "bg-white/10 hover:bg-[#FF6B35] text-white border-white/20 hover:border-[#FF6B35]"
+                          : "bg-[#F1F0EC] hover:bg-[#111111] hover:text-white text-[#111111] border-[#111111]"
+                      }`}
                     >
                       <span>SPECIFICATIONS</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -458,28 +523,28 @@ export default function ModernEditorialPortfolio() {
       </section>
 
       {/* =========================================================================
-          SECTION 4: PROJECTS (12 VERIFIED PROJECTS)
+          SECTION 4: PROJECTS (SELECTED WORK & ASYMMETRIC GRID)
          ========================================================================= */}
       <section
         id="projects"
-        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2DED7]"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E5E5E5] bg-[#FFFFFF]"
       >
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E2DED7] text-xs font-mono uppercase tracking-widest text-[#777D87]">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#E5E5E5] text-xs font-mono uppercase tracking-widest text-[#666666]">
             <div className="flex items-center gap-2">
-              <span className="text-[#F07860] font-bold">[04]</span>
-              <span>VERIFIED PORTFOLIO SHOWCASE</span>
+              <span className="text-[#FF6B35] font-bold">[04]</span>
+              <span className="text-[#111111] font-bold">SELECTED PORTFOLIO SHOWCASE</span>
             </div>
             <span>12 DELIVERED PROJECTS &bull; ASYMMETRIC GRID</span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#14243A] leading-tight mb-4">
-                PROVEN DELIVERIES. MEASURABLE IMPACT.
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-[#111111] leading-tight uppercase mb-4">
+                {COMPANY_DETAILS.projectsHeadline}
               </h2>
-              <p className="text-base text-[#777D87] leading-relaxed font-sans">
+              <p className="text-base text-[#555555] leading-relaxed font-sans">
                 Explore real client deliveries and specialized technical systems developed by Black Grapes Softech. We clearly distinguish live enterprise client engagements from demonstration prototypes.
               </p>
             </div>
@@ -490,10 +555,10 @@ export default function ModernEditorialPortfolio() {
                 <button
                   key={cat}
                   onClick={() => setActiveProjectCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all ${
+                  className={`px-4 py-2 rounded-none text-xs font-mono uppercase tracking-wider transition-all border ${
                     activeProjectCategory === cat
-                      ? "bg-[#14243A] text-white font-semibold shadow-sm"
-                      : "bg-white text-[#777D87] hover:text-[#14243A] border border-[#E2DED7]"
+                      ? "bg-[#111111] text-white border-[#111111] font-bold shadow-[2px_2px_0px_#FF6B35]"
+                      : "bg-[#F1F0EC] text-[#777777] hover:text-[#111111] border-[#E5E5E5]"
                   }`}
                 >
                   {cat}
@@ -510,34 +575,35 @@ export default function ModernEditorialPortfolio() {
               return (
                 <div
                   key={project.id}
-                  className="rounded-2xl bg-white border border-[#E2DED7] overflow-hidden flex flex-col justify-between group hover:border-[#F07860] transition-all duration-300 shadow-sm hover:translate-y-[-4px]"
+                  className="rounded-none bg-[#F1F0EC] border-2 border-[#111111] overflow-hidden flex flex-col justify-between group hover:border-[#FF6B35] transition-all duration-300 shadow-[5px_5px_0px_#111111] hover:translate-x-[-2px] hover:translate-y-[-2px]"
                 >
                   <div>
                     {/* Project Screenshot Container */}
-                    <div className="relative h-56 w-full bg-[#E8E5DF] overflow-hidden border-b border-[#E2DED7]">
+                    <div className="relative h-60 w-full bg-[#E5E5E5] overflow-hidden border-b-2 border-[#111111]">
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover object-top filter contrast-[1.05] group-hover:scale-105 transition-transform duration-500"
                       />
 
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                         <span
-                          className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-md font-semibold ${
+                          className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-none font-bold ${
                             isClientProject
-                              ? "bg-[#14243A] text-white shadow-sm flex items-center gap-1.5"
-                              : "bg-white/95 text-[#777D87] border border-[#E2DED7]"
+                              ? "bg-[#111111] text-white shadow-sm flex items-center gap-1.5 border border-[#111111]"
+                              : "bg-white text-[#777777] border border-[#111111]"
                           }`}
                         >
                           {isClientProject && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#F07860]" />
+                            <span className="w-1.5 h-1.5 bg-[#FF6B35]" />
                           )}
                           {project.status}
                         </span>
 
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/95 text-[#14243A] border border-[#E2DED7] font-semibold">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border border-[#111111] font-bold">
                           {project.num}
                         </span>
                       </div>
@@ -545,15 +611,15 @@ export default function ModernEditorialPortfolio() {
 
                     {/* Content */}
                     <div className="p-6">
-                      <div className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-medium mb-1.5">
+                      <div className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-1.5">
                         {project.category} &bull; {project.client}
                       </div>
 
-                      <h3 className="text-xl font-heading font-bold text-[#14243A] mb-2.5 group-hover:text-[#F07860] transition-colors">
+                      <h3 className="text-xl font-heading font-extrabold text-[#111111] mb-2.5 group-hover:text-[#FF6B35] transition-colors uppercase">
                         {project.title}
                       </h3>
 
-                      <p className="text-sm text-[#777D87] leading-relaxed mb-4 line-clamp-2 font-sans">
+                      <p className="text-sm text-[#555555] leading-relaxed mb-4 line-clamp-2 font-sans">
                         {project.summary}
                       </p>
 
@@ -562,7 +628,7 @@ export default function ModernEditorialPortfolio() {
                         {project.tags.map((tag, i) => (
                           <span
                             key={i}
-                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F7F5F0] text-[#14243A] border border-[#E2DED7]"
+                            className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border border-[#E5E5E5] font-semibold"
                           >
                             {tag}
                           </span>
@@ -575,7 +641,7 @@ export default function ModernEditorialPortfolio() {
                   <div className="p-6 pt-0 flex items-center justify-between gap-3">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#F7F5F0] hover:bg-[#14243A] hover:text-white text-[#14243A] border border-[#E2DED7] text-xs font-mono uppercase tracking-wider font-semibold transition-all flex items-center justify-between"
+                      className="w-full py-2.5 px-4 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-between"
                     >
                       <span>VIEW CASE STUDY</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -586,7 +652,7 @@ export default function ModernEditorialPortfolio() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 rounded-xl border border-[#E2DED7] bg-white text-[#777D87] hover:text-[#F07860] hover:border-[#F07860] transition-all"
+                        className="p-2.5 rounded-none border border-[#111111] bg-white text-[#111111] hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] transition-all"
                         title="Open Live Website"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -601,18 +667,18 @@ export default function ModernEditorialPortfolio() {
       </section>
 
       {/* =========================================================================
-          SECTION 5: CONTACT & WORKING INQUIRY FORM (NAVY BACKGROUND)
+          SECTION 5: CONTACT & WORKING INQUIRY FORM (STATEMENT JET BLACK SECTION)
          ========================================================================= */}
       <section
         id="contact"
-        className="relative py-24 px-4 sm:px-6 lg:px-8 bg-[#14243A] text-white"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 bg-[#111111] text-white"
       >
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#2A4468] text-xs font-mono uppercase tracking-widest text-[#E8E5DF]/70">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-12 border-b border-[#2A2A2A] text-xs font-mono uppercase tracking-widest text-[#777777]">
             <div className="flex items-center gap-2">
-              <span className="text-[#F07860] font-bold">[05]</span>
-              <span>COMMENCE A PROJECT INQUIRY</span>
+              <span className="text-[#FF6B35] font-bold">[05]</span>
+              <span className="text-white font-bold">COMMENCE A PROJECT INQUIRY</span>
             </div>
             <span>INDORE HEADQUARTERS &bull; DIRECT CONTACT</span>
           </div>
@@ -621,10 +687,10 @@ export default function ModernEditorialPortfolio() {
             {/* Left Column: Official Contact Dossier */}
             <div className="lg:col-span-5 space-y-8">
               <div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white leading-tight mb-4">
-                  LET&apos;S CREATE SOMETHING MEANINGFUL.
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white leading-tight uppercase mb-4">
+                  {COMPANY_DETAILS.contactHeadline}
                 </h2>
-                <p className="text-base text-[#E8E5DF]/80 leading-relaxed font-sans">
+                <p className="text-base text-[#CCCCCC] leading-relaxed font-sans">
                   Whether you are architecting a custom software ecosystem, revamping an enterprise web application, or building an MLM/CRM algorithm, connect with our Indore directors directly.
                 </p>
               </div>
@@ -632,12 +698,12 @@ export default function ModernEditorialPortfolio() {
               {/* Contact Information Cards */}
               <div className="space-y-4">
                 {/* Physical Location */}
-                <div className="p-6 rounded-2xl bg-[#1C304B] border border-[#2A4468] shadow-sm flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-[#F07860]">
+                <div className="p-6 rounded-none bg-[#1A1A1A] border border-[#2A2A2A] shadow-[3px_3px_0px_#FF6B35] flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FF6B35]">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8E5DF]/70 block mb-1">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#777777] block mb-1 font-bold">
                       HEADQUARTERS
                     </span>
                     <p className="text-sm font-medium text-white leading-relaxed font-sans">
@@ -647,25 +713,25 @@ export default function ModernEditorialPortfolio() {
                 </div>
 
                 {/* Direct Phone Lines */}
-                <div className="p-6 rounded-2xl bg-[#1C304B] border border-[#2A4468] shadow-sm flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-[#F07860]">
+                <div className="p-6 rounded-none bg-[#1A1A1A] border border-[#2A2A2A] shadow-[3px_3px_0px_#FF6B35] flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FF6B35]">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8E5DF]/70 block mb-1">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#777777] block mb-1 font-bold">
                       DIRECT CALL LINES
                     </span>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-mono font-medium text-white">
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-mono font-bold text-white">
                       <a
                         href={`tel:${COMPANY_DETAILS.contact.phone1}`}
-                        className="hover:text-[#F07860] transition-colors"
+                        className="hover:text-[#FF6B35] transition-colors"
                       >
                         {COMPANY_DETAILS.contact.phone1}
                       </a>
-                      <span className="text-[#2A4468]">|</span>
+                      <span className="text-[#333333]">|</span>
                       <a
                         href={`tel:${COMPANY_DETAILS.contact.phone2}`}
-                        className="hover:text-[#F07860] transition-colors"
+                        className="hover:text-[#FF6B35] transition-colors"
                       >
                         {COMPANY_DETAILS.contact.phone2}
                       </a>
@@ -674,24 +740,24 @@ export default function ModernEditorialPortfolio() {
                 </div>
 
                 {/* Official Emails */}
-                <div className="p-6 rounded-2xl bg-[#1C304B] border border-[#2A4468] shadow-sm flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-[#F07860]">
+                <div className="p-6 rounded-none bg-[#1A1A1A] border border-[#2A2A2A] shadow-[3px_3px_0px_#FF6B35] flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FF6B35]">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8E5DF]/70 block mb-1">
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#777777] block mb-1 font-bold">
                       OFFICIAL COMMUNICATIONS
                     </span>
                     <div className="flex flex-col gap-1 text-sm font-mono text-white">
                       <a
                         href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`}
-                        className="hover:text-[#F07860] transition-colors font-medium"
+                        className="hover:text-[#FF6B35] transition-colors font-bold"
                       >
                         {COMPANY_DETAILS.contact.primaryEmail}
                       </a>
                       <a
                         href={`mailto:${COMPANY_DETAILS.contact.directorEmail}`}
-                        className="hover:text-[#F07860] transition-colors text-xs text-[#E8E5DF]/70"
+                        className="hover:text-[#FF6B35] transition-colors text-xs text-[#777777]"
                       >
                         {COMPANY_DETAILS.contact.directorEmail}
                       </a>
@@ -701,12 +767,12 @@ export default function ModernEditorialPortfolio() {
               </div>
 
               {/* Direct WhatsApp Callout */}
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-4">
+              <div className="p-6 rounded-none bg-white/5 border border-white/10 flex items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#F07860] block mb-1">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF6B35] block mb-1 font-bold">
                     INSTANT CHAT
                   </span>
-                  <div className="text-sm font-bold font-heading text-white">
+                  <div className="text-sm font-bold font-heading text-white uppercase">
                     Need immediate technical advisory?
                   </div>
                 </div>
@@ -714,7 +780,7 @@ export default function ModernEditorialPortfolio() {
                   href={COMPANY_DETAILS.contact.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shrink-0 flex items-center gap-2"
+                  className="px-4 py-2.5 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-bold transition-all shrink-0 flex items-center gap-2 shadow-[2px_2px_0px_#FFFFFF]"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>WhatsApp</span>
@@ -724,28 +790,28 @@ export default function ModernEditorialPortfolio() {
 
             {/* Right Column: Working Inquiry Form */}
             <div className="lg:col-span-7">
-              <div className="p-8 sm:p-10 rounded-3xl bg-[#1C304B] border border-[#2A4468] shadow-xl">
-                <div className="flex items-center justify-between pb-6 mb-8 border-b border-[#2A4468]">
+              <div className="p-8 sm:p-10 rounded-none bg-[#1A1A1A] border-2 border-[#2A2A2A] shadow-[6px_6px_0px_#FF6B35]">
+                <div className="flex items-center justify-between pb-6 mb-8 border-b border-[#2A2A2A]">
                   <div>
-                    <h3 className="text-2xl font-heading font-bold text-white">
+                    <h3 className="text-2xl font-heading font-extrabold text-white uppercase">
                       Project Inquiry Form
                     </h3>
-                    <p className="text-xs text-[#E8E5DF]/70 font-mono mt-1">
+                    <p className="text-xs text-[#777777] font-mono mt-1 font-bold">
                       EXPECT RESPONSE WITHIN 4 BUSINESS HOURS
                     </p>
                   </div>
-                  <span className="w-3 h-3 rounded-full bg-[#F07860]"></span>
+                  <span className="w-3 h-3 bg-[#FF6B35]"></span>
                 </div>
 
                 {formStatus === "success" ? (
                   <div className="py-12 text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-[#F07860]/20 text-[#F07860] mx-auto flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-none bg-[#FF6B35]/20 text-[#FF6B35] mx-auto flex items-center justify-center border border-[#FF6B35]">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h4 className="text-2xl font-heading font-bold text-white">
-                      Inquiry Received Successfully!
+                    <h4 className="text-2xl font-heading font-extrabold text-white uppercase">
+                      Inquiry Transmitted Successfully!
                     </h4>
-                    <p className="text-sm text-[#E8E5DF]/80 max-w-md mx-auto font-sans">
+                    <p className="text-sm text-[#CCCCCC] max-w-md mx-auto font-sans">
                       Thank you for contacting Black Grapes Softech. Our engineering directors will review your scope and respond promptly.
                     </p>
                     <div className="pt-4 flex flex-wrap justify-center gap-3">
@@ -753,7 +819,7 @@ export default function ModernEditorialPortfolio() {
                         href={getFormWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F07860] text-white font-mono text-xs uppercase tracking-wider"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-none bg-[#FF6B35] text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[2px_2px_0px_#FFFFFF]"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
                         <span>Send via WhatsApp also</span>
@@ -769,7 +835,7 @@ export default function ModernEditorialPortfolio() {
                             message: "",
                           });
                         }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white font-mono text-xs uppercase tracking-wider border border-white/20"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-none bg-white/10 text-white font-mono text-xs uppercase tracking-wider border border-white/20 font-bold"
                       >
                         <span>Send Another Message</span>
                       </button>
@@ -780,7 +846,7 @@ export default function ModernEditorialPortfolio() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       {/* Name */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-bold">
                           Your Full Name *
                         </label>
                         <input
@@ -791,13 +857,13 @@ export default function ModernEditorialPortfolio() {
                             setFormData({ ...formData, name: e.target.value })
                           }
                           placeholder="e.g. Rahul Sharma"
-                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans"
+                          className="w-full px-4 py-3 rounded-none bg-[#111111] border border-[#2A2A2A] text-sm text-white placeholder:text-[#555555] focus:outline-none focus:border-[#FF6B35] transition-all font-sans"
                         />
                       </div>
 
                       {/* Email */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-bold">
                           Work Email *
                         </label>
                         <input
@@ -808,7 +874,7 @@ export default function ModernEditorialPortfolio() {
                             setFormData({ ...formData, email: e.target.value })
                           }
                           placeholder="name@company.com"
-                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans"
+                          className="w-full px-4 py-3 rounded-none bg-[#111111] border border-[#2A2A2A] text-sm text-white placeholder:text-[#555555] focus:outline-none focus:border-[#FF6B35] transition-all font-sans"
                         />
                       </div>
                     </div>
@@ -816,7 +882,7 @@ export default function ModernEditorialPortfolio() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       {/* Phone */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-bold">
                           Phone / WhatsApp Number
                         </label>
                         <input
@@ -826,13 +892,13 @@ export default function ModernEditorialPortfolio() {
                             setFormData({ ...formData, phone: e.target.value })
                           }
                           placeholder="+91 98765 43210"
-                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans"
+                          className="w-full px-4 py-3 rounded-none bg-[#111111] border border-[#2A2A2A] text-sm text-white placeholder:text-[#555555] focus:outline-none focus:border-[#FF6B35] transition-all font-sans"
                         />
                       </div>
 
                       {/* Service */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                        <label className="block text-xs font-mono uppercase tracking-wider text-white font-bold">
                           Service Required *
                         </label>
                         <select
@@ -840,7 +906,7 @@ export default function ModernEditorialPortfolio() {
                           onChange={(e) =>
                             setFormData({ ...formData, service: e.target.value })
                           }
-                          className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white focus:outline-none focus:border-[#F07860] transition-all font-sans"
+                          className="w-full px-4 py-3 rounded-none bg-[#111111] border border-[#2A2A2A] text-sm text-white focus:outline-none focus:border-[#FF6B35] transition-all font-sans"
                         >
                           {SERVICES.map((s) => (
                             <option key={s.id} value={s.title}>
@@ -853,7 +919,7 @@ export default function ModernEditorialPortfolio() {
 
                     {/* Requirement Message */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-mono uppercase tracking-wider text-white font-semibold">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-white font-bold">
                         Project Scope &amp; Deliverables *
                       </label>
                       <textarea
@@ -864,7 +930,7 @@ export default function ModernEditorialPortfolio() {
                           setFormData({ ...formData, message: e.target.value })
                         }
                         placeholder="Please describe your project objectives, timeline, existing tech stack, and expected deliverables..."
-                        className="w-full px-4 py-3 rounded-xl bg-[#14243A] border border-[#2A4468] text-sm text-white placeholder:text-[#E8E5DF]/40 focus:outline-none focus:border-[#F07860] transition-all font-sans resize-none"
+                        className="w-full px-4 py-3 rounded-none bg-[#111111] border border-[#2A2A2A] text-sm text-white placeholder:text-[#555555] focus:outline-none focus:border-[#FF6B35] transition-all font-sans resize-none"
                       />
                     </div>
 
@@ -873,7 +939,7 @@ export default function ModernEditorialPortfolio() {
                       <button
                         type="submit"
                         disabled={formStatus === "submitting"}
-                        className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_4px_16px_rgba(240,120,96,0.35)] flex items-center justify-center gap-2 hover:translate-y-[-1px] disabled:opacity-50"
+                        className="w-full sm:w-auto px-8 py-3.5 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-[3px_3px_0px_#FFFFFF] flex items-center justify-center gap-2 hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px] disabled:opacity-50"
                       >
                         {formStatus === "submitting" ? (
                           <span>TRANSMITTING...</span>
@@ -889,9 +955,9 @@ export default function ModernEditorialPortfolio() {
                         href={getFormWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full sm:w-auto px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-mono text-xs uppercase tracking-wider font-medium transition-all flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto px-5 py-3.5 rounded-none bg-white/10 hover:bg-white/20 text-white border border-white/20 font-mono text-xs uppercase tracking-wider font-bold transition-all flex items-center justify-center gap-2"
                       >
-                        <MessageSquare className="w-3.5 h-3.5 text-[#F07860]" />
+                        <MessageSquare className="w-3.5 h-3.5 text-[#FF6B35]" />
                         <span>Chat via WhatsApp</span>
                       </a>
                     </div>
@@ -909,16 +975,16 @@ export default function ModernEditorialPortfolio() {
       {selectedProject && (
         <div
           onClick={() => setSelectedProject(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#14243A]/75 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#111111]/80 backdrop-blur-sm animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white border border-[#E2DED7] p-6 sm:p-8 shadow-2xl"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-none bg-white border-2 border-[#111111] p-6 sm:p-8 shadow-[8px_8px_0px_#FF6B35]"
           >
             {/* Close Button */}
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-[#F7F5F0] text-[#14243A] hover:bg-[#14243A] hover:text-white transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-none bg-[#F1F0EC] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors border border-[#111111]"
               aria-label="Close Case Study"
             >
               <X className="w-5 h-5" />
@@ -927,57 +993,58 @@ export default function ModernEditorialPortfolio() {
             {/* Modal Header */}
             <div className="mb-6 pr-12">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#14243A] text-white">
+                <span className="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-none bg-[#111111] text-white font-bold">
                   {selectedProject.status}
                 </span>
-                <span className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold">
                   {selectedProject.category}
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#14243A]">
+              <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] uppercase">
                 {selectedProject.title}
               </h3>
-              <p className="text-xs font-mono uppercase tracking-wider text-[#777D87] mt-1">
+              <p className="text-xs font-mono uppercase tracking-wider text-[#777777] mt-1 font-semibold">
                 Client: {selectedProject.client} &bull; Platform: {selectedProject.platform}
               </p>
             </div>
 
             {/* Project Image Preview */}
-            <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-[#E2DED7] mb-6 bg-[#E8E5DF]">
+            <div className="relative h-64 sm:h-80 w-full rounded-none overflow-hidden border-2 border-[#111111] mb-6 bg-[#E5E5E5]">
               <Image
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 768px"
                 className="object-cover object-top"
               />
             </div>
 
             {/* Summary */}
             <div className="mb-6">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-2">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-2">
                 PROJECT OVERVIEW
               </h4>
-              <p className="text-sm text-[#777D87] leading-relaxed font-sans">
+              <p className="text-sm text-[#555555] leading-relaxed font-sans">
                 {selectedProject.summary}
               </p>
             </div>
 
             {/* Challenge & Solution */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="p-5 rounded-2xl bg-[#F7F5F0] border border-[#E2DED7]">
-                <h5 className="text-xs font-mono uppercase tracking-wider text-[#14243A] font-bold mb-2">
+              <div className="p-5 rounded-none bg-[#F1F0EC] border border-[#111111]">
+                <h5 className="text-xs font-mono uppercase tracking-wider text-[#111111] font-bold mb-2">
                   THE CHALLENGE
                 </h5>
-                <p className="text-xs text-[#777D87] leading-relaxed font-sans">
+                <p className="text-xs text-[#555555] leading-relaxed font-sans">
                   {selectedProject.challenge}
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#E8E5DF]/50 border border-[#E2DED7]">
-                <h5 className="text-xs font-mono uppercase tracking-wider text-[#14243A] font-bold mb-2">
+              <div className="p-5 rounded-none bg-[#FFFFFF] border-2 border-[#111111]">
+                <h5 className="text-xs font-mono uppercase tracking-wider text-[#111111] font-bold mb-2">
                   OUR SOLUTION
                 </h5>
-                <p className="text-xs text-[#777D87] leading-relaxed font-sans">
+                <p className="text-xs text-[#555555] leading-relaxed font-sans">
                   {selectedProject.solution}
                 </p>
               </div>
@@ -985,16 +1052,16 @@ export default function ModernEditorialPortfolio() {
 
             {/* Measurable Results */}
             <div className="mb-6">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-2.5">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-2.5">
                 MEASURABLE OUTCOMES
               </h4>
               <ul className="space-y-2">
                 {selectedProject.results.map((res, i) => (
                   <li
                     key={i}
-                    className="text-xs text-[#14243A] flex items-center gap-2 font-medium font-sans"
+                    className="text-xs text-[#111111] flex items-center gap-2 font-bold font-sans"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#F07860] shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#FF6B35] shrink-0" />
                     <span>{res}</span>
                   </li>
                 ))}
@@ -1002,12 +1069,12 @@ export default function ModernEditorialPortfolio() {
             </div>
 
             {/* Tech Tags */}
-            <div className="pt-6 border-t border-[#E2DED7] flex flex-wrap items-center justify-between gap-4">
+            <div className="pt-6 border-t border-[#E5E5E5] flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-wrap gap-1.5">
                 {selectedProject.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F7F5F0] text-[#14243A] border border-[#E2DED7]"
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#F1F0EC] text-[#111111] border border-[#111111] font-semibold"
                   >
                     {tag}
                   </span>
@@ -1019,7 +1086,7 @@ export default function ModernEditorialPortfolio() {
                   href={selectedProject.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold inline-flex items-center gap-2 transition-all shadow-sm"
+                  className="px-5 py-2.5 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-bold inline-flex items-center gap-2 transition-all shadow-[2px_2px_0px_#111111]"
                 >
                   <span>Visit Live Site</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -1036,48 +1103,48 @@ export default function ModernEditorialPortfolio() {
       {selectedService && (
         <div
           onClick={() => setSelectedService(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#14243A]/75 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#111111]/80 backdrop-blur-sm animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl rounded-3xl bg-white border border-[#E2DED7] p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-2xl rounded-none bg-white border-2 border-[#111111] p-6 sm:p-8 shadow-[8px_8px_0px_#FF6B35] max-h-[90vh] overflow-y-auto"
           >
             {/* Close Button */}
             <button
               onClick={() => setSelectedService(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-[#F7F5F0] text-[#14243A] hover:bg-[#14243A] hover:text-white transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-none bg-[#F1F0EC] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors border border-[#111111]"
               aria-label="Close Specifications"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="mb-6 pr-12">
-              <div className="flex items-center gap-2 mb-2 font-mono text-xs text-[#F07860] font-bold">
+              <div className="flex items-center gap-2 mb-2 font-mono text-xs text-[#FF6B35] font-bold">
                 <span>{selectedService.num}</span>
                 <span>&bull;</span>
                 <span>ENGINEERING CAPABILITY</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#14243A]">
+              <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] uppercase">
                 {selectedService.title}
               </h3>
             </div>
 
-            <p className="text-sm text-[#777D87] leading-relaxed mb-6 font-sans">
+            <p className="text-sm text-[#555555] leading-relaxed mb-6 font-sans">
               {selectedService.shortDesc}
             </p>
 
             {/* Core Features */}
             <div className="mb-6">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-3">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-3">
                 ARCHITECTURAL CAPABILITIES
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {selectedService.features.map((feat, i) => (
                   <div
                     key={i}
-                    className="p-3.5 rounded-xl bg-[#F7F5F0] border border-[#E2DED7] text-xs text-[#14243A] flex items-start gap-2 font-sans"
+                    className="p-3.5 rounded-none bg-[#F1F0EC] border border-[#111111] text-xs text-[#111111] flex items-start gap-2 font-sans font-semibold"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#F07860] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#FF6B35] shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </div>
                 ))}
@@ -1086,14 +1153,14 @@ export default function ModernEditorialPortfolio() {
 
             {/* Technologies */}
             <div className="mb-8">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#F07860] font-semibold mb-2.5">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-2.5">
                 RECOMMENDED TECH STACK
               </h4>
               <div className="flex flex-wrap gap-2">
                 {selectedService.technologies.map((tech, i) => (
                   <span
                     key={i}
-                    className="text-xs font-mono px-3 py-1 rounded-md bg-[#14243A] text-white"
+                    className="text-xs font-mono px-3 py-1 rounded-none bg-[#111111] text-white font-semibold"
                   >
                     {tech}
                   </span>
@@ -1102,9 +1169,9 @@ export default function ModernEditorialPortfolio() {
             </div>
 
             {/* Direct Service CTA */}
-            <div className="pt-6 border-t border-[#E2DED7] flex flex-wrap items-center justify-between gap-4">
-              <div className="text-xs font-mono text-[#777D87]">
-                Direct advisory available with Mr. Arpit Jain
+            <div className="pt-6 border-t border-[#E5E5E5] flex flex-wrap items-center justify-between gap-4">
+              <div className="text-xs font-mono text-[#777777] font-semibold">
+                Direct technical review available with Mr. Arpit Jain
               </div>
               <button
                 onClick={() => {
@@ -1112,7 +1179,7 @@ export default function ModernEditorialPortfolio() {
                   setFormData((prev) => ({ ...prev, service: selectedService.title }));
                   scrollToSection("contact");
                 }}
-                className="px-6 py-3 rounded-full bg-[#F07860] hover:bg-[#E0634A] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all shadow-[0_4px_14px_rgba(240,120,96,0.35)]"
+                className="px-6 py-3 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-bold transition-all shadow-[2px_2px_0px_#111111]"
               >
                 Request Quotation &rarr;
               </button>

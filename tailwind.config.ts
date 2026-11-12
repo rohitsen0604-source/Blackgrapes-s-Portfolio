@@ -9,43 +9,36 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        offwhite: {
-          DEFAULT: "#F7F5F0",
-          light: "#FCFAF7",
-          dark: "#EFECE5",
+        jet: {
+          DEFAULT: "#111111",
+          light: "#1A1A1A",
+          dark: "#080808",
         },
-        navy: {
-          DEFAULT: "#14243A",
-          dark: "#0D1827",
-          light: "#1F3552",
-          subtle: "#2A4569",
+        tangerine: {
+          DEFAULT: "#FF6B35",
+          hover: "#E55A27",
+          light: "#FF8757",
+          subtle: "rgba(255, 107, 53, 0.12)",
         },
-        coral: {
-          DEFAULT: "#F07860",
-          hover: "#E0634A",
-          light: "#F79986",
-          subtle: "rgba(240, 120, 96, 0.12)",
+        warmGrey: {
+          DEFAULT: "#F1F0EC",
+          light: "#F7F6F3",
+          dark: "#E3E1DA",
         },
-        stone: {
-          DEFAULT: "#E8E5DF",
-          light: "#F0EDE8",
-          dark: "#D8D4CC",
+        secondaryGrey: {
+          DEFAULT: "#777777",
+          light: "#999999",
+          dark: "#555555",
         },
-        slateText: {
-          DEFAULT: "#777D87",
-          light: "#959BA5",
-          dark: "#525760",
-        },
-        editorialBorder: {
-          DEFAULT: "#E2DED7",
-          subtle: "#ECE8E2",
-          dark: "#C9C4BB",
+        borderGrey: {
+          DEFAULT: "#E5E5E5",
+          dark: "#2A2A2A",
+          light: "#EEEEEE",
         },
       },
       fontFamily: {
+        heading: ["var(--font-space-grotesk)", "sans-serif"],
         sans: ["var(--font-inter)", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
-        heading: ["var(--font-manrope)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
         mono: ["var(--font-dm-mono)", "monospace"],
       },
       letterSpacing: {
