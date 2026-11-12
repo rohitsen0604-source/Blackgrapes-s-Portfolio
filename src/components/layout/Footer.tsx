@@ -14,36 +14,36 @@ import { COMPANY_DETAILS, SERVICES } from "@/data/company";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative bg-[#111111] text-white pt-16 pb-12 border-t border-[#2A2A2A] overflow-hidden">
+    <footer className="relative bg-[#111111] text-white pt-12 sm:pt-16 pb-12 border-t border-[#2A2A2A] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Callout Banner */}
-        <div className="mb-14 p-8 rounded-none bg-[#1A1A1A] border border-[#2A2A2A] flex flex-col md:flex-row items-center justify-between gap-6 shadow-[4px_4px_0px_#FF6B35]">
+        <div className="mb-10 sm:mb-14 p-5 sm:p-8 rounded-none bg-[#1A1A1A] border border-[#2A2A2A] flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-[4px_4px_0px_#FF6B35]">
           <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-wider text-[#FF6B35] font-bold">
+            <div className="flex items-center gap-2 mb-2 font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#FF6B35] font-bold">
               <span>[05 // COLLABORATION]</span>
               <span>&bull;</span>
               <span>INDORE &bull; GLOBAL IMPACT</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight uppercase">
+            <h3 className="text-xl xs:text-2xl sm:text-3xl font-heading font-extrabold text-white tracking-tight uppercase">
               LET&apos;S BUILD SOMETHING THAT MATTERS.
             </h3>
-            <p className="text-sm text-[#777777] mt-1 max-w-xl font-sans">
+            <p className="text-xs sm:text-sm text-[#777777] mt-1 max-w-xl font-sans">
               Connect directly with our engineering and technical directors in Indore, Madhya Pradesh.
             </p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto shrink-0">
             <a
               href={COMPANY_DETAILS.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-none bg-white/5 text-white border border-[#2A2A2A] text-xs font-mono uppercase tracking-wider hover:bg-white/10 transition-all flex items-center gap-2"
+              className="px-4 py-3 min-h-[44px] rounded-none bg-white/5 text-white border border-[#2A2A2A] text-xs font-mono uppercase tracking-wider hover:bg-white/10 transition-all flex items-center justify-center gap-2"
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#FF6B35]" />
               <span>WhatsApp Direct</span>
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 rounded-none bg-[#FF6B35] text-white text-xs font-mono uppercase tracking-wider font-bold hover:bg-[#E55A27] transition-all flex items-center gap-2 shadow-[2px_2px_0px_#FFFFFF]"
+              className="px-6 py-3 min-h-[44px] rounded-none bg-[#FF6B35] text-white text-xs font-mono uppercase tracking-wider font-bold hover:bg-[#E55A27] transition-all flex items-center justify-center gap-2 shadow-[2px_2px_0px_#FFFFFF]"
             >
               <span>LET&apos;S TALK</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -52,15 +52,16 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Navigation Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#2A2A2A]">
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 pb-12 border-b border-[#2A2A2A]">
           {/* Column 1 & 2: Company Profile */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="xs:col-span-2 md:col-span-3 lg:col-span-2 space-y-4">
             <a href="#home" className="inline-block focus:outline-none">
-              <div className="relative h-11 w-52 bg-white rounded-none px-3 py-1.5 border border-[#2A2A2A]">
+              <div className="relative h-9 w-44 sm:h-11 sm:w-52 bg-white rounded-none px-3 py-1.5 border border-[#2A2A2A]">
                 <Image
                   src="/assets/bgst-logo.png"
                   alt="Black Grapes Softech"
                   fill
+                  sizes="(max-width: 640px) 176px, 208px"
                   className="object-contain p-1"
                 />
               </div>
@@ -76,7 +77,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#FF6B35] shrink-0" />
-                <div className="flex gap-2 font-mono">
+                <div className="flex flex-wrap gap-2 font-mono">
                   <a href={`tel:${COMPANY_DETAILS.contact.phone1}`} className="hover:text-white transition-colors">
                     {COMPANY_DETAILS.contact.phone1}
                   </a>
@@ -88,7 +89,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#FF6B35] shrink-0" />
-                <a href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`} className="hover:text-white transition-colors font-mono">
+                <a href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`} className="hover:text-white transition-colors font-mono break-all">
                   {COMPANY_DETAILS.contact.primaryEmail}
                 </a>
               </div>

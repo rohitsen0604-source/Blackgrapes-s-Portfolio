@@ -1,9 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingContact } from "@/components/layout/FloatingContact";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#111111",
+};
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -31,6 +38,9 @@ export const metadata: Metadata = {
   title: "Black Grapes Softech | Digital Solutions & Software Development",
   description:
     "Black Grapes Softech delivers software development, website design, mobile applications and digital solutions from Indore, India.",
+  alternates: {
+    canonical: "https://blackgrapessoftech.com/",
+  },
   keywords: [
     "Black Grapes Softech",
     "Software Development Indore",

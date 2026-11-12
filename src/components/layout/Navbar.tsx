@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X, ArrowRight, MessageSquare } from "lucide-react";
+import { Menu, X, ArrowRight, MessageSquare, Phone, MapPin } from "lucide-react";
 import { COMPANY_DETAILS } from "@/data/company";
 
 export const Navbar: React.FC = () => {
@@ -18,12 +18,13 @@ export const Navbar: React.FC = () => {
     { label: "CONTACT", href: "#contact", num: "05" },
   ];
 
+  // Handle scroll detection and active section spy
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
 
       const sections = ["home", "about", "services", "projects", "contact"];
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = window.scrollY + 180;
 
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -38,9 +39,32 @@ export const Navbar: React.FC = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Prevent background scrolling while mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Keyboard accessibility: Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -51,7 +75,7 @@ export const Navbar: React.FC = () => {
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
     if (element) {
-      const offsetTop = element.offsetTop - 75;
+      const offsetTop = element.offsetTop - 70;
       window.scrollTo({
         top: offsetTop > 0 ? offsetTop : 0,
         behavior: "smooth",
@@ -63,32 +87,32 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E5E5E5] py-3 shadow-[0_4px_16px_rgba(17,17,17,0.04)]"
-          : "bg-transparent py-5"
+          ? "bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#E5E5E5] py-2.5 sm:py-3 shadow-[0_4px_16px_rgba(17,17,17,0.05)]"
+          : "bg-transparent py-3.5 sm:py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Original Official Logo with Enhanced Crisp Sizing */}
+          {/* Logo with Responsive Proportion */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-3 group focus:outline-none"
+            className="flex items-center gap-2 group focus:outline-none"
             aria-label="Black Grapes Softech Home"
           >
-            <div className="relative h-10 w-44 sm:h-11 sm:w-56 transition-transform duration-200 group-hover:scale-[1.01]">
+            <div className="relative h-8 w-36 xs:h-9 xs:w-44 sm:h-10 sm:w-48 md:h-11 md:w-56 transition-transform duration-200 group-hover:scale-[1.01]">
               <Image
                 src="/assets/bgst-logo.png"
                 alt="Black Grapes Softech"
                 fill
-                sizes="(max-width: 640px) 176px, 224px"
+                sizes="(max-width: 480px) 150px, (max-width: 768px) 180px, 224px"
                 className="object-contain object-left"
                 priority
               />
             </div>
           </a>
 
-          {/* Desktop Navigation: 5 Sections with Bold Readability */}
+          {/* Desktop Navigation: 5 Sections */}
           <nav className="hidden md:flex items-center space-x-1 bg-[#FFFFFF] px-3 py-1.5 rounded-none border border-[#E5E5E5] shadow-[2px_2px_0px_#111111]">
             {navItems.map((item) => {
               const sectionId = item.href.replace("#", "");
@@ -121,7 +145,7 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Desktop Right CTA: High-Contrast Tangerine Button */}
+          {/* Desktop Right CTA */}
           <div className="hidden md:flex items-center gap-3">
             <a
               href={COMPANY_DETAILS.contact.whatsappLink}
@@ -143,61 +167,114 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Actions: Touch-friendly CTA + Hamburger */}
           <div className="flex items-center gap-2 md:hidden">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="text-xs uppercase font-mono tracking-wider font-bold px-3 py-1.5 rounded-none bg-[#FF6B35] text-white shadow-[2px_2px_0px_#111111]"
+              className="text-[11px] xs:text-xs uppercase font-mono tracking-wider font-bold px-3 py-2 min-h-[38px] flex items-center justify-center rounded-none bg-[#FF6B35] text-white shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px]"
             >
-              LET&apos;S TALK
+              <span>TALK</span>
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-none bg-white border border-[#E5E5E5] text-[#111111] focus:outline-none shadow-[2px_2px_0px_#111111]"
-              aria-label="Toggle Navigation Menu"
+              className="p-2 min-w-[38px] min-h-[38px] flex items-center justify-center rounded-none bg-white border-2 border-[#111111] text-[#111111] focus:outline-none shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px]"
+              aria-label={mobileMenuOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-[#111111]" /> : <Menu className="w-5 h-5 text-[#111111]" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Full-Feature Mobile Navigation Overlay Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b-2 border-[#111111] bg-[#FFFFFF] px-6 py-6 transition-all duration-200 shadow-2xl">
-          <div className="space-y-2">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="flex items-center justify-between px-4 py-3 text-sm font-heading font-extrabold uppercase tracking-wider text-[#111111] hover:bg-[#F1F0EC] border border-transparent hover:border-[#111111] transition-colors"
-              >
-                <span>{item.label}</span>
-                <span className="text-xs text-[#FF6B35] font-mono font-bold">{item.num}</span>
-              </a>
-            ))}
+        <div
+          id="mobile-navigation"
+          className="md:hidden fixed inset-x-0 top-[52px] sm:top-[60px] bottom-0 bg-[#FFFFFF] border-b-4 border-[#111111] z-50 flex flex-col justify-between overflow-y-auto animate-in fade-in slide-in-from-top-3 duration-200 p-5 sm:p-6"
+        >
+          {/* Section Navigation Links */}
+          <div className="space-y-1.5">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-[#777777] font-bold pb-2 border-b border-[#E5E5E5] mb-2 flex items-center justify-between">
+              <span>[DIRECT DIRECTORY]</span>
+              <span className="text-[#FF6B35]">5 CORE SECTIONS</span>
+            </div>
+
+            {navItems.map((item) => {
+              const sectionId = item.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`flex items-center justify-between px-4 py-3.5 min-h-[48px] rounded-none border-2 transition-all ${
+                    isActive
+                      ? "bg-[#111111] text-white border-[#111111] shadow-[3px_3px_0px_#FF6B35]"
+                      : "bg-[#F1F0EC] text-[#111111] border-[#111111] hover:border-[#FF6B35]"
+                  }`}
+                >
+                  <span className="text-sm font-heading font-extrabold uppercase tracking-wider">
+                    {item.label}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`text-xs font-mono font-bold ${
+                        isActive ? "text-[#FF6B35]" : "text-[#777777]"
+                      }`}
+                    >
+                      {item.num}
+                    </span>
+                    <ArrowRight
+                      className={`w-4 h-4 ${
+                        isActive ? "text-[#FF6B35]" : "text-[#111111]"
+                      }`}
+                    />
+                  </div>
+                </a>
+              );
+            })}
           </div>
 
-          <div className="mt-6 pt-5 border-t border-[#E5E5E5] space-y-2.5">
-            <a
-              href={COMPANY_DETAILS.contact.whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-none bg-[#F1F0EC] border border-[#111111] text-[#111111] font-mono text-xs uppercase tracking-wider font-bold shadow-[2px_2px_0px_#111111]"
-            >
-              <MessageSquare className="w-4 h-4 text-[#FF6B35]" />
-              <span>WhatsApp Direct</span>
-            </a>
+          {/* Mobile Drawer Bottom: Quick Action CTAs & Credentials */}
+          <div className="mt-6 pt-5 border-t border-[#E5E5E5] space-y-3">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-none bg-[#FF6B35] text-white font-mono text-xs uppercase tracking-wider font-bold shadow-[3px_3px_0px_#111111]"
+              className="flex items-center justify-center gap-2 w-full py-3.5 min-h-[48px] rounded-none bg-[#FF6B35] text-white font-mono text-xs uppercase tracking-wider font-extrabold shadow-[3px_3px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px]"
             >
-              <span>LET&apos;S TALK</span>
+              <span>COMMENCE INQUIRY</span>
               <ArrowRight className="w-4 h-4" />
             </a>
+
+            <div className="grid grid-cols-2 gap-2.5">
+              <a
+                href={COMPANY_DETAILS.contact.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 py-3 min-h-[44px] rounded-none bg-[#111111] text-white border border-[#111111] font-mono text-[11px] uppercase tracking-wider font-bold shadow-[2px_2px_0px_#FF6B35]"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-[#FF6B35]" />
+                <span>WhatsApp</span>
+              </a>
+
+              <a
+                href={`tel:${COMPANY_DETAILS.contact.phone1}`}
+                className="flex items-center justify-center gap-1.5 py-3 min-h-[44px] rounded-none bg-white text-[#111111] border-2 border-[#111111] font-mono text-[11px] uppercase tracking-wider font-bold shadow-[2px_2px_0px_#111111]"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#FF6B35]" />
+                <span>Call Studio</span>
+              </a>
+            </div>
+
+            {/* Micro Address Tag */}
+            <div className="pt-2 flex items-center justify-center gap-1.5 text-[10px] font-mono text-[#777777] text-center">
+              <MapPin className="w-3 h-3 text-[#FF6B35] shrink-0" />
+              <span>Vijaynagar, Indore, Madhya Pradesh</span>
+            </div>
           </div>
         </div>
       )}

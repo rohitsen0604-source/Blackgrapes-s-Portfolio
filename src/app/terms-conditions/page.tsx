@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Terms and Conditions | Black Grapes Softech",
   description:
     "Official Terms and Conditions governing software development services, website usage, intellectual property, and client agreements with Black Grapes Softech.",
+  alternates: {
+    canonical: "https://blackgrapessoftech.com/terms-conditions",
+  },
 };
 
 export default function TermsConditionsPage() {
@@ -100,24 +103,24 @@ export default function TermsConditionsPage() {
   ];
 
   return (
-    <div className="pt-28 pb-24 relative overflow-hidden bg-[#F1F0EC] text-[#111111]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mb-8">
+    <div className="pt-24 sm:pt-28 pb-16 sm:pb-24 relative overflow-hidden bg-[#F1F0EC] text-[#111111]">
+      <div className="max-w-4xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10">
+        <div className="mb-6 sm:mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#777777] hover:text-[#FF6B35] transition-colors font-bold"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#777777] hover:text-[#FF6B35] transition-colors font-bold min-h-[44px]"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
           </Link>
         </div>
 
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-white text-[#FF6B35] border border-[#111111] mb-4 font-mono text-xs uppercase tracking-wider font-bold shadow-[2px_2px_0px_#111111]">
+        <div className="mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-white text-[#FF6B35] border border-[#111111] mb-3 sm:mb-4 font-mono text-xs uppercase tracking-wider font-bold shadow-[2px_2px_0px_#111111]">
             <Scale className="w-3.5 h-3.5" />
             Legal Framework
           </div>
-          <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-[#111111] tracking-tight mb-4 uppercase">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl font-heading font-extrabold text-[#111111] tracking-tight mb-3 sm:mb-4 uppercase">
             Terms &amp; Conditions
           </h1>
           <p className="text-xs sm:text-sm text-[#777777] font-mono font-semibold">
@@ -125,7 +128,7 @@ export default function TermsConditionsPage() {
           </p>
         </div>
 
-        <div className="p-8 sm:p-12 rounded-none bg-white border-2 border-[#111111] shadow-[6px_6px_0px_#111111] space-y-6">
+        <div className="p-5 sm:p-8 md:p-12 rounded-none bg-white border-2 border-[#111111] shadow-[4px_4px_0px_#111111] sm:shadow-[6px_6px_0px_#111111] space-y-6">
           <div className="pb-6 border-b border-[#E5E5E5] flex items-center justify-between text-xs font-mono text-[#777777]">
             <span className="font-bold">17 DOCUMENTED CLAUSES</span>
             <span className="flex items-center gap-1.5 text-[#FF6B35] font-bold">
