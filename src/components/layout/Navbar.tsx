@@ -15,7 +15,8 @@ export const Navbar: React.FC = () => {
     { label: "ABOUT", href: "#about", num: "02" },
     { label: "SERVICES", href: "#services", num: "03" },
     { label: "PROJECTS", href: "#projects", num: "04" },
-    { label: "CONTACT", href: "#contact", num: "05" },
+    { label: "PROJECT DEMOS", href: "#project-demos", num: "05" },
+    { label: "CONTACT", href: "#contact", num: "06" },
   ];
 
   // Handle scroll detection and active section spy
@@ -23,7 +24,7 @@ export const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ["home", "about", "services", "projects", "contact"];
+      const sections = ["home", "about", "services", "projects", "project-demos", "contact"];
       const scrollPosition = window.scrollY + 180;
 
       for (const section of sections) {

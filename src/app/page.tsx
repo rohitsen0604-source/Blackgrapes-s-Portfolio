@@ -27,8 +27,10 @@ import {
   COMPANY_DETAILS,
   SERVICES,
   PROJECTS,
+  LIVE_DEMOS,
   ServiceItem,
   ProjectItem,
+  LiveDemoItem,
 } from "@/data/company";
 import { DynamicIcon } from "@/components/ui/DynamicIcon";
 
@@ -74,17 +76,16 @@ export default function ModernBrutalistPortfolio() {
 
   const projectCategories = [
     "All",
-    "Live Demos",
-    "Management Systems",
     "Web Applications",
+    "Mobile Application",
+    "E-Commerce",
+    "Enterprise Solution",
     "Education",
   ];
 
   const filteredProjects =
     activeProjectCategory === "All"
       ? PROJECTS
-      : activeProjectCategory === "Live Demos"
-      ? PROJECTS.filter((p) => p.isLiveDemo)
       : PROJECTS.filter((p) => p.category === activeProjectCategory);
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -525,7 +526,7 @@ export default function ModernBrutalistPortfolio() {
       </section>
 
       {/* =========================================================================
-          SECTION 4: PROJECTS (PREMIUM LIVE DEMOS & ASYMMETRIC GRID)
+          SECTION 4: PROJECTS (AUTHENTIC CLIENT DELIVERIES & CASE STUDIES)
          ========================================================================= */}
       <section
         id="projects"
@@ -536,9 +537,9 @@ export default function ModernBrutalistPortfolio() {
           <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 pb-4 mb-8 sm:mb-12 border-b border-[#E5E5E5] text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest text-[#666666]">
             <div className="flex items-center gap-2">
               <span className="text-[#FF6B35] font-bold">[04]</span>
-              <span className="text-[#111111] font-bold">PORTFOLIO &amp; LIVE DEMO SYSTEMS</span>
+              <span className="text-[#111111] font-bold">CLIENT WORK &amp; CASE STUDIES</span>
             </div>
-            <span>INTERACTIVE DEMOS &bull; VERIFIED SOFTWARE</span>
+            <span>AUTHENTIC CLIENT DELIVERIES &bull; VERIFIED SOFTWARE</span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-12">
@@ -547,7 +548,7 @@ export default function ModernBrutalistPortfolio() {
                 {COMPANY_DETAILS.projectsHeadline}
               </h2>
               <p className="text-sm xs:text-base text-[#555555] leading-relaxed font-sans">
-                {COMPANY_DETAILS.projectsSubheadline}
+                A curated selection of enterprise platforms, native applications, and digital systems delivered by Black Grapes Softech.
               </p>
             </div>
 
@@ -571,142 +572,251 @@ export default function ModernBrutalistPortfolio() {
 
           {/* Asymmetric Projects Showcase Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProjects.map((project) => {
-              const isLiveDemo = project.isLiveDemo || project.status === "LIVE DEMO";
-              const isClientProject = project.status === "CLIENT PROJECT";
-              const demoTargetUrl = project.demoUrl || project.liveUrl;
+            {filteredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="rounded-none bg-[#F1F0EC] border-2 border-[#111111] shadow-[4px_4px_0px_#111111] overflow-hidden flex flex-col justify-between group hover:border-[#FF6B35] transition-all duration-300 hover:translate-x-[-2px] hover:translate-y-[-2px]"
+              >
+                <div>
+                  {/* Project Cover Container */}
+                  <div className="relative h-56 sm:h-64 w-full bg-[#1A1A1A] overflow-hidden border-b-2 border-[#111111]">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-top filter contrast-[1.05] group-hover:scale-105 transition-transform duration-500"
+                    />
 
-              return (
-                <div
-                  key={project.id}
-                  className={`rounded-none bg-[#F1F0EC] border-2 ${
-                    isLiveDemo ? "border-[#111111] shadow-[5px_5px_0px_#FF6B35]" : "border-[#111111] shadow-[4px_4px_0px_#111111]"
-                  } overflow-hidden flex flex-col justify-between group hover:border-[#FF6B35] transition-all duration-300 hover:translate-x-[-2px] hover:translate-y-[-2px]`}
-                >
-                  <div>
-                    {/* Project Cover Container */}
-                    <div className="relative h-56 sm:h-64 w-full bg-[#1A1A1A] overflow-hidden border-b-2 border-[#111111]">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover object-top filter contrast-[1.05] group-hover:scale-105 transition-transform duration-500"
-                      />
+                    {/* Top Badges */}
+                    <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-3 sm:left-3 sm:right-3 flex items-center justify-between z-10">
+                      <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-none font-extrabold flex items-center gap-1.5 border bg-[#111111] text-white border-[#111111]">
+                        <span className="w-1.5 h-1.5 bg-[#FF6B35]" />
+                        {project.status}
+                      </span>
 
-                      {/* Top Badges */}
-                      <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-3 sm:left-3 sm:right-3 flex items-center justify-between z-10">
-                        <span
-                          className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-none font-extrabold flex items-center gap-1.5 border ${
-                            isLiveDemo
-                              ? "bg-[#FF6B35] text-white border-[#FF6B35] shadow-[2px_2px_0px_#111111]"
-                              : isClientProject
-                              ? "bg-[#111111] text-white border-[#111111]"
-                              : "bg-white text-[#777777] border-[#111111]"
-                          }`}
-                        >
-                          <span className={`w-1.5 h-1.5 ${isLiveDemo ? "bg-white animate-ping" : "bg-[#FF6B35]"}`} />
-                          {project.status}
-                        </span>
-
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border-2 border-[#111111] font-bold shadow-[1px_1px_0px_#111111]">
-                          {project.num}
-                        </span>
-                      </div>
-
-                      {/* Illustrative Artwork Transparency Tag */}
-                      {project.isAiArtwork && (
-                        <div className="absolute bottom-2 left-2.5 z-10">
-                          <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-none bg-[#111111]/85 backdrop-blur-sm text-[#CCCCCC] border border-[#2A2A2A]">
-                            ILLUSTRATIVE COVER ARTWORK
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-5 sm:p-6">
-                      <div className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-1.5">
-                        {project.category} &bull; {project.client}
-                      </div>
-
-                      <h3 className="text-lg sm:text-xl font-heading font-extrabold text-[#111111] mb-2 sm:mb-2.5 group-hover:text-[#FF6B35] transition-colors uppercase">
-                        {project.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-4 line-clamp-3 font-sans">
-                        {project.summary}
-                      </p>
-
-                      {/* Tech Pills */}
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        {project.tags.map((tag, i) => (
-                          <span
-                            key={i}
-                            className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border border-[#E5E5E5] font-semibold"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border-2 border-[#111111] font-bold shadow-[1px_1px_0px_#111111]">
+                        {project.num}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Bottom Action Strip */}
-                  <div className="p-5 sm:p-6 pt-0">
-                    {isLiveDemo && demoTargetUrl ? (
-                      <div className="flex items-center gap-2">
-                        <a
-                          href={demoTargetUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 min-h-[44px] py-2.5 px-4 rounded-none bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs uppercase tracking-wider font-extrabold transition-all flex items-center justify-center gap-1.5 shadow-[2px_2px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
-                        >
-                          <span>VIEW LIVE DEMO</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
+                  {/* Content */}
+                  <div className="p-5 sm:p-6">
+                    <div className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#FF6B35] font-bold mb-1.5">
+                      {project.category} &bull; {project.client}
+                    </div>
 
-                        <button
-                          onClick={() => setSelectedProject(project)}
-                          className="min-h-[44px] py-2.5 px-3.5 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border-2 border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-center shadow-[2px_2px_0px_#111111]"
-                          title="View Project Specifications"
-                        >
-                          <span>DETAILS</span>
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-between gap-2.5">
-                        <button
-                          onClick={() => setSelectedProject(project)}
-                          className="w-full min-h-[44px] py-2.5 px-4 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border-2 border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-between shadow-[2px_2px_0px_#111111]"
-                        >
-                          <span>VIEW CASE STUDY</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </button>
+                    <h3 className="text-lg sm:text-xl font-heading font-extrabold text-[#111111] mb-2 sm:mb-2.5 group-hover:text-[#FF6B35] transition-colors uppercase">
+                      {project.title}
+                    </h3>
 
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-none border-2 border-[#111111] bg-white text-[#111111] hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] transition-all shadow-[2px_2px_0px_#111111]"
-                            title="Open Live Website"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
+                    <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-4 line-clamp-3 font-sans">
+                      {project.summary}
+                    </p>
+
+                    {/* Tech Pills */}
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      {project.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-white text-[#111111] border border-[#E5E5E5] font-semibold"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Action Strip */}
+                <div className="p-5 sm:p-6 pt-0">
+                  <div className="flex items-center justify-between gap-2.5">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="w-full min-h-[44px] py-2.5 px-4 rounded-none bg-white hover:bg-[#111111] hover:text-white text-[#111111] border-2 border-[#111111] text-xs font-mono uppercase tracking-wider font-bold transition-all flex items-center justify-between shadow-[2px_2px_0px_#111111]"
+                    >
+                      <span>VIEW CASE STUDY</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-none border-2 border-[#111111] bg-white text-[#111111] hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] transition-all shadow-[2px_2px_0px_#111111]"
+                        title="Open Live Website"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
                     )}
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 5: CONTACT & WORKING INQUIRY FORM (STATEMENT JET BLACK SECTION)
+          SECTION 5: PROJECT DEMOS (INDEPENDENT LIVE DEMONSTRATION SUITE)
+         ========================================================================= */}
+      <section
+        id="project-demos"
+        className="relative py-16 sm:py-24 px-3.5 sm:px-6 lg:px-8 border-b border-[#2A2A2A] bg-[#141414] text-white"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Section Metadata Header */}
+          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 pb-4 mb-8 sm:mb-12 border-b border-[#2A2A2A] text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest text-[#777777]">
+            <div className="flex items-center gap-2">
+              <span className="text-[#FF6B35] font-bold">[05]</span>
+              <span className="text-white font-bold">INDEPENDENT LIVE DEMOS</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#FF6B35] animate-ping" />
+              <span className="text-white font-bold">4 LIVE OPERATIONAL SYSTEMS</span>
+            </div>
+          </div>
+
+          {/* Section Main Titles */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-14">
+            <div className="max-w-3xl">
+              <div className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-[#FF6B35] font-extrabold mb-2 flex items-center gap-2">
+                <span>{COMPANY_DETAILS.demosSubheadline}</span>
+              </div>
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-white leading-tight uppercase mb-3 sm:mb-4">
+                {COMPANY_DETAILS.demosHeadline}
+              </h2>
+              <p className="text-sm xs:text-base text-[#AAAAAA] leading-relaxed font-sans max-w-2xl">
+                {COMPANY_DETAILS.demosDescription}
+              </p>
+            </div>
+
+            {/* Live Indicator Pill */}
+            <div className="hidden lg:flex items-center gap-3 px-4 py-2.5 bg-[#1C1C1C] border border-[#2E2E2E] text-xs font-mono">
+              <span className="w-2.5 h-2.5 bg-[#22C55E] rounded-full animate-pulse" />
+              <span className="text-[#CCCCCC] uppercase tracking-wider">Public Cloud Demos Active</span>
+            </div>
+          </div>
+
+          {/* 4 Live Demo Cards Grid (2x2 Desktop, 1 Col Mobile) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {LIVE_DEMOS.map((demo) => (
+              <div
+                key={demo.id}
+                className="group relative rounded-none bg-[#1A1A1A] border-2 border-[#2E2E2E] hover:border-[#FF6B35] transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-[4px_4px_0px_#000000] hover:shadow-[6px_6px_0px_#FF6B35] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+              >
+                <div>
+                  {/* 16:9 Aspect Ratio Media Container with AI Cover */}
+                  <div className="relative aspect-video w-full overflow-hidden bg-[#0A0A0A] border-b-2 border-[#2E2E2E]">
+                    <Image
+                      src={demo.image}
+                      alt={demo.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-[1.05]"
+                    />
+
+                    {/* Top Floating Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="px-2.5 py-1 bg-[#FF6B35] text-white font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider shadow-[2px_2px_0px_#000000] flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping" />
+                        {demo.badge}
+                      </span>
+                      <span className="px-2.5 py-1 bg-[#111111]/90 backdrop-blur-sm text-white font-mono text-[11px] font-bold border border-white/20">
+                        DEMO // {demo.num}
+                      </span>
+                    </div>
+
+                    {/* Bottom Floating Artwork Notice Badge */}
+                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 bg-[#111111]/85 backdrop-blur-sm text-[#CCCCCC] border border-white/10">
+                        CONCEPTUAL COVER ARTWORK
+                      </span>
+                      <span className="text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 bg-black/80 text-[#22C55E] font-bold border border-[#22C55E]/40 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
+                        {demo.status}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Demo Card Body */}
+                  <div className="p-5 sm:p-7">
+                    <div className="flex items-center justify-between gap-2 mb-2 font-mono text-[11px] sm:text-xs">
+                      <span className="text-[#FF6B35] font-bold uppercase tracking-wider">
+                        {demo.category}
+                      </span>
+                      <span className="text-[#777777] uppercase text-[10px]">
+                        {demo.client}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-white mb-2.5 uppercase tracking-tight group-hover:text-[#FF6B35] transition-colors">
+                      {demo.title}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-[#BBBBBB] leading-relaxed mb-5 font-sans">
+                      {demo.summary}
+                    </p>
+
+                    {/* Tech & Feature Tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {demo.technologies.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="text-[10px] font-mono px-2 py-0.5 bg-white/5 text-[#E0E0E0] border border-[#333333] font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {demo.tags.slice(0, 2).map((tag, i) => (
+                        <span
+                          key={`tag-${i}`}
+                          className="text-[10px] font-mono px-2 py-0.5 bg-[#252525] text-[#AAAAAA] border border-[#333333]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Call to Action Strip */}
+                <div className="p-5 sm:p-7 pt-0">
+                  <a
+                    href={demo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full min-h-[48px] py-3 px-5 bg-[#FF6B35] hover:bg-[#E55A27] text-white font-mono text-xs sm:text-sm uppercase tracking-wider font-extrabold transition-all flex items-center justify-center gap-2 shadow-[3px_3px_0px_#FFFFFF] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
+                  >
+                    <span>VIEW LIVE DEMO</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Transparency Guarantee Footer Callout */}
+          <div className="mt-10 sm:mt-12 p-4 sm:p-5 bg-[#1A1A1A] border border-[#2E2E2E] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-[#888888]">
+            <div className="flex items-center gap-2 text-[#CCCCCC]">
+              <ShieldCheck className="w-4 h-4 text-[#FF6B35] shrink-0" />
+              <span>All demonstrations are active public cloud deployments hosted for exploration and testing.</span>
+            </div>
+            <a
+              href="#contact"
+              className="text-[#FF6B35] hover:underline uppercase font-bold shrink-0 flex items-center gap-1"
+            >
+              <span>REQUEST CUSTOM SYSTEM PROTOTYPE</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 6: CONTACT & WORKING INQUIRY FORM (STATEMENT JET BLACK SECTION)
          ========================================================================= */}
       <section
         id="contact"
@@ -716,7 +826,7 @@ export default function ModernBrutalistPortfolio() {
           {/* Section Header */}
           <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 pb-4 mb-8 sm:mb-12 border-b border-[#2A2A2A] text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest text-[#777777]">
             <div className="flex items-center gap-2">
-              <span className="text-[#FF6B35] font-bold">[05]</span>
+              <span className="text-[#FF6B35] font-bold">[06]</span>
               <span className="text-white font-bold">COMMENCE A PROJECT INQUIRY</span>
             </div>
             <span>INDORE HEADQUARTERS &bull; DIRECT CONTACT</span>

@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
         <div className="mb-10 sm:mb-14 p-5 sm:p-8 rounded-none bg-[#1A1A1A] border border-[#2A2A2A] flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-[4px_4px_0px_#FF6B35]">
           <div>
             <div className="flex items-center gap-2 mb-2 font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#FF6B35] font-bold">
-              <span>[05 // COLLABORATION]</span>
+              <span>[06 // COLLABORATION]</span>
               <span>&bull;</span>
               <span>INDORE &bull; GLOBAL IMPACT</span>
             </div>
@@ -124,8 +124,13 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="#project-demos" className="hover:text-white transition-colors">
+                  05. Project Demos (4)
+                </a>
+              </li>
+              <li>
                 <a href="#contact" className="hover:text-white transition-colors">
-                  05. Contact Us
+                  06. Contact Us
                 </a>
               </li>
             </ul>

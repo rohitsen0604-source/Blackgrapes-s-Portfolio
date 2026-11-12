@@ -15,21 +15,31 @@ export interface ProjectItem {
   num: string;
   title: string;
   client: string;
-  category: "Web Applications" | "Management Systems" | "Education" | "Enterprise Solution" | "E-Commerce" | "Mobile Application";
-  status: "LIVE DEMO" | "CLIENT PROJECT" | "DEMO PROJECT";
-  isLiveDemo?: boolean;
-  demoUrl?: string;
-  liveUrl?: string;
+  category: "Web Development" | "Mobile Application" | "E-Commerce" | "Enterprise Solution";
+  status: "CLIENT PROJECT" | "DEMO PROJECT";
   summary: string;
   challenge: string;
   solution: string;
   results: string[];
   image: string;
-  isAiArtwork?: boolean;
-  artworkNotice?: string;
+  liveUrl?: string;
   tags: string[];
   platform: "Web" | "iOS" | "Android" | "Cross-Platform";
   featured?: boolean;
+}
+
+export interface LiveDemoItem {
+  id: string;
+  num: string;
+  name: string;
+  category: string;
+  description: string;
+  url: string;
+  image: string;
+  technologies: string[];
+  badge: string;
+  status: "LIVE OPERATIONAL" | "ACTIVE DEMO";
+  verificationNote?: string;
 }
 
 export const COMPANY_DETAILS = {
@@ -39,9 +49,11 @@ export const COMPANY_DETAILS = {
     "Black Grapes Softech combines technology, creativity and engineering to build meaningful digital experiences and business solutions.",
   location: "INDORE, INDIA",
   aboutHeadline: "WE BELIEVE GREAT TECHNOLOGY SHOULD MAKE A REAL DIFFERENCE.",
-  projectsHeadline: "BUILT TO SOLVE. DESIGNED TO PERFORM.",
-  projectsSubheadline:
-    "Explore selected digital products and software solutions developed to address real business requirements.",
+  projectsHeadline: "SELECTED WORK. REAL-WORLD IMPACT.",
+  demosHeadline: "EXPLORE OUR LIVE DEMOS.",
+  demosSubheadline: "REAL PRODUCTS. WORKING EXPERIENCES.",
+  demosDescription:
+    "Explore our software demonstrations and experience the solutions developed by Black Grapes Softech.",
   contactHeadline: "LET'S BUILD SOMETHING THAT MATTERS.",
   aboutText:
     "Black Grapes Softech is a modern software engineering studio headquartered in Vijaynagar, Indore. Since our inception, we have helped enterprises, startups, and public institutions transform complex operational challenges into elegant, high-performing digital platforms.",
