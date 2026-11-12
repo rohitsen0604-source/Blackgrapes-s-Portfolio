@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-obsidian: #09070d;
+  --color-obsidian-subtle: #120e1a;
+  --color-grape: #24102f;
+  --color-purple-rich: #7136a8;
+  --color-purple-electric: #a970f5;
+  --color-soft-white: #f8f6fa;
+  --color-muted-grey: #a9a2b0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-soft-white);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+  selection-background-color: var(--color-purple-rich);
+  selection-color: #ffffff;
+}
+
+::selection {
+  background: #7136a8;
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09070d;
+}
+::-webkit-scrollbar-thumb {
+  background: #24102f;
+  border-radius: 4px;
+  border: 1px solid rgba(169, 112, 245, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7136a8;
+}
+
+/* Glassmorphism surfaces */
+.glass-panel {
+  background: rgba(18, 14, 26, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(169, 112, 245, 0.12);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(36, 16, 47, 0.6);
+  border-color: rgba(169, 112, 245, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(113, 54, 168, 0.3);
+  transform: translateY(-3px);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 20%, #a970f5 70%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #a970f5 0%, #7136a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-glow {
+  position: relative;
+}
+.border-glow::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(169, 112, 245, 0.4), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
