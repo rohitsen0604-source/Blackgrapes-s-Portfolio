@@ -1,16 +1,16 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import {
   MapPin,
   Phone,
   Mail,
-  ArrowUpRight,
   ShieldCheck,
   Award,
   Sparkles,
+  ArrowRight,
 } from "lucide-react";
-import { COMPANY_DETAILS, SERVICES, PRODUCTS } from "@/data/company";
+import { COMPANY_DETAILS, SERVICES } from "@/data/company";
 
 export const Footer: React.FC = () => {
   return (
@@ -24,13 +24,13 @@ export const Footer: React.FC = () => {
         <div className="mb-14 p-8 rounded-2xl glass-panel border border-purple-electric/25 bg-gradient-to-r from-obsidian-100 via-grape/40 to-obsidian-100 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-electric/15 text-purple-electric border border-purple-electric/30 mb-2">
-              <Sparkles className="w-3.5 h-3.5" /> Ready to build something extraordinary?
+              <Sparkles className="w-3.5 h-3.5" /> Innovate &bull; Integrate &bull; Elevate
             </span>
             <h3 className="text-2xl font-bold text-soft-white tracking-tight">
-              Transform your business with cutting-edge engineering.
+              Transform your ideas into scalable digital reality.
             </h3>
             <p className="text-sm text-muted-light mt-1">
-              Connect directly with our technical leadership in Indore, MP, India.
+              Connect directly with our software directors in Indore, MP, India.
             </p>
           </div>
           <div className="flex items-center gap-3 shrink-0">
@@ -42,13 +42,13 @@ export const Footer: React.FC = () => {
             >
               WhatsApp Direct
             </a>
-            <Link
-              href="/contact"
+            <a
+              href="#contact"
               className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-rich to-purple-electric text-soft-white text-sm font-semibold shadow-lg shadow-purple-900/40 hover:opacity-95 transition-all flex items-center gap-2"
             >
-              <span>Schedule Consultation</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+              <span>Get In Touch</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
 
@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-purple-900/30">
           {/* Column 1: Company Profile */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-block">
+            <a href="#home" className="inline-block">
               <div className="relative h-12 w-52">
                 <Image
                   src="/assets/bgst-logo.png"
@@ -65,17 +65,15 @@ export const Footer: React.FC = () => {
                   className="object-contain"
                 />
               </div>
-            </Link>
+            </a>
             <p className="text-sm text-muted-grey max-w-sm leading-relaxed">
-              Black Grapes Softech is a premier software development and digital transformation company. We engineer custom enterprise software, mobile applications, web platforms, and automated workflow engines.
+              Black Grapes Softech is an enterprise software development and digital transformation company. We engineer custom enterprise software, mobile applications, web platforms, and automated workflow engines.
             </p>
 
             <div className="pt-2 space-y-2.5 text-xs text-muted-light">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-purple-electric shrink-0 mt-0.5" />
-                <span>
-                  {COMPANY_DETAILS.address.full}
-                </span>
+                <span>{COMPANY_DETAILS.address.full}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-purple-electric shrink-0" />
@@ -89,133 +87,88 @@ export const Footer: React.FC = () => {
                   </a>
                 </div>
               </div>
-              <div className="flex flex-col gap-1.5 pt-1">
-                <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-purple-electric shrink-0" />
-                  <a href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`} className="hover:text-purple-electric transition-colors">
-                    {COMPANY_DETAILS.contact.primaryEmail}
-                  </a>
-                </div>
-                <div className="pl-6 flex flex-col gap-1 text-[11px] text-muted-grey">
-                  <a href={`mailto:${COMPANY_DETAILS.contact.directorEmail}`} className="hover:text-purple-electric transition-colors">
-                    {COMPANY_DETAILS.contact.directorEmail}
-                  </a>
-                  <a href={`mailto:${COMPANY_DETAILS.contact.managementEmail}`} className="hover:text-purple-electric transition-colors">
-                    {COMPANY_DETAILS.contact.managementEmail}
-                  </a>
-                </div>
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-purple-electric shrink-0" />
+                <a href={`mailto:${COMPANY_DETAILS.contact.primaryEmail}`} className="hover:text-purple-electric transition-colors">
+                  {COMPANY_DETAILS.contact.primaryEmail}
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Core Services */}
+          {/* Column 2: Quick Jump Navigation */}
           <div>
             <h4 className="text-sm font-bold text-soft-white uppercase tracking-wider mb-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-purple-electric"></span>
-              Core Services
+              Navigation
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <a href="#home" className="hover:text-purple-electric transition-colors">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#about" className="hover:text-purple-electric transition-colors">
+                  About Us &amp; Founders
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-purple-electric transition-colors">
+                  Our Services
+                </a>
+              </li>
+              <li>
+                <a href="#projects" className="hover:text-purple-electric transition-colors">
+                  Client Projects
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-purple-electric transition-colors">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Core Services */}
+          <div>
+            <h4 className="text-sm font-bold text-soft-white uppercase tracking-wider mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-electric"></span>
+              Core Offerings
             </h4>
             <ul className="space-y-2 text-sm">
-              {SERVICES.slice(0, 6).map((s) => (
+              {SERVICES.slice(0, 5).map((s) => (
                 <li key={s.id}>
-                  <Link
-                    href={`/services/${s.slug}`}
+                  <a
+                    href="#services"
                     className="hover:text-purple-electric transition-colors hover:translate-x-1 inline-block duration-200"
                   >
                     {s.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
               <li>
-                <Link
-                  href="/services"
+                <a
+                  href="#services"
                   className="text-purple-electric hover:underline font-semibold inline-flex items-center gap-1 text-xs mt-1"
                 >
-                  View All 9 Services &rarr;
-                </Link>
+                  View All Services &rarr;
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Products & Specializations */}
-          <div>
-            <h4 className="text-sm font-bold text-soft-white uppercase tracking-wider mb-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-electric"></span>
-              Products & Tenders
-            </h4>
-            <ul className="space-y-2 text-sm">
-              {PRODUCTS.map((p) => (
-                <li key={p.id}>
-                  <Link
-                    href="/products"
-                    className="hover:text-purple-electric transition-colors hover:translate-x-1 inline-block duration-200"
-                  >
-                    {p.title}
-                  </Link>
-                </li>
-              ))}
-              <li className="pt-2 border-t border-purple-900/30">
-                <Link
-                  href="/government-tenders"
-                  className="hover:text-purple-electric transition-colors block text-xs font-semibold text-muted-light"
-                >
-                  Government Tender Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/private-tenders"
-                  className="hover:text-purple-electric transition-colors block text-xs font-semibold text-muted-light"
-                >
-                  Private Tender Consulting
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/it-staffing"
-                  className="hover:text-purple-electric transition-colors block text-xs font-semibold text-muted-light"
-                >
-                  IT Staffing Augmentation
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Company & Legal */}
+          {/* Column 4: Founders & Legal */}
           <div>
             <h4 className="text-sm font-bold text-soft-white uppercase tracking-wider mb-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-purple-electric"></span>
               Corporate
             </h4>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about" className="hover:text-purple-electric transition-colors">
-                  About Us & Leadership
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="hover:text-purple-electric transition-colors">
-                  Client Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link href="/industries" className="hover:text-purple-electric transition-colors">
-                  Industries We Serve
-                </Link>
-              </li>
-              <li>
-                <Link href="/partnership" className="hover:text-purple-electric transition-colors">
-                  Partner with Us (ODC)
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-purple-electric transition-colors">
-                  Careers at Black Grapes
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-purple-electric transition-colors">
-                  Contact & Inquiries
-                </Link>
+              <li className="text-xs text-muted-light">
+                <strong>Founders:</strong><br />
+                Mr. Arpit Jain &bull; Mrs. Deepika Jain
               </li>
               <li className="pt-2 border-t border-purple-900/30">
                 <Link href="/privacy-policy" className="hover:text-purple-electric transition-colors text-xs">
@@ -224,7 +177,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/terms-conditions" className="hover:text-purple-electric transition-colors text-xs">
-                  Terms & Conditions
+                  Terms &amp; Conditions
                 </Link>
               </li>
             </ul>
@@ -244,10 +197,10 @@ export const Footer: React.FC = () => {
               <ShieldCheck className="w-3.5 h-3.5 text-purple-electric" />
               Verified Enterprise Partner
             </span>
-            <span>•</span>
+            <span>&bull;</span>
             <span className="flex items-center gap-1">
               <Award className="w-3.5 h-3.5 text-purple-electric" />
-              ISO Quality Compliant Processes
+              ISO Compliant Engineering
             </span>
           </div>
         </div>

@@ -12,3 +12,4 @@ export const DynamicIcon: React.FC<DynamicIconProps> = ({ name, className = "w-5
   const IconComponent = (Icons as any)[name] || Icons.Code2;
   return <IconComponent className={className} size={size} />;
 };
+
