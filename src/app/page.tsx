@@ -88,6 +88,46 @@ export default function ModernBrutalistPortfolio() {
       ? PROJECTS
       : PROJECTS.filter((p) => p.category === activeProjectCategory);
 
+  // Project Demos filtering state
+  const [activeDemoCategory, setActiveDemoCategory] = useState<string>("All Demos");
+
+  const demoCategories = [
+    "All Demos",
+    "Payment Systems",
+    "Real Estate",
+    "Business Management",
+    "Education Systems",
+    "Healthcare Systems",
+  ];
+
+  const filteredDemos =
+    activeDemoCategory === "All Demos"
+      ? LIVE_DEMOS
+      : activeDemoCategory === "Payment Systems"
+      ? LIVE_DEMOS.filter((d) => d.category.includes("Payment"))
+      : activeDemoCategory === "Real Estate"
+      ? LIVE_DEMOS.filter((d) => d.category.includes("Real Estate"))
+      : activeDemoCategory === "Business Management"
+      ? LIVE_DEMOS.filter(
+          (d) =>
+            d.category.includes("Business") ||
+            d.category.includes("Productivity") ||
+            d.category.includes("Analytics")
+        )
+      : activeDemoCategory === "Education Systems"
+      ? LIVE_DEMOS.filter(
+          (d) =>
+            d.category.includes("Education") ||
+            d.category.includes("Academic") ||
+            d.category.includes("Campus") ||
+            d.category.includes("Student")
+        )
+      : activeDemoCategory === "Healthcare Systems"
+      ? LIVE_DEMOS.filter(
+          (d) => d.category.includes("Healthcare") || d.category.includes("Clinic")
+        )
+      : LIVE_DEMOS;
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
@@ -675,12 +715,12 @@ export default function ModernBrutalistPortfolio() {
             </div>
             <div className="flex items-center gap-2">
               <span className="inline-block w-2 h-2 rounded-full bg-[#FF6B35] animate-ping" />
-              <span className="text-white font-bold">4 LIVE OPERATIONAL SYSTEMS</span>
+              <span className="text-white font-bold">9 LIVE DEMONSTRATION SYSTEMS</span>
             </div>
           </div>
 
           {/* Section Main Titles */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-14">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-10">
             <div className="max-w-3xl">
               <div className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-[#FF6B35] font-extrabold mb-2 flex items-center gap-2">
                 <span>{COMPANY_DETAILS.demosSubheadline}</span>
@@ -694,15 +734,32 @@ export default function ModernBrutalistPortfolio() {
             </div>
 
             {/* Live Indicator Pill */}
-            <div className="hidden lg:flex items-center gap-3 px-4 py-2.5 bg-[#1C1C1C] border border-[#2E2E2E] text-xs font-mono">
+            <div className="hidden lg:flex items-center gap-3 px-4 py-2.5 bg-[#1C1C1C] border border-[#2E2E2E] text-xs font-mono shrink-0">
               <span className="w-2.5 h-2.5 bg-[#22C55E] rounded-full animate-pulse" />
-              <span className="text-[#CCCCCC] uppercase tracking-wider">Public Cloud Demos Active</span>
+              <span className="text-[#CCCCCC] uppercase tracking-wider">9 Public Demos Operational</span>
             </div>
           </div>
 
-          {/* 4 Live Demo Cards Grid (2x2 Desktop, 1 Col Mobile) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {LIVE_DEMOS.map((demo) => (
+          {/* Category Filter Pills: Mobile Horizontal Touch Carousel */}
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 mb-8 sm:mb-10 -mx-3.5 px-3.5 sm:mx-0 sm:px-0 scrollbar-none max-w-full">
+            {demoCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveDemoCategory(cat)}
+                className={`whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2 sm:py-2.5 min-h-[40px] rounded-none text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all border ${
+                  activeDemoCategory === cat
+                    ? "bg-[#FF6B35] text-white border-[#FF6B35] font-bold shadow-[2px_2px_0px_#FFFFFF]"
+                    : "bg-[#1E1E1E] text-[#AAAAAA] hover:text-white border-[#2E2E2E]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* 9 Live Demo Cards Responsive Grid (3 Cols Desktop, 2 Cols Tablet, 1 Col Mobile) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {filteredDemos.map((demo) => (
               <div
                 key={demo.id}
                 className="group relative rounded-none bg-[#1A1A1A] border-2 border-[#2E2E2E] hover:border-[#FF6B35] transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-[4px_4px_0px_#000000] hover:shadow-[6px_6px_0px_#FF6B35] hover:translate-x-[-2px] hover:translate-y-[-2px]"
