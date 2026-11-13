@@ -125,7 +125,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#project-demos" className="hover:text-white transition-colors">
-                  05. Project Demos (15)
+                  05. Project Demos (18)
                 </a>
               </li>
               <li>
