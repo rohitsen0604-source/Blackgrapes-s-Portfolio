@@ -749,4 +749,20 @@ export const LIVE_DEMOS: LiveDemoItem[] = [
     status: "ACTIVE",
     artworkNotice: "Conceptual cover artwork illustrating platform capability",
   },
+  {
+    id: "bakery-shop-management-system",
+    num: "12",
+    title: "Bakery Shop Management System",
+    client: "Bakery & Confectionery Operations",
+    category: "Retail & Bakery Management",
+    summary:
+      "A dedicated bakery shop management solution engineered to organize bakery operations, manage product catalogues, maintain sales transaction records and streamline day-to-day retail business activities.",
+    url: "https://bakery-shop-management-system.onrender.com",
+    image: "/images/project-demos/12-bakery-shop-management.webp",
+    technologies: ["PHP", "MySQL", "Inventory & Sales", "Bootstrap"],
+    tags: ["Product Catalogue", "Sales Records", "Inventory", "PHP / MySQL"],
+    badge: "LIVE DEMO",
+    status: "ACTIVE",
+    artworkNotice: "Conceptual cover artwork illustrating platform capability",
+  },
 ];

@@ -109,7 +109,9 @@ export default function ModernBrutalistPortfolio() {
             d.category.includes("Business") ||
             d.category.includes("Productivity") ||
             d.category.includes("Driving") ||
-            d.category.includes("Operations")
+            d.category.includes("Operations") ||
+            d.category.includes("Retail") ||
+            d.category.includes("Bakery")
         )
       : activeDemoCategory === "Education Systems"
       ? LIVE_DEMOS.filter(
@@ -725,7 +727,7 @@ export default function ModernBrutalistPortfolio() {
             </div>
             <div className="flex items-center gap-2">
               <span className="inline-block w-2 h-2 rounded-full bg-[#FF6B35] animate-ping" />
-              <span className="text-white font-bold">11 LIVE DEMONSTRATION SYSTEMS</span>
+              <span className="text-white font-bold">12 LIVE DEMONSTRATION SYSTEMS</span>
             </div>
           </div>
 
@@ -746,7 +748,7 @@ export default function ModernBrutalistPortfolio() {
             {/* Live Indicator Pill */}
             <div className="hidden lg:flex items-center gap-3 px-4 py-2.5 bg-[#1C1C1C] border border-[#2E2E2E] text-xs font-mono shrink-0">
               <span className="w-2.5 h-2.5 bg-[#22C55E] rounded-full animate-pulse" />
-              <span className="text-[#CCCCCC] uppercase tracking-wider">11 Public Demos Operational</span>
+              <span className="text-[#CCCCCC] uppercase tracking-wider">12 Public Demos Operational</span>
             </div>
           </div>
 
