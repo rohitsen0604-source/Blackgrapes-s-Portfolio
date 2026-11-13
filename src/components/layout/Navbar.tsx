@@ -113,8 +113,8 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Desktop Navigation: 5 Sections */}
-          <nav className="hidden md:flex items-center space-x-1 bg-[#FFFFFF] px-3 py-1.5 rounded-none border border-[#E5E5E5] shadow-[2px_2px_0px_#111111]">
+          {/* Desktop Navigation: 6 Sections */}
+          <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1 bg-[#FFFFFF] px-2 py-1 xl:px-3 xl:py-1.5 rounded-none border-2 border-[#111111] shadow-[3px_3px_0px_#111111] shrink-0">
             {navItems.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -124,22 +124,22 @@ export const Navbar: React.FC = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`px-3.5 py-1.5 text-xs uppercase tracking-wider font-mono font-bold transition-all duration-200 flex items-center gap-1.5 relative group ${
+                  className={`px-2.5 xl:px-3.5 py-1.5 text-[11px] xl:text-xs uppercase tracking-wider font-mono font-bold transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap shrink-0 relative group ${
                     isActive
-                      ? "bg-[#111111] text-white"
-                      : "text-[#555555] hover:text-[#111111] hover:bg-[#F1F0EC]"
+                      ? "bg-[#111111] text-white shadow-[1px_1px_0px_#FF6B35]"
+                      : "text-[#444444] hover:text-[#111111] hover:bg-[#F1F0EC]"
                   }`}
                 >
                   <span
-                    className={`text-[10px] ${
-                      isActive ? "text-[#FF6B35]" : "text-[#777777]"
+                    className={`text-[10px] font-mono ${
+                      isActive ? "text-[#FF6B35]" : "text-[#888888]"
                     }`}
                   >
                     {item.num}
                   </span>
-                  <span>{item.label}</span>
+                  <span className="whitespace-nowrap">{item.label}</span>
                   {!isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#FF6B35] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200" />
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-[#FF6B35] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200" />
                   )}
                 </a>
               );
@@ -147,21 +147,22 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Desktop Right CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0 ml-3">
             <a
               href={COMPANY_DETAILS.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-none border border-[#E5E5E5] bg-white text-[#111111] hover:bg-[#111111] hover:text-white hover:border-[#111111] transition-all duration-200 shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px]"
+              className="h-[38px] w-[38px] rounded-none bg-[#111111] text-[#FF6B35] hover:bg-[#FF6B35] hover:text-white transition-all duration-200 border-2 border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
               title="Chat on WhatsApp"
+              aria-label="Direct WhatsApp Chat"
             >
-              <MessageSquare className="w-4 h-4 text-[#FF6B35]" />
+              <MessageSquare className="w-4 h-4" />
             </a>
 
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase font-mono tracking-wider font-bold text-white rounded-none bg-[#FF6B35] hover:bg-[#E55A27] transition-all duration-200 shadow-[3px_3px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
+              className="h-[38px] inline-flex items-center gap-2 px-5 text-xs uppercase font-mono tracking-wider font-extrabold text-white rounded-none bg-[#FF6B35] hover:bg-[#E55A27] transition-all duration-200 border-2 border-[#111111] shadow-[2px_2px_0px_#111111] hover:translate-x-[-1px] hover:translate-y-[-1px] active:translate-x-[1px] active:translate-y-[1px]"
             >
               <span>LET&apos;S TALK</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -169,7 +170,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Actions: Touch-friendly CTA + Hamburger */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
@@ -194,13 +195,13 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="md:hidden fixed inset-x-0 top-[52px] sm:top-[60px] bottom-0 bg-[#FFFFFF] border-b-4 border-[#111111] z-50 flex flex-col justify-between overflow-y-auto animate-in fade-in slide-in-from-top-3 duration-200 p-5 sm:p-6"
+          className="lg:hidden fixed inset-x-0 top-[52px] sm:top-[60px] bottom-0 bg-[#FFFFFF] border-b-4 border-[#111111] z-50 flex flex-col justify-between overflow-y-auto animate-in fade-in slide-in-from-top-3 duration-200 p-5 sm:p-6"
         >
           {/* Section Navigation Links */}
           <div className="space-y-1.5">
             <div className="text-[10px] font-mono uppercase tracking-widest text-[#777777] font-bold pb-2 border-b border-[#E5E5E5] mb-2 flex items-center justify-between">
               <span>[DIRECT DIRECTORY]</span>
-              <span className="text-[#FF6B35]">5 CORE SECTIONS</span>
+              <span className="text-[#FF6B35]">6 SECTIONS</span>
             </div>
 
             {navItems.map((item) => {
