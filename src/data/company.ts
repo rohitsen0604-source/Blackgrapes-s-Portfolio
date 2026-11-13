@@ -765,4 +765,20 @@ export const LIVE_DEMOS: LiveDemoItem[] = [
     status: "ACTIVE",
     artworkNotice: "Conceptual cover artwork illustrating platform capability",
   },
+  {
+    id: "online-marriage-registration-system",
+    num: "13",
+    title: "Online Marriage Registration System",
+    client: "Registration & Civil Records Processing",
+    category: "Government Services / Registration Management Software",
+    summary:
+      "An online marriage registration management solution designed to organize applicant information, registration applications and administrative processing through a centralized digital platform.",
+    url: "https://online-marriage-registration-system.onrender.com",
+    image: "/images/project-demos/13-online-marriage-registration.webp",
+    technologies: ["PHP", "MySQL", "Application Portal", "Admin Dashboard"],
+    tags: ["Applicant Registration", "Marriage Applications", "Admin Verification", "PHP / MySQL"],
+    badge: "LIVE DEMO",
+    status: "ACTIVE",
+    artworkNotice: "Conceptual cover artwork illustrating platform capability",
+  },
 ];
